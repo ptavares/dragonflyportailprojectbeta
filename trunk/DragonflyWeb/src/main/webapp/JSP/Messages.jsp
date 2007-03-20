@@ -17,7 +17,12 @@
 	 <img src="img/mail_new.gif" height=18>
 				New Message</button>
 	 </div>
+	 <div style="float: right">
+	 <s:url id="refresh" action="ListMessages"/>
+	 <s:a href="%{refresh}" targets="rightcolumn">refresh</s:a>
+	 </div>
 	 <div align=center>My mailbox</div>
+	 
 </div>	 
 <div id="listPane" dojoType="ContentPane" sizeMin="20" sizeShare="20" style="" align="center">
 <table width=80%>

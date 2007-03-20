@@ -1,0 +1,42 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="authentification" namespace="/" extends="struts-default">
+
+
+	<interceptors>
+  			<interceptor-stack name="guest" >
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+  		</interceptors>
+ 		<action name="Login" class="authentification.Login">
+            <result name="input">/JSP/newIndex.jsp</result>
+            <result name= "success">/JSP/formulaire/log.jsp</result>
+        </action>
+        
+        <action name="Login2" class="authentification.Login">
+            <result name="input">/JSP/formulaire/log.jsp</result>
+            <result name="success">/JSP/formulaire/log.jsp</result>
+        </action>
+        
+        <action name="Logout" class="authentification.Login" method="logout">
+            <result name="success">/JSP/newIndex.jsp</result>        	
+        </action>
+      
+        <action name="Inscription!*" method="{1}" class="authentification.Inscription">
+        	<result name="input">/JSP/reg.jsp</result>
+        	<result name="error">/JSP/error.jsp</result>
+        	<result name="success">/JSP/success.jsp</result>
+        </action>     
+
+        <!-- Add actions here -->
+        
+        <action name="Language" class="authentification.Language">
+			<result>/JSP/newIndex.jsp</result>
+			<interceptor-ref name="guest"/>
+		</action>
+    </package>
+</struts>

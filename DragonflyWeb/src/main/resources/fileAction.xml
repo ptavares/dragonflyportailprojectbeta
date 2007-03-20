@@ -1,0 +1,18 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="fileAction" namespace="/" extends="struts-default">
+	<action name="goUpload" class="fileAction.FileAction" method="goload">
+	<result name="success">/test/upload.jsp</result>
+	</action>
+	<action name="doUpload" class="fileAction.FileAction" method="upload">
+	<result name="input">/test/upload.jsp</result>
+	<result name="success">/test/success.jsp</result>
+	</action>
+	
+	
+	
+	
+	</package>
+</struts>

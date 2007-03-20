@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>Dragonfly</artifactId>
+		<groupId>fr.umlv.Dragonfly</groupId>
+		<version>0.0.1</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.umlv.Dragonfly</groupId>
+	<artifactId>DragonflyWeb</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1</version>
+	<name>Dragonfly Web</name>
+	<build>
+		<finalName>DragonflyWeb</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<!-- 
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<generatePackage>org.apache.maven</generatePackage>
+					
+				</configuration>
+
+
+			</plugin> -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jboss-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<configuration>
+							<server>default</server>
+							<hostName>localhost</hostName>
+							<port>8080</port>
+							<fileName>
+								${project.build.directory}\${project.build.finalName}.${project.packaging}
+							</fileName>
+						</configuration>
+						<goals>
+							<goal>harddeploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Maven 2 Repository</name>
+			<url>
+				https://maven2-repository.dev.java.net/nonav/repository
+			</url>
+		</repository>
+		<repository>
+			<id>maven-repository.dev.java.net</id>
+			<name>Java.net Maven 1 Repository (legacy)</name>
+			<url>
+				https://maven-repository.dev.java.net/nonav/repository
+			</url>
+			<layout>legacy</layout>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven2-repository.dev.java.net</id>
+			<url>
+				https://maven2-repository.dev.java.net/nonav/repository
+			</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>maven-repository.dev.java.net</id>
+			<url>
+				https://maven-repository.dev.java.net/nonav/repository
+			</url>
+			<layout>legacy</layout>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sun</groupId>
+			<artifactId>tools</artifactId>
+			<version>1.5.0</version>
+			<scope>system</scope>
+			<systemPath>C:/Program Files/Java/jdk1.5.0_01/lib/tools.jar</systemPath>
+			<!--  <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath> -->
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.umlv.Dragonfly</groupId>
+			<artifactId>DragonflyEjb</artifactId>
+			<version>0.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-api</artifactId>
+			<version>2.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>javaee</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>5</version>
+		</dependency>
+	</dependencies>
+</project>
+

@@ -1,0 +1,9 @@
+img { border: none; }
+
+#base{
+	width:950px;margin:0px 0px;height:150px;background:#FFFFFF
+}
+
+#logo{
+	float: left;margin:0px auto;background:#FFFFFF
+}

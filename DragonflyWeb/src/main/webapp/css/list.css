@@ -1,0 +1,24 @@
+#listPane tr:hover, #listPane td:hover {
+	background: gray;
+	cursor: pointer;
+}
+#listPane tr, #listPane td { cursor: pointer; }
+#topMenu {
+	background: #a7c9fc;
+	color: white;
+	font: bold;
+}
+
+.test{
+			position : absolute;
+			left : 300px;
+			top : 250px;
+			background : #ddd;
+			width : 400px;
+			height : 300px;
+			text-align : center;
+			display : none;
+		}
+tr.header {
+	background-color: #274383; color: white; font: bold;
+}

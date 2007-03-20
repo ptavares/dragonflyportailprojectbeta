@@ -10,6 +10,7 @@ import javax.naming.InitialContext;
 import com.opensymphony.xwork2.ActionContext;
 
 import fr.umlv.dragonflyEJB.services.account.authentification.AccountAuthentification;
+import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
 
 public class Login  {
 	private String username;
@@ -27,9 +28,11 @@ public class Login  {
 		System.out.println("--login---->"+password);
 		if(Authen.isAuthentificationCorrect(getUsername(), getPassword())){
 			Map session = ActionContext.getContext().getSession();
-		   
+			final AccountInformation info=(AccountInformation) ctx.lookup("AccountInformation/remote");
 			session.put("login", "true");
 			session.put("nom", getUsername());
+			session.put("NickName", info.getUserNickname(getUsername()));
+			System.out.println(session.get("nom"));
 			return SUCCESS;
 		}
 		return INPUT;

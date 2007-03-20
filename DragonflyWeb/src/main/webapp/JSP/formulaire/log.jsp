@@ -20,7 +20,8 @@
 
 	<div dojoType="TitlePane" label="Welcome" labelNodeClass="DMTitle"
 		containerNodeClass="content">Welcome, <s:property
-		value="#session.nom" /><br />
+		value="#session.NickName" />
+		<br />
 	
 	<s:div>
 			<s:url id="profile" action="ChangeNickname.action" />
@@ -28,6 +29,7 @@
 			</s:div>	
 			<s:url id="Messages" action="ListMessages"/>
 			<s:a href="%{Messages}" targets="rightcolumn">My Messages</s:a>
+			<br/>
 	 	<a href="<%=request.getContextPath()%>/Logout.action">Logout</a>
 	</s:else>
 

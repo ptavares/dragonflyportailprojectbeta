@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Package for all databases tables -->		
+<hibernate-mapping package="fr.umlv.dragonflyBdd.tables">
+
+<!-- The Meeting's Table -->
+<class name="Roles" table="T_Roles">
+
+	<!-- The id for one meeting is a long type number -->
+	<id name="roles_id" column="roles_id" type="long">
+			<generator class="increment"/>
+	</id>
+		
+	<property name="role" column="role" type="string">
+	</property>
+	
+		
+</class>
+
+</hibernate-mapping>

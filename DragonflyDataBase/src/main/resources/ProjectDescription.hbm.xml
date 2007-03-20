@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<!-- Package for all databases tables -->		
+<hibernate-mapping package="fr.umlv.dragonflyBdd.tables">
+
+<!-- The Project's Description Tables -->
+<class name="ProjectDescription" table="T_PROJECT_DESCRIPT">
+
+	<!-- The id for one project description "depends" of his associated project-->
+	<id name="description_id" column="description_id" type="string">
+				<generator class="foreign">
+					<param name="property">project</param>
+				</generator>
+	</id>
+		
+		<!-- All properties to describe a project : a text, category, language... -->
+		<property name="resume" column="resume" type="string" not-null="true">
+		</property>
+		
+		<property name="description" column="description" type="string">
+		</property>
+				
+		<!-- 
+		<property name="category" column="category" type="string">
+		</property>
+	     -->
+	     
+	    <!-- In relation one-to-one : the associated project -->
+	    <one-to-one name="project" class="Project" constrained="true"/>
+
+</class>
+</hibernate-mapping>

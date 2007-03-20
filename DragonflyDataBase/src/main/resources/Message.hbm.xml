@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Package for all databases tables -->
+<hibernate-mapping package="fr.umlv.dragonflyBdd.tables">
+	<class name="Message" table="T_MESSAGE">
+		<id name="id" column="message_id" type="long">
+			<generator class="increment" />
+		</id>
+
+		<property name="name" column="message_name" type="string" not-null="true">
+		</property>
+
+		<property name="senter" column="nom_senter" type="string">
+		</property>
+		
+		<property name="content" column="content" type="string"
+			not-null="true">
+		</property>
+		
+		<property name="sendTime" column="sendTime" type="timestamp" not-null="true">
+		</property>
+		
+		<property name="readed" column="readed" type="boolean">
+		</property>
+
+
+	</class>
+</hibernate-mapping>

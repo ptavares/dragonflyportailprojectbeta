@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>Dragonfly</artifactId>
+        <groupId>fr.umlv.Dragonfly</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.umlv.Dragonfly</groupId>
+    <artifactId>DragonflyEar</artifactId>
+    <packaging>ear</packaging>
+    <version>0.0.1</version>
+    <name>Dragonfly Ear</name>
+    
+    <dependencies>
+        <dependency>
+            <groupId>fr.umlv.Dragonfly</groupId>
+            <artifactId>DragonflyDatabase</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>fr.umlv.Dragonfly</groupId>
+            <artifactId>DragonflyEjb</artifactId>
+            <version>0.0.1</version>
+            <type>ejb</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>fr.umlv.Dragonfly</groupId>
+            <artifactId>DragonflyWeb</artifactId>
+            <version>0.0.1</version>
+            <type>war</type>
+        </dependency>
+        
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <displayName>MavenDragonflyWeb</displayName>
+                    <version>1.4</version>
+                    <modules>
+                        <jarModule>
+                            <groupId>fr.umlv.Dragonfly</groupId>
+                            <artifactId>DragonflyDatabase</artifactId>
+                            <includeInApplicationXml>true</includeInApplicationXml>
+                        </jarModule>			
+                        
+                        <ejbModule>
+                            <groupId>fr.umlv.Dragonfly</groupId>
+                            <artifactId>DragonflyEjb</artifactId>
+                        </ejbModule>
+                        
+                        <webModule>
+                            <groupId>fr.umlv.Dragonfly</groupId>
+                            <artifactId>DragonflyWeb</artifactId>
+                            <contextRoot>/DragonflyWeb</contextRoot>
+                        </webModule>
+                        
+                    </modules>
+                </configuration>
+            </plugin>
+            <!--
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>				
+                <artifactId>jboss-maven-plugin</artifactId>		
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <configuration>
+                            <server>default</server>
+                            <hostName>localhost</hostName>
+                            <port>8080</port>
+                            <fileName>
+                                ${project.build.directory}\${project.build.finalName}.${project.packaging}
+                            </fileName>
+                        </configuration> 	
+                        <goals>
+                            <goal>harddeploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+        </plugins>
+    </build>
+    
+</project>
+

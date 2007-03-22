@@ -3,6 +3,7 @@ package fr.umlv.dragonflyBdd;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.hibernate.MappingException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
@@ -194,6 +196,53 @@ public class ProjectManager {
 	}
 	
 	
+	/**
+	 * Add a Task for the named project
+	 * 
+	 * @param project The project to add the Task
+	 * @param author The Author of the Task (nickname)
+	 * @param descr The description of the Task
+	 * @param subj The Subject of the Task
+	 * @param post The PostDate of the Task
+	 * @param start The start date for the Task
+	 * @param end The end date for the Task
+	 * @return id of the task if the Task have been added, -1 otherwise
+	 */
+	public long addTask(String project, String author, String descr, String subj, java.util.Date post, java.util.Date start, java.util.Date end) {
+		Project proj = getProject(project);
+		if(project == null)
+			return -1;
+		
+		Transaction trans = null;
+		Task task = null;
+		try {
+			trans = session.beginTransaction();
+			Collection<Task> collection = proj.getTasks();
+			if(collection == null){
+				proj.setTasks(new LinkedList<Task>());
+				collection = proj.getTasks();
+			}
+			task = new Task(post,author,subj,descr,start,end);
+			collection.add(task);
+			session.update(proj);
+			trans.commit();
+		} catch (Exception e) {
+			System.out.println("DataBase Exception "+e.getMessage());
+			e.printStackTrace();
+			if(trans != null)
+				trans.rollback();
+			return -1;
+		}
+		
+		return task.getTask_id();
+	}
+	
+	/**
+	 * Remove a Task for the named Project
+	 * @param name The name of the project to delete the Task
+	 * @param task_id The task id of the Task to delete
+	 * @return true if the delete have been done, false otherwise
+	 */
 	public boolean removeTask(String name, String task_id){
 		Project project = getProject(name);
 		long id = 0;
@@ -227,40 +276,34 @@ public class ProjectManager {
 		return true;
 	}
 	
-	public static void main(String[] args) {
-		String id = "1";
-		ProjectManager.getProjectManagerInstance().removeTask("Dragonfly", id);
-	}
-	
-	public long addTask(String project, String descr, String subj, java.util.Date post, java.util.Date start, java.util.Date end) {
+	/**
+	 * Add a Meeting for the named project
+	 * @param project The project to add the Meeting
+	 * @param author The Author of the Meeting (nickname)
+	 * @param description The description of the Meeting
+	 * @param subj The Subject of the Meeting
+	 * @param post The PostDate of the Meeting
+	 * @param date The date for the Meeting
+	 * @return id of the Meeting if the Meeting have been added, -1 otherwise
+	 */
+	public long addMeeting(String project, String author, String subj, String description, java.util.Date post, java.util.Date date) {
 		Project proj = getProject(project);
 		if(project == null)
 			return -1;
 		
 		Transaction trans = null;
-		Task task = null;
+		Meeting meeting = null;
 		try {
 			trans = session.beginTransaction();
-			Collection<Task> collection = proj.getTasks();
+			Collection<Meeting> collection = proj.getMeetings();
 			if(collection == null){
-				proj.setTasks(new LinkedList<Task>());
-				collection = proj.getTasks();
+				proj.setMeetings(new LinkedList<Meeting>());
+				collection = proj.getMeetings();
 			}
-			//TODO: Rajouter les parametres pour la tache
-			task = new Task(post,"Author",subj,descr,start,end);
-			/*
-			System.out.println("Post :"+post.toString());
-			System.out.println("Project Name :"+ project);
-			System.out.println("Start date :" + start.toString());
-			System.out.println("End Date :"+end.toString());
-			System.out.println("Tasks :"+proj.getTasks().size());
-			*/
-			collection.add(task);
-			//System.out.println("1");
+			meeting = new Meeting(post,author,subj,date,description);
+			collection.add(meeting);
 			session.update(proj);
-			//System.out.println("2");
 			trans.commit();
-			//System.out.println("jdsfsfd");
 		} catch (Exception e) {
 			System.out.println("DataBase Exception "+e.getMessage());
 			e.printStackTrace();
@@ -268,116 +311,15 @@ public class ProjectManager {
 				trans.rollback();
 			return -1;
 		}
-		
-		return task.getTask_id();
+		return meeting.getMeeting_id();
 	}
+
 	/**
-	 * Add a Task for the named project
-	 * 
-	 * @param name The name of the project to add a task
-	 * @return true if the Task have been added - false otherwise
+	 * Remove a Meeting for the named Project
+	 * @param name The name of the project to delete the Meeting
+	 * @param meet_id The meeting id of the Meeting to delete
+	 * @return true if the delete have been done, false otherwise
 	 */
-	public boolean addTask(String name){
-		Project project = getProject(name);
-		System.out.println("--->"+name);
-		if(project == null)
-			return false;
-
-		
-		Transaction tr = null;
-		try {
-			tr = session.beginTransaction();
-			Collection<Task> collection = project.getTasks();
-			if(collection == null){
-				project.setTasks(new LinkedList<Task>());
-				collection = project.getTasks();
-			}
-			//TODO: Rajouter les parametres pour la tache
-			
-			Date postdate = new Date();
-			Task task = new Task(postdate,postdate,postdate);
-			collection.add(task);
-			session.update(project);
-			tr.commit();
-		} catch (Exception e) {
-			if(tr != null)
-				tr.rollback();
-			return false;
-		}
-		return true;
-	}
-	
-	/**
-	 * Add a Meeting for the named project
-	 * 
-	 * @param name The name of the project to add a meeting
-	 * @return true if the Meeting have been added - false otherwise
-	 */
-	public boolean addMeeting(String name){
-		Project project = getProject(name);
-
-		if(project == null)
-			return false;
-		Transaction tr = null;
-		try {
-			tr = session.beginTransaction();
-			Collection<Meeting> collection = project.getMeetings();
-			if(collection == null){
-				project.setMeetings(new LinkedList<Meeting>());
-				collection = project.getMeetings();
-			}
-			//TODO: Rajouter les parametres pour le meeting
-			Date postDate = new Date(System.currentTimeMillis());
-			Date date = new Date(System.currentTimeMillis());
-			Meeting meeting = new Meeting(postDate,date,"12:30");
-			collection.add(meeting);
-			session.update(project);
-			tr.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			if(tr != null)
-				tr.rollback();
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean addMeeting(String proj, String subj, String description, java.util.Date date) {
-		System.out.println("addMeeting fonction entered : "+proj);
-		Project project = getProject(proj);
-
-		if(project == null){
-		System.out.println("project null");
-			return false;
-		}
-		Transaction tr = null;
-		try {
-			tr = session.beginTransaction();
-			Collection<Meeting> collection = project.getMeetings();
-			if(collection == null){
-				project.setMeetings(new LinkedList<Meeting>());
-				collection = project.getMeetings();
-			}
-			Date postDate = new Date(System.currentTimeMillis());
-			System.out.println("Date created");
-			Meeting meeting = new Meeting(postDate,"jdsh",subj,date,"hghg",description);
-			System.out.println("Meeting created");
-			collection.add(meeting);
-			System.out.println("Meeting added");
-			session.update(project);
-			System.out.println("session update");
-			tr.commit();
-			System.out.println("session commit");
-		} catch (Exception e) {
-			e.printStackTrace();
-			if(tr != null)
-				tr.rollback();
-			return false;
-		}
-		return true;
-	}
-
-	
 	public boolean removeMeeting(String name, String meet_id) {
 		Project project = getProject(name);
 		long id = 0;
@@ -407,20 +349,29 @@ public class ProjectManager {
 			session.update(project);
 			tr.commit();
 		}catch(Exception e){
-			System.err.println("Remove Task probleme :"+e.getMessage());
+			System.err.println("Remove Meeting probleme :"+e.getMessage());
 			return false;
 		}
 		return true;
 	}
 	
-	
-	public boolean addNews(String proj, String subj, String descr) {
+	/**
+	 * Add a News for the named project
+	 * @param proj The project to add the News
+	 * @param author The Author of the News (nickname)
+	 * @param description The description of the News
+	 * @param subj The Subject of the News
+	 * @param post The PostDate of the News
+	 * @return id of the News if the News have been added, -1 otherwise
+	 */
+	public long addNews(String proj, String author, java.util.Date post, String subj, String description) {
 		Project project = getProject(proj);
 
 		if(project == null)
-			return false;
+			return -1;
 
 		Transaction tr = null;
+		News news = null;
 		try {
 			tr = session.beginTransaction();
 			Collection<News> collection = project.getNews();
@@ -428,54 +379,130 @@ public class ProjectManager {
 				project.setNews(new LinkedList<News>());
 				collection = project.getNews();
 			}
-			//TODO: Rajouter les parametres pour la news
-			Date postdate = new Date(System.currentTimeMillis());
-			News news = new News(postdate,"Author",subj,descr);
+			news = new News(post,author,subj,description);
 			collection.add(news);
 			session.update(project);
 			tr.commit();
 		} catch (Exception e) {
 			if(tr != null)
 				tr.rollback();
+			return -1;
+		}
+		return news.getNews_id();
+	}
+	
+	/**
+	 * Remove a News for the named Project
+	 * @param name The name of the project to delete the News
+	 * @param news_id The meeting id of the Meeting to delete
+	 * @return true if the delete have been done, false otherwise
+	 */
+	public boolean removeNews(String name, String news_id) {
+		Project project = getProject(name);
+		long id = 0;
+		
+		if(project == null){
+			System.out.println("Project manager remove task :project name=null");
 			return false;
 		}
-		return true;
-	}
-
-	/**
-	 * Add a News for the named project
-	 * 
-	 * @param name The name of the project to add a news
-	 * @return true if the News have been added - false otherwise
-	 */
-	public boolean addNews(String name){
-		Project project = getProject(name);
-
-		if(project == null)
-			return false;
-
 		Transaction tr = null;
-		try {
+		try{
 			tr = session.beginTransaction();
-			Collection<News> collection = project.getNews();
-			if(collection == null){
-				project.setNews(new LinkedList<News>());
-				collection = project.getNews();
+			Collection<News> coll = project.getNews();
+			try{
+				id = Long.parseLong(news_id);
+			}catch(NumberFormatException e){
+				System.err.println("Task_id cannot be converted to long");
+				return false;
 			}
-			//TODO: Rajouter les parametres pour la news
-			Date postdate = new Date(System.currentTimeMillis());
-			News news = new News(postdate);
-			collection.add(news);
+		//TODO La meuilleur solution serait de ne pas parcourir toute la liste mais
+			//faire une requ阾e SQL
+			for(News t : coll){
+				if(t.getNews_id() == id){
+					coll.remove(t);
+					break;
+				}
+			}
 			session.update(project);
 			tr.commit();
-		} catch (Exception e) {
-			if(tr != null)
-				tr.rollback();
+		}catch(Exception e){
+			System.err.println("Remove News probleme :"+e.getMessage());
 			return false;
 		}
 		return true;
 	}
 	
+		
+	/**
+	 * Test if a project exist in DataBase
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public boolean isProjectExist(String name){
+		Project project = getProject(name);
+		return (project != null);
+	}
+	
+	
+	/**
+	 * Get the Project Object with this name
+	 * 
+	 * @param email The key to get this project in the Project's Table from DataBase. 
+	 * @return The Project Object associated with this name, null otherwise (if doesn't exist in DataBase).
+	 */
+	public Project getProject(String name) {
+		//Try to get the Project with this name key
+		return (Project)session.get(Project.class,name);
+	}
+
+	/**
+	 * Return all The Tasks for the named project 
+	 * 
+	 * @param project The name of the project to get The Tasks
+	 * @return an unmodifiableCollection with all the Tasks for this project, a empty Collection otherwise
+	 */
+	public Collection<Task> getProjectTasks(String project) {
+		Project proj = getProject(project);
+		if(proj == null)
+			new ArrayList<Task>();
+		Collection<Task> list = proj.getTasks();
+		if(list == null)
+			list = new ArrayList<Task>();
+		return Collections.unmodifiableCollection(new ArrayList<Task>(list));
+	}
+
+	/**
+	 * Return all The Meetings for the named project 
+	 * 
+	 * @param project The name of the project to get The Meetings
+	 * @return an unmodifiableCollection with all the Meetings for this project, a empty Collection otherwise
+	 */
+	public Collection<Meeting> getProjectMeetings(String project) {
+		Project proj = getProject(project);
+		if(proj == null)
+			new ArrayList<Meeting>();
+		Collection<Meeting> list = proj.getMeetings();
+		if(list == null)
+			list = new ArrayList<Meeting>();
+		return Collections.unmodifiableCollection(new ArrayList<Meeting>(list));
+	}
+
+	/**
+	 * Return all The News for the named project 
+	 * 
+	 * @param project The name of the project to get The News
+	 * @return an unmodifiableCollection with all the News for this project, a empty Collection otherwise
+	 */
+	public Collection<News> getProjectNews(String project) {
+		Project proj = getProject(project);
+		if(proj == null)
+			new ArrayList<News>();
+		Collection<News> list = proj.getNews();
+		if(list == null)
+			list = new ArrayList<News>();
+		return Collections.unmodifiableCollection(new ArrayList<News>(list));
+	}
 	
 	/**
 	 * Add an user to the project 'projectName'
@@ -506,82 +533,12 @@ public class ProjectManager {
 	}
 	
 	/**
-	 * Test if a project exist in DataBase
-	 * 
-	 * @param name
+	 *  Add an user to the named project 
+	 *  
+	 * @param project The name of the project where the user must be added
+	 * @param mail The id of the user to add to the project
 	 * @return
 	 */
-	public boolean isProjectExist(String name){
-		Project project = getProject(name);
-		return (project != null);
-	}
-	
-	
-	/**
-	 * Get the Project Object with this name
-	 * 
-	 * @param email The key to get this project in the Project's Table from DataBase. 
-	 * @return The Project Object associated with this name, null otherwise (if doesn't exist in DataBase).
-	 */
-	public Project getProject(String name) {
-		//Try to get the Project with this name key
-		return (Project)session.get(Project.class,name);
-	}
-
-	public List<List<String>> getProjectTasks(String project) {
-		Project proj = getProject(project);
-		Collection<Task> tasks = proj.getTasks();
-		if((tasks == null)||(tasks.size()==0))
-				return null;
-		List<List<String>> list = new ArrayList<List<String>>();
-		//Map<String, String> map = new HashMap<String, String>();
-		
-		for(Task t : tasks){
-			List<String> l = new ArrayList<String>();
-			l.add(Long.toString(t.getTask_id()));
-			l.add(t.getSubject());
-			l.add(t.getDescription());
-			l.add(formatter.format(t.getPostDate()));
-			l.add(formatter.format(t.getStartTask()));
-			l.add(formatter.format(t.getEndTask()));
-			list.add(l);
-		}
-		return list;
-	}
-
-	public List<List<String>> getProjectMeetings(String project) {
-		Project proj = getProject(project);
-		Collection<Meeting> list = proj.getMeetings();
-		List<List<String>> l = new ArrayList<List<String>>();
-		
-		for(Meeting meet : list){
-			List<String> m = new ArrayList<String>();
-			m.add(Long.toString(meet.getMeeting_id()));
-			m.add(meet.getSubject());
-			m.add(meet.getDate().toString());
-			m.add(meet.getPostDate().toString());
-			m.add(meet.getDescription());			
-			l.add(m);
-		}
-		return l;
-	}
-
-	public List<List<String>> getProjectNews(String name) {
-		Project project = getProject(name);
-		Collection<News> list = project.getNews();
-		List<List<String>> l = new ArrayList<List<String>>();
-		
-		for(News n : list){
-			List<String> m = new ArrayList<String>();
-			m.add(n.getAuthor());
-			m.add(n.getSubject());
-			m.add(n.getDescription());
-			m.add(n.getPostDate().toString());
-			l.add(m);
-		}
-		return l;
-	}
-	
 	public boolean addUserToProject(String project, String mail) {
 		Project proj = getProject(project);
 		Set<User> set = proj.getUsers();
@@ -605,6 +562,8 @@ public class ProjectManager {
 		System.out.println("User Added");
 		return true;
 	}
+	
+	
 
 	public String[][] getProjectUsers(String project) {
 		System.out.println("-------->Entering getProjectUsers");

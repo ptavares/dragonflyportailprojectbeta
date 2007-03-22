@@ -26,6 +26,7 @@
 <br>
 <br>
 
+<jsp:include flush="true" page="Tabs/MeetingsTabs.jsp"></jsp:include>
 
 </body>
 </html>

@@ -12,4 +12,6 @@ public interface ProjectModification {
 	public boolean removeTask(String name, String task_id);
 
 	public boolean removeMeeting(String name, String meet_id);
+
+	public boolean removeNews(String proName, String delete);
 }

@@ -12,6 +12,18 @@
 
 <SCRIPT type="text/javascript" src="javascript/projectPage_action.js"></SCRIPT>
 
+<script type="text/javascript">
+			
+	dojo.require("dojo.lfx.*");
+	function testExplode(start,node){
+		dojo.lfx.explode(start, node, 300).play();
+	}
+
+	function testImplode(start,node){
+		dojo.lfx.implode(node, start, 300).play();
+	}
+</script>
+
 <body>
 
 <!-- Header  -->
@@ -32,7 +44,7 @@
 	</s:url>
 	<s:url id="NewsPage" action="goToProjectPage" method="goToNewsPage">
 	</s:url>
-	<s:url id="TODOPage" action="goToProjectPage" method="goToTODOPage">
+	<s:url id="TODOPage" action="goToProjectPage"  method="goToTODOPage">
 	</s:url>
 	<s:url id="MeetingsPage" action="goToProjectPage" method="goToMeetingsPage">
 	</s:url>
@@ -42,22 +54,23 @@
 	</s:url>
 	<s:url id="DownUpPage" action="goToProjectPage" method="goToDownUpPage">
 	</s:url>
-
+	<s:url id="Administration" action="goToProjectPage" method="goToAdministrationPage">
+	</s:url>
 
 	<!-- Le TabbedPanel contenant les différentes pages -->
 	<s:tabbedPanel id="test" cssClass="tabbedPanel" >
    
    	<!-- Page "d'acceuil" contenant les differentes informations sur le projet courant -->
-    <s:div id="information" label="Information" labelposition="top" href="%{InformationPage}" cssClass="tabbedPanel_Div">
+    <s:div id="information" label="Information" labelposition="top" href="%{InformationPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
    	<!-- Page contenant l'ensemble des news du projet courant -->
-    <s:div id="news" label="News" labelposition="top" href="%{NewsPage}" cssClass="tabbedPanel_Div">
+    <s:div id="news" label="News" labelposition="top" href="%{NewsPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
    	<!-- Page contenant l'ensemble des tâches du projet courant -->
-   	<s:div id="todo" label="TODO" labelposition="top" href="%{TODOPage}" cssClass="tabbedPanel_Div">
+   	<s:div id="todo" label="TODO" labelposition="top" href="%{TODOPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
    	<!-- Page contenant l'ensemble des réunions du projet courant -->
-   	<s:div id="meetings" label="Meetings" labelposition="top" href="%{MeetingsPage}" cssClass="tabbedPanel_Div">
+   	<s:div id="meetings" label="Meetings" labelposition="top" href="%{MeetingsPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
   	<!-- Page contenant les actions permettant la génération maven du projet courant -->
   	<s:div id="maven" label="Maven" labelposition="top" href="%{MavenPage}" cssClass="tabbedPanel_Div">
@@ -68,7 +81,9 @@
   	<!-- Page contenant la liste des documents pouvant etre téléchargés + upload de fichier -->
   	<s:div id="download_upload" label="Download/UpLoad" labelposition="top" href="%{DownUpPage}" cssClass="tabbedPanel_Div">
    	</s:div>
-   	 
+   	<!-- Page servant à l'adminstration du projet -->
+  	<s:div id="administration" label="Administration" labelposition="top" href="%{Administration}" refreshOnShow="true" cssClass="tabbedPanel_Div">
+   	</s:div>
 	</s:tabbedPanel>
 
 

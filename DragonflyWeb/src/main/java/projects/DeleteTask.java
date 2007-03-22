@@ -2,44 +2,40 @@ package projects;
 
 import javax.naming.InitialContext;
 
-import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyEJB.services.project.modification.ProjectModification;
 
 public class DeleteTask extends ActionSupport {
-	private String[] delete;
+	private String delete;
+	private String ProName;
 	
-	public String execute() throws Exception{
-		//System.out.println("Delete Task + "+getDel());
-		
-		String project = (String)ServletActionContext.getRequest().getSession().getAttribute("project");
-		//String project = ServletActionContext.getRequest().getParameter("project");
-		System.out.println("Project Name : "+project);
-		
-		String[] tab = ServletActionContext.getRequest().getParameterValues("delete");
-		if((tab == null)||(tab.length == 0)){
-			System.out.println("DeleteTask.class : Tab Size null ou 0");
-			return "rien";
-		}
-		
+	public String execute() throws Exception{			
 		final InitialContext ctx = new InitialContext();
 		final ProjectModification proj=(ProjectModification) ctx.lookup("ProjectModification/remote");
 	
-		for(int i = 0; i<tab.length;i++){
-			System.out.println("Before Remove");
-			proj.removeTask(project, tab[i]);
-			System.out.println("Task removed");
-		}		
+		System.out.println("Before Remove");
+		proj.removeTask(getProName(), getDelete());
+		System.out.println("Task removed");	
 		return INPUT;
 	}
 
-	public String[] getDel() {
+	public String getDelete() {
 		return delete;
 	}
 
-	public void setDelete(String[] del) {
-		this.delete = del;
+	public void setDelete(String delete) {
+		this.delete = delete;
 	}
+
+	public String getProName() {
+		return ProName;
+	}
+
+	public void setProName(String proName) {
+		ProName = proName;
+	}
+
+	
+	
 }

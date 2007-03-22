@@ -30,6 +30,8 @@ public class AddTask extends ActionSupport {
 			return "rien";
 		}
 		
+		String author = (String) ServletActionContext.getRequest().getSession().getAttribute("NickName");
+		
 		final InitialContext ctx = new InitialContext();
 		
 		final ProjectAdds proj=(ProjectAdds) ctx.lookup("ProjectAdds/remote");
@@ -45,7 +47,7 @@ public class AddTask extends ActionSupport {
 		Date fin = new Date(calendar2.getTimeInMillis());
 		
 		post = new java.sql.Date(System.currentTimeMillis());
-		Long  id = proj.addTask(p,getDescr(),getSubj(),post, debut, fin);	
+		Long  id = proj.addTask(p,author,getDescr(),getSubj(),post, debut, fin);	
 		taskId = id.toString();
 		return INPUT;
 	}

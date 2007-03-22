@@ -1,6 +1,7 @@
 package projects;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -13,12 +14,16 @@ import com.opensymphony.xwork2.ActionSupport;
 import fr.umlv.dragonflyEJB.services.project.adds.ProjectAdds;
 
 public class AddMeeting extends ActionSupport {
+	
 	private String subj;
-	//private Date start;	
 	private String start;
 	private String hour;
 	private String min;
 	private String descr;
+	
+	private Date dateMeeting;
+	private String meetingId;
+	private Date post;
 	
 	
 	public String execute() throws Exception{
@@ -32,29 +37,22 @@ public class AddMeeting extends ActionSupport {
 		System.out.println("Project Name : "+project);
 		if(project==null)
 			return "rien";
-		String[] tab = getStart().split("-");
-		int y=0,m=0,d=0;
-		try{
-			y = Integer.parseInt(tab[0]);
-			m = Integer.parseInt(tab[1]);
-			d = Integer.parseInt(tab[2]);			
-		}catch(NumberFormatException n){
-			System.out.println("Add meeting exception. Cannot parse item "+ n.getMessage());
-			return "rien";
-		}
+		String[] tab = getStart().split("/");
+		Calendar calendar = new GregorianCalendar(Integer.parseInt(tab[0]), Integer.parseInt(tab[1])-1, Integer.parseInt(tab[2]),Integer.parseInt(getHour()),Integer.parseInt(getMin()));
+		dateMeeting = new Date(calendar.getTimeInMillis());
 				
-		Calendar calendar = new GregorianCalendar(y, m-1, d, Integer.parseInt(getHour()), Integer.parseInt(getMin()));
-		//calendar.s=Integer.parseInt(getHour());
-		java.util.Date debut = new Date(calendar.getTimeInMillis());
+		System.out.println("------>Date : "+ dateMeeting.toString());
 		
-		System.out.println("------>Date : "+ debut.toString());
+		String author = (String) ServletActionContext.getRequest().getSession().getAttribute("NickName");
+		
+		post = new java.sql.Date(System.currentTimeMillis());
 		
 		final InitialContext ctx = new InitialContext();
-		//System.out.println("Initial Contexte");
 		final ProjectAdds proj=(ProjectAdds) ctx.lookup("ProjectAdds/remote");
-		//System.out.println("Project Adds OK");
-		proj.addMeeting(project, getSubj(), getDescr(), debut);
-		//System.out.println("Meeting added");
+		
+		Long  id = proj.addMeeting(project, author,getSubj(), getDescr(), post, dateMeeting);
+		meetingId = id.toString();
+		
 		return INPUT;
 	}
 
@@ -63,9 +61,8 @@ public class AddMeeting extends ActionSupport {
 		return start;
 	}
 
-
-	public void setStart(String date) {
-		this.start = date;
+	public void setStart(String start) {
+		this.start = start;
 	}
 
 
@@ -107,5 +104,21 @@ public class AddMeeting extends ActionSupport {
 	public void setSubj(String subj) {
 		this.subj = subj;
 	}
+
+
+	public String getMeetingId() {
+		return meetingId;
+	}
+
+
+	public String getPost(){
+		return new SimpleDateFormat("yyyy/MM/dd").format(post);
+	}
+
+
+	public String getDateMeeting() {
+		return new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss").format(dateMeeting);
+	}
+	
 	
 }

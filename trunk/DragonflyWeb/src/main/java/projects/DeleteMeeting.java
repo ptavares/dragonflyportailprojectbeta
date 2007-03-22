@@ -9,36 +9,34 @@ import com.opensymphony.xwork2.ActionSupport;
 import fr.umlv.dragonflyEJB.services.project.modification.ProjectModification;
 
 public class DeleteMeeting extends ActionSupport {
-	private String[] deleteMeet;
+	private String delete;
+	private String ProName;
 	
 	public String execute() throws Exception{
 		String project = (String)ServletActionContext.getRequest().getSession().getAttribute("project");
 		System.out.println("Project Name : "+project);
 		
-		String[] tab = ServletActionContext.getRequest().getParameterValues("deleteMeet");
-		if((tab == null)||(tab.length==0)){
-			System.out.println("DeleteMeeting.class : getPaarametersValues null ou 0");
-			return "rien";
-		}
-		setDeleteMeet(tab);
-		
 		final InitialContext ctx = new InitialContext();
 		final ProjectModification proj=(ProjectModification) ctx.lookup("ProjectModification/remote");
 		
-		for(int i = 0; i<tab.length;i++){
-			System.out.println("Before Remove");
-			proj.removeMeeting(project, tab[i]);
-			System.out.println("Task removed");
-		}
+		proj.removeMeeting(getProName(), getDelete());
 		
 		return INPUT;
 	}
 
-	public String[] getDeleteMeet() {
-		return deleteMeet;
+	public String getDelete() {
+		return delete;
 	}
 
-	public void setDeleteMeet(String[] deleteMeet) {
-		this.deleteMeet = deleteMeet;
+	public void setDelete(String delete) {
+		this.delete = delete;
+	}
+
+	public String getProName() {
+		return ProName;
+	}
+
+	public void setProName(String proName) {
+		ProName = proName;
 	}
 }

@@ -35,7 +35,12 @@
 		<result name="newsPage">/JSP/projects/contents/news.jsp</result>
 		<result name="TODOPage">/JSP/projects/contents/tasks.jsp</result>
 		<result name="meetingsPage">/JSP/projects/contents/meetings.jsp</result>
-		<result name="mavenPage">/JSP/projects/contents/maven.jsp</result>
+                
+		<!--<result name="mavenPage">/JSP/projects/contents/maven.jsp</result>-->
+                <result name="mavenPage"  type="redirect-action">
+                    <param name="actionName">GenerateMaven</param>
+                </result>
+                
 		<result name="FAQPage">/JSP/projects/contents/faq.jsp</result>
 		<result name="downUpPage">/JSP/projects/contents/downUp.jsp</result>
 		
@@ -46,6 +51,11 @@
 		
 		</action>
 
+                
+                <action name="GenerateMaven!*" method="{1}" class="projects.GenerateMaven">
+                    <result name="success">/JSP/success.jsp</result>
+                    <result name="input">/JSP/projects/contents/maven.jsp</result>
+                </action>
 		
 		
 		<action name="ListProjects!*" method="{1}"

@@ -10,12 +10,12 @@
 
 <body>
 
-<div id="meetingTabs">
+<div id="newsTabs">
 
 
 <div id="dojoTable" align="center">
 
-<table dojoType="filteringTable" multiple="true" alternateRows="true" id="meetingTable"
+<table dojoType="filteringTable" multiple="true" alternateRows="true" id="newsTable"
 	cellpadding="0" cellspacing="0" border="1" >	
 	
 	<thead>
@@ -23,16 +23,14 @@
 		<th field="subject" dataType="String" valign="top">Subject</th>
 		<th field="description" dataType="String" valign="top">Description</th>
 		<th field="postDate" dataType="Date" sort="asc" format="%d %b %Y" valign="top">Post Date</th>
-		<th field="date" dataType="String" valign="top">Meeting Date</th>
 		</tr>
 	</thead>
 	<tbody>
-	<s:iterator value="meetings">
+	<s:iterator value="news">
 		<tr value="<s:property value="number"/>">
 			<td><s:property value="subject"/></td>
 			<td><s:property value="description"/></td>
 			<td><s:property value="postDate"/></td>
-			<td><s:property value="date"/></td>
 		</tr>
 	</s:iterator>
 	</tbody>

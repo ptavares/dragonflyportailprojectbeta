@@ -19,33 +19,20 @@ public @Stateless class ProjectAddsBean implements ProjectAdds {
 	@EJB
 	private ProjectManager managerLocal;
 	
-	public boolean addMeeting(String name) {
-		return managerLocal.addMeeting(name);
-	}
-
-	public boolean addNews(String name) {
-		return managerLocal.addNews(name);
-	}
-
-	public boolean addTask(String name) {
-		return managerLocal.addTask(name);
-	}
-
 	public boolean addUserToProject(String name, User user) {
 		return managerLocal.addUserToProject(name, user);
 	}
 
-	public long addTask(String project, String descr, String subj, Date post, Date start, Date end) {
-		return managerLocal.addTask(project,descr,subj,post,start,end);
+	public long addTask(String project, String author, String descr, String subj, Date post, Date start, Date end) {
+		return managerLocal.addTask(project,author,descr,subj,post,start,end);
 	}
 
-	public boolean addMeeting(String project, String subj, String description, Date date) {
-		System.out.println("Remote Bean");
-		return managerLocal.addMeeting(project, subj,description,date);
+	public long addMeeting(String project, String author, String subj, String description, Date post, Date date) {
+		return managerLocal.addMeeting(project, author, subj, description, post, date);
 	}
 
-	public boolean addNews(String project, String subj, String descr) {
-		return managerLocal.addNews(project, subj,descr);
+	public long addNews(String project, String author, Date post, String subj, String descr) {
+		return managerLocal.addNews(project, author, post, subj, descr);
 	}
 	
 	public boolean addUser(String project, String mail) {

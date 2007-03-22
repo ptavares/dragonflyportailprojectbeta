@@ -12,6 +12,28 @@ background-color: #87cefa;
 height: 100%;
 }
 </STYLE>
+
+<s:head theme="ajax"/>
+
+<script type="text/javascript">
+dojo.event.topic.subscribe("refreshMeetingTab",function(data,type,request){
+alert("ca passe la");
+		if(type=="load"){
+			alert(data);
+			/* Supprime la balise <form> de la reponse contenue dans Data*/			
+			var suppBalise = data.replace(/<([^>])*>/g,'');
+			/*Supprime les espaces inutiles */
+			var suppSpace = suppBalise.replace(/(^\s*)|(\s*$)/g,''); 
+			/*On extrait les différentes variables*/
+			var split = suppSpace.split("-");
+			/* On envoit dans l'ordre meetingId,subject,description,post,dateMeeting*/			
+			opener.addRowMeeting(split[0],split[1],split[2],split[3],split[4]);
+	 		window.close();
+	 		}
+	 } );
+</script>
+
+
 </head>
 <body>
 
@@ -23,45 +45,15 @@ System.out.println("yooiooo------>"+str);
 
 <div class="back">
 <h3 align="center"><b>Create a new Meeting</b></h3>
-<s:head/>
 
-
-
-<s:form action="AddMeeting.action" method="post" theme="simple">
-
-<table border="0" style="solid">
-<tr>
-
-<td colspan="5">
-<div><s:textfield name="subj" label="%{getText('adds.subject')}" size="45" theme="ajax"/></div></td>
-</tr>
-
-<tr>
-
-<td>
-<div><s:datetimepicker label="%{getText('adds.date')}"  name="start" displayFormat="yyyy-MM-dd" theme="ajax"/></div></td>
-<td>
-<div><s:select label="%{getText('adds.min')}" name="hour" list="{'01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'}" theme="ajax"/>
-</div></td>
-
-<td>
-<div><s:select name="min" label="%{getText('adds.min')}" list="{'00','05','10','15','20','25','30','35','40','45','50','55','60'}" theme="ajax"/></div></td>
-</tr>
-
-<tr>
-
-<td colspan="5">
-<div><s:textarea name="descr" label="%{getText('adds.descr')}" rows="8" cols="45" theme="xhtml"/></div></td>
-</tr>
-
-<tr>
-<td></td>
-<td><div><s:submit onclick="opener.location.reload(true);window.close()"/></div></td>
-</tr>
-</table>
+<s:form action="AddMeeting.action" method="post">
+<s:textfield name="subj" label="%{getText('adds.subject')}" size="45" />
+<s:datetimepicker label="%{getText('adds.date')}"  name="start" displayFormat="yyyy/MM/dd"/>
+<s:select label="%{getText('adds.hour')}" name="hour" list="{'01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'}"/>
+<s:select name="min" label="%{getText('adds.min')}" list="{'00','05','10','15','20','25','30','35','40','45','50','55','60'}"/>
+<s:textarea name="descr" label="%{getText('adds.descr')}" rows="8" cols="45" theme="xhtml"/>
+<s:submit notifyTopics="refreshMeetingTab"/>
 </s:form>
-
-
 
 </div>
 

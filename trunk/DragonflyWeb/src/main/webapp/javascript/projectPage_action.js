@@ -23,12 +23,39 @@ function addRowTask(taskId,subject,description,post,start,end){
 		if(w){
 			w.store.addData({
 				Id:taskId,   
-			 	Number:taskId,   
-			 	Subject:subject,   
-			 	Description:description,   
-			 	PostDate:post,
-			 	StartDate:start,
-			 	EndDate:end   
+			 	subject:subject,   
+			 	description:description,   
+			 	postDate:post,
+			 	startDate:start,
+			 	endDate:end   
 			});
 			}
 }
+
+function addRowMeeting(meetingId,subject,description,post,dateMeeting){
+	alert("-----"+meetingId+" "+subject+" "+description+" "+post+" "+dateMeeting);
+	var w=dojo.widget.byId("meetingTable");
+		if(w){
+			w.store.addData({
+				Id:meetingId,   
+			 	subject:subject,   
+			 	description:description,   
+			 	postDate:post,
+			 	date:dateMeeting
+			});
+			}
+}
+
+function addRowNews(newsId,subject,description,post){
+	alert("-----"+newsId+" "+subject+" "+description+" "+post);
+	var w=dojo.widget.byId("newsTable");
+		if(w){
+			w.store.addData({
+				Id:newsId,   
+			 	subject:subject,   
+			 	description:description,   
+			 	postDate:post
+			});
+			}
+}
+

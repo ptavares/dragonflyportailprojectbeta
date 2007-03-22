@@ -25,10 +25,7 @@
 		
 		<property name="date" column="date" type="timestamp" not-null="true">
 		</property>
-		
-		<property name="hour" column="hour" type="string" not-null="true">
-		</property>
-		
+				
 		<property name="description" column="description" type="string">
 		</property>
 

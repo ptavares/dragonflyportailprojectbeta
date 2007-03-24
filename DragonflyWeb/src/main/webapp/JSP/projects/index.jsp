@@ -73,7 +73,7 @@
    	<s:div id="meetings" label="Meetings" labelposition="top" href="%{MeetingsPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
   	<!-- Page contenant les actions permettant la génération maven du projet courant -->
-  	<s:div id="maven" label="Maven" labelposition="top" href="%{MavenPage}" cssClass="tabbedPanel_Div">
+  	<s:div id="maven" label="Maven" labelposition="top" href="%{MavenPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
    	<!-- Page contenant l'ensemble des "Frequently Asked Questions" du projet courant -->
    	<s:div id="FAQ" label="FAQ" labelposition="top" href="%{FAQPage}" cssClass="tabbedPanel_Div">

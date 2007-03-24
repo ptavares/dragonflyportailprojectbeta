@@ -36,10 +36,10 @@
 		<result name="TODOPage">/JSP/projects/contents/tasks.jsp</result>
 		<result name="meetingsPage">/JSP/projects/contents/meetings.jsp</result>
                 
-		<!--<result name="mavenPage">/JSP/projects/contents/maven.jsp</result>-->
-                <result name="mavenPage"  type="redirect-action">
+		<result name="mavenPage">/JSP/projects/contents/maven.jsp</result>
+                <!--<result name="mavenPage"  type="redirect-action">
                     <param name="actionName">GenerateMaven</param>
-                </result>
+                </result>-->
                 
 		<result name="FAQPage">/JSP/projects/contents/faq.jsp</result>
 		<result name="downUpPage">/JSP/projects/contents/downUp.jsp</result>
@@ -69,6 +69,12 @@
 		<action name="AddTask!*" method="{1}" class="projects.AddTask">
 			<result name="input">/JSP/projects/results/taskresult.jsp</result>
 		</action>
+                
+                <action name="AddMaven!*" method="{1}" class="projects.AddMaven">
+                    <result name="module">/JSP/projects/popups/addModule.jsp</result>
+                    <result name="plugin">/JSP/projects/popups/addPlugin.jsp</result>
+                    <result name="dependency">/JSP/projects/popups/addDependency.jsp</result>
+                </action>
 
         
         <action name="AddMeeting!*" method="{1}" class="projects.AddMeeting">

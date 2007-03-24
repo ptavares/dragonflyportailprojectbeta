@@ -9,10 +9,16 @@
 
 package projects;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import fr.umlv.dragonflyEJB.services.project.maven.DependencyInformation;
 import fr.umlv.dragonflyEJB.services.project.maven.MavenInformation;
 import fr.umlv.dragonflyEJB.services.project.maven.MavenManager;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.Map;
 import javax.naming.InitialContext;
 
 /**
@@ -28,8 +34,30 @@ public class GenerateMaven extends ActionSupport{
     
     @Override
     public String execute() throws Exception {
-        System.out.println("Execute");
+        System.out.println("Execute -----------------------");
         intializeMavenInformation();
+        return INPUT;
+    }
+    
+    public String test() throws Exception{
+        System.out.println("test");
+        Map<String, String> session = ActionContext.getContext().getSession();
+        String projectName = session.get("project");
+        File f = new File("/Dragonfly/"+projectName+"/pom.xml");
+        try{
+            FileInputStream inputStream = new FileInputStream("/Dragonfly/"+projectName+"/pom.xml");
+        }catch (FileNotFoundException e){
+            System.out.println("fnfe int "+e.getMessage());
+            e.printStackTrace();
+        }
+        f.createNewFile();
+        try{
+            FileOutputStream outpuStream = new FileOutputStream(f);
+        }catch (FileNotFoundException e){
+            System.out.println("fnfe out "+e.getMessage());
+            e.printStackTrace();
+        }
+        System.out.println("exit method");
         return INPUT;
     }
     
@@ -66,7 +94,7 @@ public class GenerateMaven extends ActionSupport{
         System.out.println("recup MavenManger");
         System.out.println(mavenManager);
         mavenManager.sayHello();
-        intializeMavenInformation();
+        //intializeMavenInformation();
         System.out.println("Init ok");
         try{
             mavenManager.createNewFile(mavenInformation, "projectName");

@@ -9,6 +9,7 @@
 	<include file="projects.xml"/>
 	<include file="fileAction.xml"/>
 	<include file="messageAction.xml"/>
+        <include file="administration.xml" />
     <!-- Add packages here -->
 
 </struts>

@@ -17,8 +17,8 @@
 <SCRIPT type="text/javascript" src="javascript/loading.js"></SCRIPT>
 <SCRIPT type="text/javascript" src="javascript/crypto.js"></SCRIPT>
 <script type="text/javascript">
-			dojo.require("dojo.widget.Clock");
-					dojo.require("dojo.lfx.*");
+	dojo.require("dojo.widget.Clock");
+	dojo.require("dojo.lfx.*");
 	function testExplode(start,node){
 		dojo.lfx.explode(start, node, 300).play();
 	}
@@ -67,6 +67,9 @@
 <s:a href="%{myproject}" targets="rightcolumn" >My Project</s:a><br/>
 <s:url id="listproject" action="ListProjects" />
 <s:a href="%{listproject}" targets="rightcolumn" >List Projects</s:a><br/>
+
+<s:url id="admin" action="Admin" />
+<s:a href="%{admin}" targets="content" >Administration</s:a><br/>
 </div>
 
 </td>

@@ -18,6 +18,11 @@ import javax.ejb.Remote;
 @Remote
 public interface MavenManager {
     public void createNewFile(MavenInformation mavenInformation,String projectName);
+    public void submitGeneralInformation(MavenInformation mavenInformation,String projectName);
+    public void addDependency(DependencyInformation dependency,String projectName);
+    public void submitParent(ParentInformation parent,String projectName);
+    public void addModule(String module,String projectName);
+    public void addPlugin(PluginInformation plugin,String projectName);
     public MavenInformation loadMavenFile(String projectName);
     public void sayHello();
 }

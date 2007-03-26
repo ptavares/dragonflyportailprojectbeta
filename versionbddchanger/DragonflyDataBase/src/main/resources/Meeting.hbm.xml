@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Package for all databases tables -->		
+<hibernate-mapping package="fr.umlv.dragonflyBdd.tables">
+
+<!-- The Meeting's Table -->
+<class name="Meeting" table="T_MEETING" lazy="false">
+
+	<!-- The id for one meeting is a long type number -->
+	<id name="meeting_id" column="meeting_id" type="long">
+			<generator class="increment"/>
+		</id>
+
+		<!-- All properties for one task : the postDate, the author, the desciption,...-->
+		<property name="postDate" column="postDate" type="timestamp" not-null="true">
+		</property>
+		
+		<property name="author" column="author" type="string">
+		</property>
+		
+		<property name="subject" column="subject" type="string">
+		</property>
+		
+		<property name="date" column="date" type="timestamp" not-null="true">
+		</property>
+				
+		<property name="description" column="description" type="string">
+		</property>
+
+</class>
+
+</hibernate-mapping>

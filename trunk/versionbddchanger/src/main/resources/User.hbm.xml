@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Package for all databases tables -->		
+<hibernate-mapping package="fr.umlv.dragonflyBdd.tables">
+
+<!-- The User's Table -->
+<class name="User" table="T_USER" lazy="false">
+
+		<!-- The id for the one user is the user's mail -->
+		<id name="email" column="user_id" type="string">
+			<generator class="assigned"/>
+		</id>
+		
+		<!-- All properties for one user : his nickname, password, ... -->
+		<property name="creationDate" column="creationDate" type="timestamp" not-null="true">
+		</property>
+		
+		<property name="nickname" column="nickname" type="string" not-null="true">
+		</property>
+		
+		<property name="password" column="password" type="string" not-null="true">
+		</property>
+	
+		<property name="actived" column="actived" type="boolean">
+		</property>
+		
+		<bag name="roles" cascade="all-delete-orphan">
+			<key column="user_id" not-null="true"/>
+			<one-to-many class="Roles" />
+		</bag>
+		
+		<bag name="messages" cascade="all-delete-orphan">
+			<key column="user_id" not-null="true"/>
+			<one-to-many class="Message" />
+		</bag>
+		
+	</class>
+
+</hibernate-mapping>

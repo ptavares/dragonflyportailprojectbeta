@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<!-- Package for all databases tables -->		
+<hibernate-mapping package="fr.umlv.dragonflyBdd.tables">
+
+<!-- The Project's FAQ Tables -->
+<class name="FAQ" table="T_FAQ" lazy="false">
+
+
+<!-- The id for one project description "depends" of his associated project-->
+	<id name="faq_id" column="faq_id" type="string">
+				<generator class="foreign">
+					<param name="property">project</param>
+				</generator>
+	</id>
+
+	 <!-- In relation one-to-one : the associated project -->
+	<one-to-one name="project" class="Project" constrained="true"/>
+	
+	<!-- In relation one-to-many : The QuestionResponse -->
+		<bag name="QuestionResponse" cascade="all-delete-orphan">
+			<key column="project_id" not-null="true"/>
+			<one-to-many class="QuestionResponse" />
+		</bag>
+	
+
+</class>
+</hibernate-mapping>

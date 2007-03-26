@@ -1,0 +1,164 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<package name="projects" extends="struts-default">
+		<interceptors>
+			<interceptor name="LoginError"
+				class="projects.LoginInterceptor">
+			</interceptor>
+		</interceptors>
+		<global-results>
+			<result name="login" type="redirect-action">Error</result>
+		</global-results>
+
+		<action name="Error" class="projects.LoginError">
+			<result name="error">/JSP/error.jsp</result>
+		</action>
+
+		<action name="CreateProject!*" method="{1}" class="projects.CreateProject">
+			<interceptor-ref name="LoginError"></interceptor-ref>
+			<interceptor-ref name="params"></interceptor-ref>
+			<interceptor-ref name="validation"></interceptor-ref>
+			<interceptor-ref name="workflow"/>
+			<result name="input">/JSP/createProject.jsp</result>
+			<result name="error">/JSP/createProject.jsp</result>
+			<result name="errors">/JSP/error.jsp</result>
+			<result name="success">/JSP/success.jsp</result>
+		</action>
+
+		<action name="goToProjectPage!*" method="{1}" class="projects.goToProjectPage">
+		<!-- Default -->
+		<result name="input">/JSP/projects/index.jsp</result>
+		<result name="success">/JSP/projects/index.jsp</result>
+		
+		<!-- TabbedPanel redirects -->
+		<result name="informationPage">/JSP/projects/contents/information.jsp</result>
+		<result name="newsPage">/JSP/projects/contents/news.jsp</result>
+		<result name="TODOPage">/JSP/projects/contents/tasks.jsp</result>
+		<result name="meetingsPage">/JSP/projects/contents/meetings.jsp</result>
+                
+		<!--<result name="mavenPage">/JSP/projects/contents/maven.jsp</result>-->
+                <result name="mavenPage"  type="redirect-action">
+                    <param name="actionName">GenerateMaven</param>
+                </result>
+                
+		<result name="FAQPage">/JSP/projects/contents/faq.jsp</result>
+		<result name="downUpPage">/JSP/projects/contents/downUp.jsp</result>
+		<result name="administration">/JSP/projects/contents/administration.jsp</result>
+		
+		<!-- Adds Redirects -->
+		<result name="addTaskPage">/JSP/projects/adds/addTask.jsp</result>
+		<result name="addNewsPage">/JSP/projects/adds/addNews.jsp</result>
+		<result name="addMeetingPage">/JSP/projects/adds/addMeeting.jsp</result>
+		<result name="addFAQPage">/JSP/projects/adds/addFAQ.jsp</result>
+		
+		<!-- Edits Redirects -->
+		<result name="taskTabs">/JSP/projects/contents/Tabs/adminTaskTab.jsp</result>
+		<result name="meetingTabs">/JSP/projects/contents/Tabs/adminMeetingTab.jsp</result>
+		<result name="newsTabs">/JSP/projects/contents/Tabs/adminNewsTab.jsp</result>
+				
+		</action>
+
+
+      <action name="GenerateMaven!*" method="{1}" class="projects.GenerateMaven">
+                    <result name="success">/JSP/success.jsp</result>
+                    <result name="input">/JSP/projects/contents/maven.jsp</result>
+      </action>
+		
+		
+		<action name="ListProjects!*" method="{1}"
+			class="projects.PopProject">
+			<result name="input">/JSP/ListProject.jsp</result>
+			<result name="success">/JSP/ListProject.jsp</result>
+		</action>
+		
+		<!-- Adds Actions -->
+		<action name="AddTask!*" method="{1}" class="projects.adds.AddTask">
+			<result name="input">/JSP/projects/adds/addTask.jsp</result>
+			<result name="error">/JSP/projects/adds/addTask.jsp</result>
+			<result name="success">/JSP/projects/adds/addTask.jsp</result>
+		</action>
+
+        <action name="AddMeeting!*" method="{1}" class="projects.adds.AddMeeting">
+            <result name="input">/JSP/projects/adds/addMeeting.jsp</result>
+			<result name="error">/JSP/projects/adds/addMeeting.jsp</result>
+			<result name="success">/JSP/projects/adds/addMeeting.jsp</result>
+        </action>
+        
+		<action name="AddNews!*" method="{1}" class="projects.adds.AddNews">
+			<result name="input">/JSP/projects/adds/addNews.jsp</result>
+			<result name="error">/JSP/projects/adds/addNews.jsp</result>
+			<result name="success">/JSP/projects/adds/addNews.jsp</result>
+		</action>
+		
+		<action name="AddFAQ!*" method="{1}" class="projects.adds.AddFAQ">
+			<result name="input">/JSP/projects/adds/addFAQ.jsp</result>
+			<result name="error">/JSP/projects/adds/addFAQ.jsp</result>
+			<result name="success">/JSP/projects/adds/addFAQ.jsp</result>
+		</action>
+		
+		 <action name="AddUser!*" method="{1}" class="projects.adds.AddUser">
+            <result name="input">/JSP/projects/adds/addUser.jsp</result>
+            <result name="success">/JSP/projects/adds/addUser.jsp</result>
+            <result name="error">/JSP/projects/adds/addUser.jsp</result>
+            <result name="Error">/JSP/projects/adds/addUser.jsp</result>
+        </action>
+
+		
+		<!-- Deletes Actions -->
+		<action name="DeleteTask!*" method="{1}" class="projects.deletes.DeleteTask">
+			<result name="input">/JSP/projects/results/deleteTaskResult.jsp</result>
+			<result name="error">/JSP/projects/results/deleteTaskResult.jsp</result>
+		</action>
+		
+		<action name="DeleteMeeting!*" method="{1}" class="projects.deletes.DeleteMeeting">
+			<result name="input">/JSP/projects/results/deleteMeetingResult.jsp</result>
+			<result name="error">/JSP/projects/results/deleteMeetingResult.jsp</result>
+		</action>
+		
+		<action name="DeleteNews!*" method="{1}" class="projects.deletes.DeleteNews">
+			<result name="input">/JSP/projects/results/deleteNewsResult.jsp</result>
+			<result name="error">/JSP/projects/results/deleteNewsResult.jsp</result>
+		</action>
+
+		<!-- Modifications -->
+		<action name="ModifPassword" method="goPasswd"
+			class="projects.account.ChangePasswd">
+			<result name="success">JSP/passwd.jsp</result>
+		</action>
+
+		<action name="ChangePasswd!*" method="{1}"
+			class="projects.account.ChangePasswd">
+			<result name="error">passwd.jsp</result>
+			<result name="success">newIndex.jsp</result>
+		</action>
+
+		<action name="ModifNickname" method="goNickname"
+			class="projects.account.ChangeNickname">
+			<result name="success">JSP/modifNickname.jsp</result>
+		</action>
+
+
+		<action name="ChangeNickname!*" method="{1}"
+			class="projects.account.ChangeNickname">
+			<result name="input">JSP/profile.jsp</result>
+			<result name="error">modifNickname.jsp</result>
+			<result name="success">newIndex.jsp</result>
+		</action>
+
+		<action name="ModifEmail" method="goEmail"
+			class="projects.account.ChangeEmail">
+			<result name="success">JSP/changeEmail.jsp</result>
+		</action>
+
+		<action name="ChangeEmail!*" method="{1}"
+			class="projects.account.ChangeEmail">
+			<result name="input">profile.jsp</result>
+			<result name="error">changeEmail.jsp</result>
+			<result name="success">newIndex.jsp</result>
+		</action>
+	</package>
+</struts>

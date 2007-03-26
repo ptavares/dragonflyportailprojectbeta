@@ -1,0 +1,45 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="fileAction" namespace="/" extends="struts-default">
+		<!--  <action name="test" class="fileAction.testAction"
+			method="goload">
+			<result name="success">test/upload.jsp</result>
+		</action>
+	-->
+		<action name="goUpload" class="fileAction.FileAction"
+			method="goload">
+			<result name="success">
+				/JSP/projects/contents/upload.jsp
+			</result>
+		</action>
+		
+		
+		<action name="doUpload" class="fileAction.FileAction"
+			method="upload">
+			<result name="input">/JSP/projects/contents/upload.jsp</result>
+			<result name="success">/JSP/projects/contents/upload.jsp</result>
+		</action>
+		
+		
+		<action name="download" class="fileAction.DownloadAction2">
+			<result name="success" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<action name="goAdminFile" class="fileAction.AdminFileAction" method="load">
+		<result name="success">/JSP/projects/contents/Tabs/adminFileTab.jsp</result>
+		</action>
+
+		<action name="FileDelete" class="fileAction.AdminFileAction" method="del">
+		<result name="success">/JSP/projects/contents/Tabs/adminFileTab.jsp</result>
+		</action>
+		<action name="FileValide" class="fileAction.AdminFileAction" method="valide">
+		<result name="success">/JSP/projects/contents/Tabs/adminFileTab.jsp</result>
+		</action>
+
+	</package>
+</struts>

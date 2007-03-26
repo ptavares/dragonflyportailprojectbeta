@@ -249,6 +249,16 @@ body {
 	font-weight: Bold;
 }
 
+#faq .faqTitleTab {
+	background-image: url(../img/ft-head.gif);
+	width: 200px;
+	text-align: center;
+}
+
+#faq .faqContentTab {
+	text-align: left;
+}
+
 #administration .taskImage {
 	background-image: url(../img/project/little_task.jpg);
 	width: 16px;

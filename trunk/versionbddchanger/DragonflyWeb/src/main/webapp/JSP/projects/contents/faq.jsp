@@ -15,6 +15,7 @@
 <br>
 <br>
 
+<s:if test="userStatus == 2">
 <ul>	
 	<s:url id="addFAQ" action="goToProjectPage" method="goToAddFAQPage"></s:url>
 	
@@ -27,6 +28,7 @@
 
 <br>
 <br>
+</s:if>
 
 <div id="faqTabs">
 

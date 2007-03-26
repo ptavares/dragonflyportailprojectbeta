@@ -12,18 +12,18 @@
 
 <div id="faqTabs">
 <s:iterator value="questionsResponse">
-	<table id="<s:property value="QRId"/>" width="85%" border="1">
+	<table id="<s:property value="QRId"/>" width="85%" align="center" border="1" cellspacing="2">
 
 		<tr>
-			<td><s:text name="faq.showfaq.question"/></td>
-			<td><s:property value="question" /></td>
+			<td class="faqTitleTab" bordercolor="white"><s:text name="faq.showfaq.question"/></td>
+			<td class="faqContentTab" bordercolor="white"><s:property value="question" /></td>
 		</tr>
 		<tr>
-			<td><s:text name="faq.showfaq.response"/></td>
-			<td><s:property value="response" /></td>
+			<td class="faqTitleTab" bordercolor="white"><s:text name="faq.showfaq.response"/></td>
+			<td class="faqContentTab" bordercolor="white"><s:property value="response" /></td>
 		</tr>
-
 	</table>
+	<br>
 </s:iterator></div>
 </body>
 </html>

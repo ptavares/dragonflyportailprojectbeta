@@ -59,7 +59,8 @@
 		<result name="taskTabs">/JSP/projects/contents/Tabs/adminTaskTab.jsp</result>
 		<result name="meetingTabs">/JSP/projects/contents/Tabs/adminMeetingTab.jsp</result>
 		<result name="newsTabs">/JSP/projects/contents/Tabs/adminNewsTab.jsp</result>
-				
+		<result name="FAQTabs">/JSP/projects/contents/Tabs/adminFaqTab.jsp</result>
+		
 		</action>
 
 
@@ -123,6 +124,12 @@
 			<result name="input">/JSP/projects/results/deleteNewsResult.jsp</result>
 			<result name="error">/JSP/projects/results/deleteNewsResult.jsp</result>
 		</action>
+		
+		<action name="DeleteFAQ!*" method="{1}" class="projects.deletes.DeleteFAQ">
+			<result name="input">/JSP/projects/results/deleteFaqResult.jsp</result>
+			<result name="error">/JSP/projects/results/deleteFaqResult.jsp</result>
+		</action>
+		
 
 		<!-- Modifications -->
 		<action name="ModifPassword" method="goPasswd"

@@ -33,7 +33,7 @@
 <s:url id="backFAQPage" action="goToProjectPage"  method="goToFAQPage">
 <s:param name="ProName"><%=session.getAttribute("project")%></s:param>
 </s:url>
-<s:text name="tasks.goBack"></s:text>
+<s:text name="faq.goBack"></s:text>
 <s:a href="%{backFAQPage}" targets="faq">
 <img src="img/project/goBack.png" border="0"></s:a>
 </div>

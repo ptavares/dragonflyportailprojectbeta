@@ -64,9 +64,14 @@ dojo.require("dojo.lfx.*");
    	<!-- Page "d'acceuil" contenant les differentes informations sur le projet courant -->
     <s:div id="information" label="Information" labelposition="top" href="%{InformationPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
+   	   	
    	<!-- Page contenant l'ensemble des news du projet courant -->
     <s:div id="news" label="News" labelposition="top" href="%{NewsPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
+   	
+   	<!-- Page accessible uniquement au Utilisateur du projet et Chef de Projet -->
+   	<s:if test="userStatus == 2 || userStatus == 1">
+   	
    	<!-- Page contenant l'ensemble des tâches du projet courant -->
    	<s:div id="todo" label="TODO" labelposition="top" href="%{TODOPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
@@ -82,9 +87,15 @@ dojo.require("dojo.lfx.*");
   	<!-- Page contenant la liste des documents pouvant etre téléchargés + upload de fichier -->
   	<s:div id="download_upload" label="Download/UpLoad" labelposition="top" href="%{DownUpPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
-   	<!-- Page servant à l'adminstration du projet -->
+   	
+   	</s:if>
+   	
+   	<s:if test="userStatus == 2">
+   	<!-- Page servant à l'adminstration du projet (reserver chef de projet) -->
   	<s:div id="administration" label="Administration" labelposition="top" href="%{Administration}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
+   	</s:if>
+   	
 	</s:tabbedPanel>
 
 <div id="goback">

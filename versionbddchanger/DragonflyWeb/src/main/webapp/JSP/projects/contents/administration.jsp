@@ -26,8 +26,9 @@
 </div>
 </div>
 </div>
-<jsp:include flush="true" page="addUser.jsp"></jsp:include></div>
+<jsp:include flush="true" page="../adds/addUser.jsp"></jsp:include></div>
 
+<br>
 
 <div id="newsTabs">
 <jsp:include flush="true" page="../results/deleteNewsResult.jsp"></jsp:include>
@@ -44,6 +45,14 @@
 <div id="meetingTabs">
 <jsp:include flush="true" page="../results/deleteMeetingResult.jsp"></jsp:include>
 </div>
+
+<br>
+
+<div id="FAQTabs">
+<jsp:include flush="true" page="../results/deleteFaqResult.jsp"></jsp:include>
+</div>
+
+<br>
 
 <div id="fileTabs">
 <jsp:include flush="true" page="../results/valideFichier.jsp"></jsp:include>

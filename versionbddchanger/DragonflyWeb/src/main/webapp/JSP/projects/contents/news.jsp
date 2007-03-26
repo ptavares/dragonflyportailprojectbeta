@@ -14,6 +14,7 @@
 <br>
 <br>
 
+<s:if test="userStatus == 2 || userStatus == 1">
 <ul>
 	<s:url id="addNews" action="goToProjectPage" method="goToAddNewsPage"></s:url>
 	
@@ -26,6 +27,7 @@
 
 <br>
 <br>
+</s:if>
 
 <jsp:include flush="true" page="Tabs/NewsTabs.jsp"></jsp:include>
 

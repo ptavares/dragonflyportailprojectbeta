@@ -36,7 +36,7 @@
 <s:url id="backMeetingPage" action="goToProjectPage"  method="goToMeetingsPage">
 <s:param name="ProName"><%=session.getAttribute("project")%></s:param>
 </s:url>
-<s:text name="tasks.goBack"></s:text>
+<s:text name="meetings.goBack"></s:text>
 <s:a href="%{backMeetingPage}" targets="meetings">
 <img src="img/project/goBack.png" border="0"></s:a>
 </div>

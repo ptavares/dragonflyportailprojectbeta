@@ -235,13 +235,11 @@ public class AccountManager {
 	}
 
 	public String getUserNickname(String mail) throws DragonflyBddException {
-		System.out.println("AccountManger getUserNickname");
 		return getUser(mail).getNickname();
 	}
 
 	public boolean isPasswordCorrect(String mail, String passwd) throws DragonflyBddException {
 		String pass = getUser(mail).getPassword();
-		System.out.println("Password : "+pass);
 		if(passwd.compareTo(pass)==0)
 			return true;
 		return false;
@@ -252,16 +250,23 @@ public class AccountManager {
 	 * @throws DragonflyBddException 
 	 * 
 	 */
-	public List<String> getUserRoles(String user) throws DragonflyBddException{
-		User u = getUser(user);
-		if(u==null)
-			return null;
-		Collection<Roles> coll =  u.getRoles();
-		List<String> set = new ArrayList<String>();
-		for(Roles r: coll)
-			set.add(r.getRole());
-
-		return set;
+	public Collection<Roles> getUserRoles(String userId) throws DragonflyBddException{
+		Transaction tr = null;
+		Session session = null;
+		try {
+			session = DragonFlyDBManager.openSession();
+			tr = session.beginTransaction();
+			//Try to get the user with this email key
+			User user = (User)session.get(User.class,userId);
+			Collection<Roles> coll =  user.getRoles();
+			
+			return Collections.unmodifiableCollection(new ArrayList<Roles>(coll));
+		}catch (Exception e) {
+			throw new DragonflyBddException(e.getMessage());
+		} finally {
+			session.close();
+			//DragonFlyDBManager.closeSession();
+		}
 	}
 
 

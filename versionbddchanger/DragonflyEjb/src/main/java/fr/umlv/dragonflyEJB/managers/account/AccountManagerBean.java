@@ -10,6 +10,7 @@ import org.jboss.annotation.ejb.LocalBinding;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyBdd.tables.Message;
+import fr.umlv.dragonflyBdd.tables.Roles;
 import fr.umlv.dragonflyEJB.managers.tables.MessageEJB;
 
 @LocalBinding(jndiBinding = "AccountManager/local")
@@ -62,7 +63,11 @@ private final static fr.umlv.dragonflyBdd.AccountManager MANAGER;
 	}
 
 	public List<String> getUserRoles(String user) throws DragonflyBddException{
-		return MANAGER.getUserRoles(user);
+		Collection<Roles> coll = MANAGER.getUserRoles(user);
+		List<String> set = new ArrayList<String>();
+		for(Roles r: coll)
+			set.add(r.getRole());
+		return set;
 	}
 
 	public List<MessageEJB> getMessages(String UserID) throws DragonflyBddException{

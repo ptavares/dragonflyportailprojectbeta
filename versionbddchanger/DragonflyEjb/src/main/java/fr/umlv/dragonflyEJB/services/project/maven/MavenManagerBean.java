@@ -100,7 +100,9 @@ public @Stateless class MavenManagerBean implements MavenManager{
     }
     
     private File getPomFile(String projectName){
-        return new File("Dragonfly/"+projectName+"/pom.xml");
+        File file = new File("Dragonfly/"+projectName+"/realise/pom.xml");
+        System.out.println("e------------>"+file.getPath());
+        return file;
     }
     
     private MavenInformation generateBasicPom(String projectName){
@@ -121,7 +123,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
         
         
         try {
-            FileOutputStream output = new FileOutputStream("Dragonfly/"+projectName+"/pom.xml");
+            FileOutputStream output = new FileOutputStream("Dragonfly/"+projectName+"/realise/pom.xml");
             JAXBContext context = JAXBContext.newInstance("org.apache.maven");
             System.out.println("create JaxbContext");
             Marshaller marshaller = context.createMarshaller();
@@ -148,7 +150,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
             System.out.println("create directory "+source.getAbsolutePath());
         }
         
-        File pomFile = new File("Dragonfly/"+projectName+"/pom.xml");
+        File pomFile = new File("Dragonfly/"+projectName+"/realise/pom.xml");
         
         MavenInformation info = new MavenInformation();
         if(pomFile.exists() && pomFile.isFile()){

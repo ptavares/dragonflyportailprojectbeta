@@ -17,4 +17,8 @@ public interface AccountInformation {
 	public List<String> getUserRoles(String user)throws DragonflyBddException;
 	
 	public List<MessageEJB> getMessages(String UserID)throws DragonflyBddException;
+        
+        public List<String> getActiveUsers()throws DragonflyBddException;
+        
+        public List<String> getNotActiveUsers()throws DragonflyBddException;
 }

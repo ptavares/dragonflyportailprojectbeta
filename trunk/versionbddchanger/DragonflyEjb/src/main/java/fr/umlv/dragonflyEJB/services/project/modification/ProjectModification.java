@@ -20,5 +20,7 @@ public interface ProjectModification {
 	public boolean removeQuestionResponse(String name, String qr_id) throws DragonflyBddException;
 	
 	public boolean editQuestionResponse(String name, String qr_id,String question, String response) throws DragonflyBddException;
+        
+        public boolean activateProject(String name) throws DragonflyBddException;
 
 }

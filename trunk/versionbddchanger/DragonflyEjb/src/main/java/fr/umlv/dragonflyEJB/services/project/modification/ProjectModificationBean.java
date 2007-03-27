@@ -40,6 +40,10 @@ public @Stateless class ProjectModificationBean implements ProjectModification {
 	public boolean removeQuestionResponse(String name, String qr_id) throws DragonflyBddException {
 		return managerLocal.removeQuestionResponse(name, qr_id);
 	}
+
+        public boolean activateProject(String name) throws DragonflyBddException {
+                return managerLocal.activateProject(name);
+        }
 	
 	
 }

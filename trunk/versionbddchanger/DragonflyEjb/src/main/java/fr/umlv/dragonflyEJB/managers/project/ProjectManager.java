@@ -58,5 +58,7 @@ public interface ProjectManager {
 	public boolean editQuestionResponse(String name, String qr_id,String question, String response) throws DragonflyBddException;
 
 	public List<QuestionResponseBean> getProjectFAQ(String project) throws DragonflyBddException;
+        
+        public boolean activateProject(String project) throws DragonflyBddException;
 
 }

@@ -30,5 +30,9 @@ public interface ProjectInformation {
 	public ProjectInformationsBean getProjectInformations(String proName)throws DragonflyBddException;
 	
 	public List<QuestionResponseBean> getProjectFAQ(String project) throws DragonflyBddException;
+        
+        public List<String> getActiveProject() throws DragonflyBddException;
+        
+        public List<String> getNotActiveProject() throws DragonflyBddException;
 
 }

@@ -11,6 +11,7 @@ package fr.umlv.dragonflyEJB.services.project.maven;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -24,7 +25,10 @@ public class MavenInformation implements Serializable{
     private String version;
     private String description;
     
-    private ArrayList<DependencyInformation> dependencies = new ArrayList<DependencyInformation>();
+    private ParentInformation parent;
+    private List<String> modules = new ArrayList<String>();
+    private List<DependencyInformation> dependencies = new ArrayList<DependencyInformation>();
+    private List<PluginInformation> plugins = new ArrayList<PluginInformation>();
 
     public String getGroupId() {
         return groupId;
@@ -74,12 +78,36 @@ public class MavenInformation implements Serializable{
         this.description = description;
     }
 
-    public ArrayList<DependencyInformation> getDependencies() {
+    public List<DependencyInformation> getDependencies() {
         return dependencies;
     }
 
-    public void setDependencies(ArrayList<DependencyInformation> dependencies) {
-        this.dependencies = dependencies;
+    public void setDependencies(List<DependencyInformation> dependencies) {
+        this.setDependencies(dependencies);
+    }
+
+    public ParentInformation getParent() {
+        return parent;
+    }
+
+    public void setParent(ParentInformation parent) {
+        this.parent = parent;
+    }
+
+    public List<String> getModules() {
+        return modules;
+    }
+
+    public void setModules(List<String> modules) {
+        this.modules = modules;
+    }
+
+    public List<PluginInformation> getPlugins() {
+        return plugins;
+    }
+
+    public void setPlugins(List<PluginInformation> plugins) {
+        this.plugins = plugins;
     }
     
     

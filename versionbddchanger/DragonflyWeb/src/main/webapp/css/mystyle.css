@@ -233,7 +233,7 @@ body {
 	font-weight: bold;
 }
 
-#infoProject,#news,#todo,#meetings,#faq,#administration {
+#infoProject,#news,#todo,#meetings,#faq,#administration,#projectDiv,#accountDiv{
 	padding-top: 10px;
 	padding-left: 10px;
 }

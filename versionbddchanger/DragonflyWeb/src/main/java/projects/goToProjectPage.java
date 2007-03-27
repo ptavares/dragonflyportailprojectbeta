@@ -18,6 +18,8 @@ import fr.umlv.dragonflyEJB.beans.QuestionResponseBean;
 import fr.umlv.dragonflyEJB.beans.TaskBean;
 import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
 import fr.umlv.dragonflyEJB.services.project.information.ProjectInformation;
+import fr.umlv.dragonflyEJB.services.project.maven.MavenInformation;
+import fr.umlv.dragonflyEJB.services.project.maven.MavenManager;
 
 public class goToProjectPage extends ActionSupport {
 	public String ProName;
@@ -279,8 +281,8 @@ public class goToProjectPage extends ActionSupport {
 
 		} catch (DragonflyBddException e) {
 //			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
-			e.printStackTrace();
-		} catch (NamingException e) {
+            e.printStackTrace();
+        } catch (NamingException e) {
 //			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
 			e.printStackTrace();
 		}
@@ -297,20 +299,76 @@ public class goToProjectPage extends ActionSupport {
 
 		} catch (DragonflyBddException e) {
 //			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
-			e.printStackTrace();
-		} catch (NamingException e) {
-			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
-			e.printStackTrace();
-		}
-	}
+            e.printStackTrace();
+        } catch (NamingException e) {
+            // TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
+            e.printStackTrace();
+        }
+    }
+    
+    public String goToPrivateSpace(){
+        return "privateSpace";
+    }
+    
+    public String goToMeetings(){
+        return "meeting";
+    }
+    
+    
+    public String getProName() {
+        return ProName;
+    }
+    public void setProName(String proName) {
+        ProName = proName;
+    }
+    
+    public ProjectInformationsBean getInformationBean() {
+        return informationBean;
+    }
+    
+    public void setInformationBean(ProjectInformationsBean informationBean) {
+        this.informationBean = informationBean;
+    }
+    
+    public List<MeetingBean> getMeetings() {
+        return meetings;
+    }
+    
+    public void setMeetings(List<MeetingBean> meetings) {
+        this.meetings = meetings;
+    }
+    
+    public List<NewsBean> getNews() {
+        return news;
+    }
+    
+    public void setNews(List<NewsBean> news) {
+        this.news = news;
+    }
+    
+    public List<QuestionResponseBean> getQuestionsResponse() {
+        return questionsResponse;
+    }
+    
+    public void setQuestionsResponse(List<QuestionResponseBean> questionsResponse) {
+        this.questionsResponse = questionsResponse;
+    }
+    
+    public List<TaskBean> getTasks() {
+        return tasks;
+    }
+    
+    public void setTasks(List<TaskBean> tasks) {
+        this.tasks = tasks;
+    }
 
-	public String goToPrivateSpace(){
-		return "privateSpace";
-	}
+    public MavenInformation getMavenInformation() {
+        return mavenInformation;
+    }
 
-	public String goToMeetings(){
-		return "meeting";
-	}
+    public void setMavenInformation(MavenInformation mavenInformation) {
+        this.mavenInformation = mavenInformation;
+    }
 
 
 	public String getProName() {

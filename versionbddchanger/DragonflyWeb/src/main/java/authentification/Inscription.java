@@ -19,11 +19,11 @@ public class Inscription extends ActionSupport {
 		final AccountCreation creator=(AccountCreation) ctx.lookup("AccountCreation/remote");
 		int result=creator.createAccount(email, username, password);
 		if (result==1){
-			addFieldError("isExist", "You email has been used, please change another one.");
+			addActionError(getText("register.emailExist"));
 			return ("error");
 		}
 		else if(result==2){
-			addFieldError("System problem", "Sorry, the systeme have a problem, please try again");
+			addActionError(getText("register.erreurInterne"));
 			return ("error");
 		}
 		

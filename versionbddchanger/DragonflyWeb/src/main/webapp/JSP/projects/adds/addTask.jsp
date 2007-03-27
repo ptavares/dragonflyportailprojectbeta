@@ -27,7 +27,7 @@
 <s:datetimepicker label="%{getText('tasks.creates.dateDebut')}" name="start" displayFormat="yyyy/MM/dd" id="start" required="true"></s:datetimepicker>
 <s:datetimepicker label="%{getText('tasks.creates.dateFin')}" name="end"  displayFormat="yyyy/MM/dd" id="end" required="true"></s:datetimepicker>
 <s:textarea name="descr" label="%{getText('tasks.creates.description')}" rows="8" cols="43" theme="xhtml" id="descr" id="description"></s:textarea>
-<s:submit value="%{getText('button.submit')}" label="%{getText('button.submit')}" notifyTopics="deleteWhiteSpace" targets="createTask" showLoadingText="false"></s:submit>
+<s:submit value="%{getText('button.submit')}" label="%{getText('button.submit')}" notifyTopics="deleteWhiteSpace,checkDate" targets="createTask" showLoadingText="false"></s:submit>
 </s:form>
 
 

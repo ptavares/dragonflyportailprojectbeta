@@ -13,6 +13,8 @@
 
 <s:head/>
 
+<s:div id="createProject">
+
 <div id="title">
 <div id="title-left">
 <div id="title-right">
@@ -21,11 +23,13 @@
 </div>
 </div>
 
+<s:actionerror/>
+
 <div class="bodyForm">
 <s:form action="CreateProject" method="post" theme="ajax">
 
 	<div>	        
-    	<s:textfield label="%{getText('createproject.projectName')}" name="nomProjet" size="50" required="true"/>
+    	<s:textfield label="%{getText('createproject.projectName')}" id="projectName" name="nomProjet" size="50" required="true" />
    </div> 
    <div> 	
 
@@ -40,9 +44,11 @@
     	<s:textarea label="%{getText('createproject.descriptif')}" name="descriptif" cols="50" rows="8" theme="xhtml"/>
    </div>
    	
-    <s:submit targets="rightcolumn" showLoadingText="false"/>
+    <s:submit targets="createProject" notifyTopics="DeleteProjetWhiteSpace" showLoadingText="false"/>
 </s:form>
 </div>
 
+
+</s:div>
 </body>
 </html>

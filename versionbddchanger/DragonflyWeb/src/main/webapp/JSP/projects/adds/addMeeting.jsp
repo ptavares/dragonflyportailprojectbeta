@@ -24,11 +24,11 @@
 
 <s:form action="AddMeeting.action" method="post">
 <s:textfield name="subj" label="%{getText('meetings.creates.subject')}" size="45" required="true" id="subject"/>
-<s:datetimepicker label="%{getText('meetings.creates.date')}"  name="start" displayFormat="yyyy/MM/dd" required="true"/>
+<s:datetimepicker label="%{getText('meetings.creates.date')}"  name="start" displayFormat="yyyy/MM/dd" required="true" id="start"/>
 <s:select label="%{getText('meetings.creates.hour')}" name="hour" list="{'01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'}"/>
 <s:select name="min" label="%{getText('meetings.creates.min')}" list="{'00','05','10','15','20','25','30','35','40','45','50','55','60'}"/>
 <s:textarea name="descr" label="%{getText('meetings.creates.description')}" rows="8" cols="45" theme="xhtml" id="description"/>
-<s:submit value="%{getText('button.submit')}" label="%{getText('button.submit')}" notifyTopics="deleteWhiteSpace" targets="createMeeting" showLoadingText="false"></s:submit>
+<s:submit value="%{getText('button.submit')}" label="%{getText('button.submit')}" notifyTopics="deleteWhiteSpace,checkDate" targets="createMeeting" showLoadingText="false"></s:submit>
 </s:form>
 
 

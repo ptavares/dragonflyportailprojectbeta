@@ -10,19 +10,8 @@
 <s:head theme="ajax"/>
 </head>
 
-<SCRIPT type="text/javascript" src="javascript/ProjectPagesJS.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="javascript/ProjectsPagesJS.js"></SCRIPT>
 
-<script type="text/javascript">
-//Pour les popups affichant les informations
-dojo.require("dojo.lfx.*");
-	function testExplode(start,node){
-		dojo.lfx.explode(start, node, 300).play();
-	}
-	
-	function testImplode(start,node){
-		dojo.lfx.implode(node, start, 300).play();
-	}
-</script>
 <body>
 
 <!-- Header  -->
@@ -62,37 +51,37 @@ dojo.require("dojo.lfx.*");
 	<s:tabbedPanel id="test" cssClass="tabbedPanel" >
    
    	<!-- Page "d'acceuil" contenant les differentes informations sur le projet courant -->
-    <s:div id="information" label="Information" labelposition="top" href="%{InformationPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
+    <s:div id="information" label="%{getText('tabbed.info')}" labelposition="top" href="%{InformationPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
    	   	
    	<!-- Page contenant l'ensemble des news du projet courant -->
-    <s:div id="news" label="News" labelposition="top" href="%{NewsPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
+    <s:div id="news" label="%{getText('tabbed.news')}" labelposition="top" href="%{NewsPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
    	
    	<!-- Page accessible uniquement au Utilisateur du projet et Chef de Projet -->
    	<s:if test="userStatus == 2 || userStatus == 1">
    	
    	<!-- Page contenant l'ensemble des tâches du projet courant -->
-   	<s:div id="todo" label="TODO" labelposition="top" href="%{TODOPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
+   	<s:div id="todo" label="%{getText('tabbed.tasks')}" labelposition="top" href="%{TODOPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
    	<!-- Page contenant l'ensemble des réunions du projet courant -->
-   	<s:div id="meetings" label="Meetings" labelposition="top" href="%{MeetingsPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
+   	<s:div id="meetings" label="%{getText('tabbed.meeting')}" labelposition="top" href="%{MeetingsPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
   	<!-- Page contenant les actions permettant la génération maven du projet courant -->
-  	<s:div id="maven" label="Maven" labelposition="top" href="%{MavenPage}" cssClass="tabbedPanel_Div">
+  	<s:div id="maven" label="%{getText('tabbed.maven')}" labelposition="top" href="%{MavenPage}" cssClass="tabbedPanel_Div">
    	</s:div>
    	<!-- Page contenant l'ensemble des "Frequently Asked Questions" du projet courant -->
-   	<s:div id="FAQ" label="FAQ" labelposition="top" href="%{FAQPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
+   	<s:div id="FAQ" label="%{getText('tabbed.faq')}" labelposition="top" href="%{FAQPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
   	<!-- Page contenant la liste des documents pouvant etre téléchargés + upload de fichier -->
-  	<s:div id="download_upload" label="Download/UpLoad" labelposition="top" href="%{DownUpPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
+  	<s:div id="download_upload" label="%{getText('tabbed.downUp')}" labelposition="top" href="%{DownUpPage}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
    	
    	</s:if>
    	
    	<s:if test="userStatus == 2">
    	<!-- Page servant à l'adminstration du projet (reserver chef de projet) -->
-  	<s:div id="administration" label="Administration" labelposition="top" href="%{Administration}" refreshOnShow="true" cssClass="tabbedPanel_Div">
+  	<s:div id="administration" label="%{getText('tabbed.admin')}" labelposition="top" href="%{Administration}" refreshOnShow="true" cssClass="tabbedPanel_Div">
    	</s:div>
    	</s:if>
    	

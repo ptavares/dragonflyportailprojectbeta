@@ -1,7 +1,6 @@
 package projects.adds;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -10,6 +9,8 @@ import javax.naming.NamingException;
 
 import org.apache.struts2.ServletActionContext;
 
+import projects.adds.tools.Tools;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
@@ -17,40 +18,49 @@ import fr.umlv.dragonflyEJB.services.project.adds.ProjectAdds;
 
 public class AddTask extends ActionSupport {
 
+	private Date post;
+	
 	private String subj;
 	private String start;
-	private String end;
+	private String end ;
 	private String descr;
 	private String taskId;
-	private Date post;
-
+	
+ 
 	
 	public String execute() {
 
 		String p = (String) ServletActionContext.getRequest().getSession().getAttribute("project");
 		if(p==null){
-			System.out.println("AddTask class: session.attribute=null : ");
 			return "rien";
 		}
 
+		if(!Tools.checkSpecialChar(subj)){
+			addActionError(getText("creates.SpecialCharactersError"));
+			return ERROR;
+		}
+		
 		String author = (String) ServletActionContext.getRequest().getSession().getAttribute("NickName");
 		if(author == null){
 			addActionError(getText("tasks.creates.rightCreationError"));
 			return ERROR;
 		}
 		
+				
 		InitialContext ctx;
 
 		try {
 			ctx = new InitialContext();
 
-
+			post = new java.sql.Date(System.currentTimeMillis());
+			
 			final ProjectAdds proj=(ProjectAdds) ctx.lookup("ProjectAdds/remote");
 
 			String[] tab = getStart().split("/");
 			String[] tab2 = getEnd().split("/");
 
-
+			
+			
 			Calendar calendar = new GregorianCalendar(Integer.parseInt(tab[0]), Integer.parseInt(tab[1])-1, Integer.parseInt(tab[2]));
 			Date debut = new Date(calendar.getTimeInMillis());
 
@@ -61,8 +71,6 @@ public class AddTask extends ActionSupport {
 				addActionError(getText("tasks.creates.dateEndBeforeStartError"));
 				return ERROR;
 			}
-			
-			post = new java.sql.Date(System.currentTimeMillis());
 			
 			if( debut.before(post) ){
 				addActionError(getText("tasks.creates.dateStartBeforePost"));
@@ -95,8 +103,8 @@ public class AddTask extends ActionSupport {
 		return taskId;
 	}
 
-	public String getPost(){
-		return new SimpleDateFormat("yyyy/MM/dd").format(post);
+	public Date getPost(){
+		return post;
 	}
 
 	public String getDescr() {
@@ -123,7 +131,7 @@ public class AddTask extends ActionSupport {
 	public void setStart(String start) {
 		this.start = start;
 	}
-
+	
 	public String getSubj() {
 		return subj;
 	}

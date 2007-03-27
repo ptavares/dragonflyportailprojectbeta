@@ -9,8 +9,6 @@
 <meta http-equiv="Content-Language" content="fr" />
 </head>
 
-<s:head theme="ajax"/>
-
 <body>
 
 <s:div id="register">
@@ -25,10 +23,10 @@
 </div>
 </div>
 
-<s:fielderror/>
+<s:actionerror/>
 
-<s:form action="Inscription" method="post" validate="true" theme="ajax">
-
+<s:form action="Inscription" method="post" validate="true">
+ 
 		<!-- Information général (optionnelle) -->
 		<s:textfield label="%{getText('register.firstname')}" name="firstname"
 			size="20" />
@@ -47,7 +45,7 @@
 		<s:textfield label="%{getText('register.email')}" name="email"
 			size="20" required="true" />
 
-		<s:submit targets="register" showLoadingText="false" onclick="cryptePasswords2(new Array('register.password','register.confirmpassword'));"
+		<s:submit targets="register" showLoadingText="false" onclick="cryptePasswords(new Array('register.password','register.confirmpassword'));"
 			notifyTopics="registerLoading,loading" />
 		<s:label value="%{getText('register.fieldscondition')}" />
 	</s:form>

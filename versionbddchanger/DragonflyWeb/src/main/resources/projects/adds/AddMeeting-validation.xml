@@ -5,19 +5,24 @@
 <validators>
 	<field name="subj">
 		<field-validator type="requiredstring">
-			<message key="news.creates.subjectLengthError"></message>
+			<message key="meetings.creates.subjectLengthError"></message>
 		</field-validator>
 		<field-validator type="stringlength">
 			<param name="minLength">1</param>
 			<param name="maxLength">40</param>
-			<message key="news.creates.subjectLengthError" />
+			<message key="meetings.creates.subjectLengthError" />
 		</field-validator>
 	</field>
+	<field name="start">
+		<field-validator type="requiredstring">
+			<message key="meetings.creates.dateError"></message>
+		</field-validator>
+	</field> 
 	<field name="descr">
 		<field-validator type="stringlength">
 			<param name="minLength">0</param>
 			<param name="maxLength">255</param>
-			<message key="creates.decrLengthError" />
+			<message key="meetings.creates.decrLengthError" />
 		</field-validator>
 	</field> 
 </validators>

@@ -5,31 +5,31 @@
 <validators>
 	<field name="username">
 		<field-validator type="requiredstring">
-			<message>Username is required</message>
+			<message key="register.userRequired"></message>
 		</field-validator>
 	</field>
 	<field name="password">
 		<field-validator type="requiredstring">
-			<message>Password is required</message>
+			<message key="register.passwordRequired"></message>
 		</field-validator>
 	</field>
 	<field name="confirmPassword">
 		<field-validator type="requiredstring">
-			<message>Confirm Password is required</message>
+			<message key="register.confirmPasswordRequired"></message>
 		</field-validator>
 		<field-validator type="TestPassword">
 			<param name="password">password</param>
 			<param name="confirmPassword">confirmPassword</param>
-			<message />
+			<message key=""/>
 		</field-validator>
 	</field>
 	
 	<field name="email">
 		<field-validator type="email">
-			<message>E-Mail is not valid</message>
+			<message key="register.emailNotValid"></message>
 		</field-validator>
 		<field-validator type="requiredstring">
-			<message>E-Mail is required</message>
+			<message key="register.emailRequired"></message>
 		</field-validator>
 	</field>
 </validators>

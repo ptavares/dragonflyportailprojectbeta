@@ -8,6 +8,8 @@ import javax.naming.NamingException;
 
 import org.apache.struts2.ServletActionContext;
 
+import projects.adds.tools.Tools;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
@@ -23,9 +25,10 @@ public class AddNews extends ActionSupport {
 	public String execute() {
 		String project = (String)ServletActionContext.getRequest().getSession().getAttribute("project");
 		
-		System.out.println("Project Name : "+project);
-		System.out.println("Project Subject : "+ getSubj());
-		System.out.println("Project Descreption : "+ getDescr());
+		if(!Tools.checkSpecialChar(subj)){
+			addActionError(getText("creates.SpecialCharactersError"));
+			return ERROR;
+		}
 				
 		String author = (String) ServletActionContext.getRequest().getSession().getAttribute("NickName");
 		if(author == null){

@@ -18,13 +18,15 @@ public class TestPassword extends FieldValidatorSupport {
 		password = (String) getFieldValue("password", object);
 		confirmPassword = (String) getFieldValue("confirmPassword", object);
 	
+		String message = getMessage(getMessageKey());
+		
 		ValidatorContext ctxt = getValidatorContext();
 		
 		if(password == null || confirmPassword == null)
 			return;
 		
 		if(!password.equals(confirmPassword)){
-			ctxt.addFieldError(fieldname, "Password and Confirm Password must be equals");
+			ctxt.addFieldError(fieldname, message);
 			return;
 		}
 	}

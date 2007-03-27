@@ -16,6 +16,8 @@
 <SCRIPT type="text/javascript" src="javascript/projectPage_action.js"></SCRIPT>
 <SCRIPT type="text/javascript" src="javascript/loading.js"></SCRIPT>
 <SCRIPT type="text/javascript" src="javascript/crypto.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="javascript/CreateProjectJS.js"></SCRIPT>
+
 <script type="text/javascript">
 			dojo.require("dojo.widget.Clock");
 					dojo.require("dojo.lfx.*");
@@ -54,15 +56,14 @@
 <table id="t2">
 <tr>
 <td>
-<div dojoType="TitlePane" label="Projects" labelNodeClass="DMTitle" containerNodeClass="content">
-<s:url id="test2" action="goAdminFile"><s:param name="projectName">ttt22</s:param> </s:url>
-<s:a href="%{test2}" targets="rightcolumn">test2</s:a>
+<div dojoType="TitlePane" label="<s:text name="newindex.projects"/>" labelNodeClass="DMTitle" containerNodeClass="content">
+
 <s:url id="createproject" action="CreateProject!input" />
-<s:a href="%{createproject}" targets="rightcolumn" >Create Project</s:a><br/>
+<s:a href="%{createproject}" targets="rightcolumn" ><s:text name="newindex.createProject"></s:text></s:a><br/>
 <s:url id="myproject" action="MyProject" />
 <s:a href="%{myproject}" targets="rightcolumn" >My Project</s:a><br/>
 <s:url id="listproject" action="ListProjects" />
-<s:a href="%{listproject}" targets="rightcolumn" >List Projects</s:a><br/>
+<s:a href="%{listproject}" targets="rightcolumn" ><s:text name="newindex.listProject"></s:text></s:a><br/>
 </div>
 
 </td>
@@ -73,11 +74,13 @@
 <table id="t3">
 <tr>
 <td>
-<div dojoType="TitlePane" label="Information" labelNodeClass="DMTitle" containerNodeClass="content">
+<div dojoType="TitlePane" label="<s:text name="newindex.information"/>" labelNodeClass="DMTitle" containerNodeClass="content">
 <a href="javascript:ajaxpage('general/general.html', 'rightcolumn');">General</a><br/>
 <a href="javascript:ajaxpage('general/about.html', 'rightcolumn');">About</a><br/>
 <a href="javascript:ajaxpage('general/contact.html', 'rightcolumn');">Contact</a><br/>
 <a href="javascript:ajaxpage('general/faq.html', 'rightcolumn');">FAQ</a><br/>
+<a href="javascript:ajaxpage('JSP/help.jsp', 'rightcolumn');"><s:text name="newindex.help"/></a><br/>
+
 <br>
 </div>
 </td>

@@ -9,6 +9,8 @@ import javax.naming.NamingException;
 
 import org.apache.struts2.ServletActionContext;
 
+import projects.adds.tools.Tools;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
@@ -21,13 +23,19 @@ public class AddMeeting extends ActionSupport {
 	private String hour;
 	private String min;
 	private String descr;
-		
+
 	public String execute() {
 			
 		String project = (String)ServletActionContext.getRequest().getSession().getAttribute("project");
 		System.out.println("Project Name : "+project);
 		if(project==null)
 			return "rien";
+		
+		if(!Tools.checkSpecialChar(subj)){
+			addActionError(getText("creates.SpecialCharactersError"));
+			return ERROR;
+		}
+		
 		String[] tab = getStart().split("/");
 		Calendar calendar = new GregorianCalendar(Integer.parseInt(tab[0]), Integer.parseInt(tab[1])-1, Integer.parseInt(tab[2]),Integer.parseInt(getHour()),Integer.parseInt(getMin()));
 		

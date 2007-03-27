@@ -25,7 +25,6 @@
 			<interceptor-ref name="workflow"/>
 			<result name="input">/JSP/createProject.jsp</result>
 			<result name="error">/JSP/createProject.jsp</result>
-			<result name="errors">/JSP/error.jsp</result>
 			<result name="success">/JSP/success.jsp</result>
 		</action>
 

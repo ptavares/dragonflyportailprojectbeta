@@ -5,13 +5,30 @@
 <validators>
 	<field name="nomProjet">
 		<field-validator type="requiredstring">
-			<message>Project Name is required</message>
+			<message key="createproject.nameRequired"></message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="minLength">1</param>
+			<param name="maxLength">20</param>
+			<message key="createproject.nameLengthError" />
 		</field-validator>
 	</field>
 	<field name="resume">
 		<field-validator type="requiredstring">
-			<message>Resume is required</message>
+			<message key="createproject.resumeError"></message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="minLength">1</param>
+			<param name="maxLength">50</param>
+			<message key="createproject.resumeLengthError" />
 		</field-validator>
 	</field>
+	<field name="descriptif">
+		<field-validator type="stringlength">
+			<param name="minLength">0</param>
+			<param name="maxLength">255</param>
+			<message key="createproject.descriptifLenthError" />
+		</field-validator>
+	</field> 
 </validators>
 

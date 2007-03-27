@@ -10,14 +10,24 @@
 		<field-validator type="stringlength">
 			<param name="minLength">1</param>
 			<param name="maxLength">40</param>
-			<message key="faq.creates.decrLengthError" />
+			<message key="tasks.creates.decrLengthError" />
 		</field-validator>
 	</field>
+	<field name="start">
+		<field-validator type="requiredstring">
+			<message key="tasks.creates.dateError"></message>
+		</field-validator>
+	</field> 
+	<field name="end">
+		<field-validator type="requiredstring">
+			<message key="tasks.creates.dateError"></message>
+		</field-validator>
+	</field> 
 	<field name="descr">
 		<field-validator type="stringlength">
 			<param name="minLength">0</param>
 			<param name="maxLength">255</param>
-			<message key="faq.creates.decrLengthError" />
+			<message key="tasks.creates.decrLengthError" />
 		</field-validator>
 	</field>
 	 

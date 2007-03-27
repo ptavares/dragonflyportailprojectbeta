@@ -24,7 +24,10 @@
 		<property name="endDate" column="endDate" type="timestamp" not-null="false">
 		</property>
 		
-		<!--  
+                <property name="actived" column="actived" type="boolean">
+		</property>
+ 
+                <!--  
 		<property name="public" column="public" type="boolean">
 		</property>
 		-->

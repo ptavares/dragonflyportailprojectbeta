@@ -274,6 +274,8 @@ public class AccountManager {
         User user = getUser(email);
         if(user == null)
             return false;
+        if(!user.isActived())
+            return false;
         return user.getPassword().equals(password);
         
     }

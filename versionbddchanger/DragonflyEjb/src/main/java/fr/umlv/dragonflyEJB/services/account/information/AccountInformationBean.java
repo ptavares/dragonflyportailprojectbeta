@@ -8,8 +8,11 @@ import javax.ejb.Stateless;
 import org.jboss.annotation.ejb.RemoteBinding;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
+import fr.umlv.dragonflyBdd.tables.User;
 import fr.umlv.dragonflyEJB.managers.account.AccountManager;
 import fr.umlv.dragonflyEJB.managers.tables.MessageEJB;
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 @RemoteBinding(jndiBinding = "AccountInformation/remote")
@@ -33,4 +36,28 @@ public @Stateless class AccountInformationBean implements AccountInformation {
 	public List<MessageEJB> getMessages(String UserID)throws DragonflyBddException{
 		return managerLocal.getMessages(UserID);
 	}
+
+    public List<String> getActiveUsers() throws DragonflyBddException {
+        List<User> users = managerLocal.getAllUsers();
+        List<String> reponse = new ArrayList<String>();
+        if(users == null || users.isEmpty())
+            return Collections.EMPTY_LIST;
+        for(User user : users)
+            if(user.isActived())
+                reponse.add(user.getEmail());
+        System.out.println("fin getActiveUsers");
+        return reponse;
+    }
+
+    public List<String> getNotActiveUsers() throws DragonflyBddException {
+        List<User> users = managerLocal.getAllUsers();
+        List<String> reponse = new ArrayList<String>();
+        if(users == null || users.isEmpty())
+            return Collections.EMPTY_LIST;
+        for(User user : users)
+            if(!user.isActived())
+                reponse.add(user.getEmail());
+        System.out.println("fin getNotActiveUsers");
+        return reponse;
+    }
 }

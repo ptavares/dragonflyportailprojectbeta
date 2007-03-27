@@ -24,4 +24,8 @@ public @Stateless class AccountModificationBean implements AccountModification {
 		return managerLocal.changePassword(email, newPassword);
 	}
 
+        public boolean activateAccount(String email) throws DragonflyBddException {
+            return managerLocal.activateUser(email);
+        }
+
 }

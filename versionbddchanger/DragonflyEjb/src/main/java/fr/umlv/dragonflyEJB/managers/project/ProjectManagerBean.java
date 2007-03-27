@@ -196,5 +196,9 @@ public @Stateless class ProjectManagerBean implements ProjectManager {
 		
 		return FAQList;
 	}
+
+    public boolean activateProject(String project) throws DragonflyBddException {
+        return MANAGER.activateProject(project);
+    }
 	
 }

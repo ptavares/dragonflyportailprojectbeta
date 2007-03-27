@@ -10,4 +10,6 @@ public interface AccountModification {
 	public boolean changeNickmane(String email, String newNickName)throws DragonflyBddException;
 	
 	public boolean changePassword(String email, String newPassword)throws DragonflyBddException;
+        
+        public boolean activateAccount(String email)throws DragonflyBddException;
 }

@@ -78,4 +78,28 @@ public @Stateless class ProjectInformationBean implements ProjectInformation {
 		return managerLocal.getProjectFAQ(project);
 	}
 
+        public List<String> getActiveProject() throws DragonflyBddException {
+                List<String> reponse = new ArrayList<String>();
+                List<Project> projects = getAllProject();
+                for(Project p:projects){
+                        if(p.isActived()){
+                                System.out.println("EJB "+p.getName());
+                                reponse.add(p.getName());
+                        }
+                }
+                return reponse;
+        }
+
+        public List<String> getNotActiveProject() throws DragonflyBddException {
+                List<String> reponse = new ArrayList<String>();
+                List<Project> projects = getAllProject();
+                for(Project p:projects){
+                        if(!p.isActived()){
+                                System.out.println("EJB "+p.getName());
+                                reponse.add(p.getName());
+                        }
+                }
+                return reponse;
+        }
+
 }

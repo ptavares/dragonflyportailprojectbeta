@@ -64,7 +64,11 @@ public @Stateless class AccountManagerBean implements AccountManager {
     }
     
     public List<String> getUserRoles(String user) throws DragonflyBddException{
-        return MANAGER.getUserRoles(user);
+        Collection<Roles> coll = MANAGER.getUserRoles(user);
+        List<String> set = new ArrayList<String>();
+        for(Roles r: coll)
+            set.add(r.getRole());
+        return set;
     }
     
     public List<MessageEJB> getMessages(String UserID) throws DragonflyBddException{

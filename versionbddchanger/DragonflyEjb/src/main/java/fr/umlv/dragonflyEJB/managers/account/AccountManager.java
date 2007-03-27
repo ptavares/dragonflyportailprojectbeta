@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
+import fr.umlv.dragonflyBdd.tables.User;
 import fr.umlv.dragonflyEJB.managers.tables.MessageEJB;
 
 @Local
@@ -35,4 +36,8 @@ public interface AccountManager {
 	public boolean createMessage(String sender, String addressee, String name, String content)throws DragonflyBddException;
 	
 	public boolean removeMessage(String user_id, long id)throws DragonflyBddException;
+        
+        public List<User> getAllUsers()throws DragonflyBddException;
+       
+        public boolean activateUser(String email)throws DragonflyBddException;
 }

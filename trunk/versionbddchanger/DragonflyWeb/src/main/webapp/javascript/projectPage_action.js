@@ -59,3 +59,42 @@ function addRowNews(newsId,subject,description,post){
 			}
 }
 
+function addRowDependencyMaven(groupId,artifactId,version,scope){
+    alert("-----"+groupId+" "+artifactId+" "+version+" "+scope);
+    var tableId = groupId+"."+artifactId;
+    var w=dojo.widget.byId("dependencyTable");
+    if(w){
+        w.store.addData({
+            Id:tableId,
+            GroupId:groupId,
+            ArtifactId:artifactId,
+            Version:version,
+            Scope:scope
+        });
+    }
+}
+
+function addRowPluginMaven(groupId,artifactId,version){
+    alert("-----"+groupId+" "+artifactId+" "+version);
+    var tableId = groupId+"."+artifactId;
+    var w=dojo.widget.byId("pluginTable");
+    if(w){
+        w.store.addData({
+            Id:tableId,
+            GroupId:groupId,
+            ArtifactId:artifactId,
+            Version:version
+        });
+    }
+}
+
+function addRowModuleMaven(module){
+    alert("-----"+module);
+    var w=dojo.widget.byId("moduleTable");
+    if(w){
+        w.store.addData({
+            Id:module,
+            Module:module
+        });
+    }
+}

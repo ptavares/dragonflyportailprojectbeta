@@ -38,12 +38,7 @@
 		<result name="newsPage">/JSP/projects/contents/news.jsp</result>
 		<result name="TODOPage">/JSP/projects/contents/tasks.jsp</result>
 		<result name="meetingsPage">/JSP/projects/contents/meetings.jsp</result>
-                
-		<!--<result name="mavenPage">/JSP/projects/contents/maven.jsp</result>-->
-                <result name="mavenPage"  type="redirect-action">
-                    <param name="actionName">GenerateMaven</param>
-                </result>
-                
+                <result name="mavenPage">/JSP/projects/contents/maven.jsp</result>
 		<result name="FAQPage">/JSP/projects/contents/faq.jsp</result>
 		<result name="downUpPage">/JSP/projects/contents/downUp.jsp</result>
 		<result name="administration">/JSP/projects/contents/administration.jsp</result>
@@ -61,13 +56,6 @@
 		<result name="FAQTabs">/JSP/projects/contents/Tabs/adminFaqTab.jsp</result>
 		
 		</action>
-
-
-      <action name="GenerateMaven!*" method="{1}" class="projects.GenerateMaven">
-                    <result name="success">/JSP/success.jsp</result>
-                    <result name="input">/JSP/projects/contents/maven.jsp</result>
-      </action>
-		
 		
 		<action name="ListProjects!*" method="{1}"
 			class="projects.PopProject">
@@ -81,12 +69,18 @@
 			<result name="error">/JSP/projects/adds/addTask.jsp</result>
 			<result name="success">/JSP/projects/adds/addTask.jsp</result>
 		</action>
+                
+                <action name="AddMaven!*" method="{1}" class="projects.adds.AddMaven">
+                    <result name="module">/JSP/projects/popups/addModule.jsp</result>
+                    <result name="plugin">/JSP/projects/popups/addPlugin.jsp</result>
+                    <result name="dependency">/JSP/projects/popups/addDependency.jsp</result>
+                </action>
 
-        <action name="AddMeeting!*" method="{1}" class="projects.adds.AddMeeting">
-            <result name="input">/JSP/projects/adds/addMeeting.jsp</result>
-			<result name="error">/JSP/projects/adds/addMeeting.jsp</result>
-			<result name="success">/JSP/projects/adds/addMeeting.jsp</result>
-        </action>
+                <action name="AddMeeting!*" method="{1}" class="projects.adds.AddMeeting">
+                    <result name="input">/JSP/projects/adds/addMeeting.jsp</result>
+                                <result name="error">/JSP/projects/adds/addMeeting.jsp</result>
+                                <result name="success">/JSP/projects/adds/addMeeting.jsp</result>
+                </action>
         
 		<action name="AddNews!*" method="{1}" class="projects.adds.AddNews">
 			<result name="input">/JSP/projects/adds/addNews.jsp</result>

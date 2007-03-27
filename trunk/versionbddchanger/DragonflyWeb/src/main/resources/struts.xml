@@ -6,10 +6,10 @@
 
     <include file="authentification.xml"/>
 	<include file="Pojets.xml"/>
-	<include file="projects.xml"/>
-	
+	<include file="projects.xml"/>	
 	<include file="messageAction.xml"/>
 	<include file="fileAction.xml"/>
+        <include file="administration.xml" />
     <!-- Add packages here -->
 
 </struts>

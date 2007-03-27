@@ -11,6 +11,7 @@
 </head>
 
 <SCRIPT type="text/javascript" src="javascript/ProjectsPagesJS.js"></SCRIPT>
+    <script language="JavaScript" src="javascript/projectPage_action.js"></script>
 
 <body>
 

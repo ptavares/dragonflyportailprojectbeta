@@ -10,7 +10,7 @@ pageEncoding="ISO-8859-1"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/mystyle.css" type="text/css">
         
-        <title>Administration Page</title>
+        <title><s:text name="%{getText('admin.Title')}" /></title>
         
         <s:head theme="ajax"/>
     </head>
@@ -28,9 +28,9 @@ pageEncoding="ISO-8859-1"%>
                     <s:url id="AccountListPage" action="Admin" method="accountList"></s:url>
                     <!-- Le TabbedPanel contenant les différentes pages -->
                      <s:tabbedPanel id="adminTPanel" cssClass="tabbedPanel" >
-                        <s:div id="AccountList" label="AccountList" labelposition="top" href="%{AccountListPage}" cssClass="tabbedPanel_Div" >
+                        <s:div id="AccountList" label="%{getText('admin.accountTab')}" labelposition="top" href="%{AccountListPage}" cssClass="tabbedPanel_Div" >
                         </s:div>
-                        <s:div id="ProjectList" label="ProjectList" labelposition="top" href="%{ProjectListPage}" cssClass="tabbedPanel_Div" />
+                        <s:div id="ProjectList" label="%{getText('admin.projectTab')}" labelposition="top" href="%{ProjectListPage}" cssClass="tabbedPanel_Div" />
                     </s:tabbedPanel>
                     
                 </div>

@@ -16,11 +16,23 @@ public class ChangePasswd extends ActionSupport {
 	
 	
 	public String execute() throws Exception{
-		
+		System.out.println("test");
 		String mail = (String) ServletActionContext.getRequest().getSession().getAttribute("nom");
-		if(isValid(oldPasswd)==false) return ERROR;
-		if(isValid(newPasswd)==false) return ERROR;
-		if(isValid(confirmPasswd)==false) return ERROR;
+		if(isValid(oldPasswd)==false) {
+			addFieldError("changeError","oldPasswd Invalid");
+			System.out.println("yes la dedans");
+			return "changFaild";
+			}
+		if(isValid(newPasswd)==false) {
+			addFieldError("changeError","newPasswd Invalid");
+			
+			return "changFaild";
+			}
+		if(isValid(confirmPasswd)==false) {
+			addFieldError("changeError","confirmPasswd Invalid");
+			
+			return "changFaild";
+			}
 		
 		System.out.println("old password : "+ getOldPasswd());
 		System.out.println("new password : "+ getNewPasswd());
@@ -29,21 +41,21 @@ public class ChangePasswd extends ActionSupport {
 		final AccountInformation info = (AccountInformation)ctx.lookup("AccountInformation/remote");
 		boolean comp = info.isPasswordCorrect(mail, oldPasswd);
 		if(comp == false){
-			System.out.println("This is not the correct password");
-			return ERROR;
+			addFieldError("changeError",getText("passwdChange.incorrect"));
+			return "changFaild";
 		}
 		if(newPasswd.compareTo(confirmPasswd)!=0){
-			System.out.println("The two passwords do not match");
-			return ERROR;
+			addFieldError("changeError",getText("passwdChange.notMatch"));
+			return "changFaild";
 		}
 		final AccountModification modif = (AccountModification)ctx.lookup("AccountModification/remote");
 		boolean b = modif.changePassword(mail, newPasswd);
 		if(b==false){
-			System.out.println("Problem changing the password");
-			return ERROR;
+			addFieldError("changeError",getText("passwdChange.probleme"));
+			return "changFaild";
 		}
-		System.out.println("Password changed successfully");		
-		return SUCCESS;
+		addActionMessage(getText("passwdChange.success"));		
+		return "changeOk";
 	}
 
 	public String goPasswd(){

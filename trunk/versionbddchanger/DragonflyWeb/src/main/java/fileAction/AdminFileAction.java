@@ -11,7 +11,9 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AdminFileAction extends  ActionSupport {
 	private String projectName;
 	private List<Fichier> nameList=new ArrayList<Fichier>();
+	private List<Fichier> nameListR=new ArrayList<Fichier>();
 	private int listLength;
+	private int listLengthR;
 	private String fileDel;
 	private String file;
 
@@ -41,16 +43,28 @@ public class AdminFileAction extends  ActionSupport {
 	public String load(){
 		if (projectName==null)
 			setProject();
-		File f = new File(getText("fileAction.path")+"/Upload/"+projectName+"/tmp");
+		File f = new File(getText("fileAction.path")+projectName+"/tmp");
 		if (!f.exists()){
 			f.mkdirs();
 		}
 		File[] l=f.listFiles();
 		for(int i=0;i<l.length;i++){
 			nameList.add(new Fichier(l[i].getName(),l[i].getPath()));
-			System.out.println("--------------------------------->"+l[i].getName());
 		}
 		listLength=l.length;
+		
+		
+		File f2 = new File(getText("fileAction.path")+projectName+"/realise");
+		if (!f2.exists()){
+			f2.mkdirs();
+		}
+		File[] lr=f2.listFiles();
+		for(int i=0;i<lr.length;i++){
+			nameListR.add(new Fichier(lr[i].getName(),lr[i].getPath()));
+		}
+		listLengthR=lr.length;
+		
+		
 		return SUCCESS;
 	}
 
@@ -65,8 +79,8 @@ public class AdminFileAction extends  ActionSupport {
 
 	public String valide(){
 		setProject();
-		File f = new File(getText("fileAction.path")+"/Upload/"+projectName+"/tmp/"+file);
-		File f2=new File(getText("fileAction.path")+"/Upload/"+projectName+"/realise");
+		File f = new File(getText("fileAction.path")+projectName+"/tmp/"+file);
+		File f2=new File(getText("fileAction.path")+projectName+"/realise");
 		if (!f2.exists()){
 			f2.mkdirs();
 		}
@@ -101,6 +115,26 @@ public class AdminFileAction extends  ActionSupport {
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
+	}
+
+
+	public int getListLengthR() {
+		return listLengthR;
+	}
+
+
+	public void setListLengthR(int listLengthR) {
+		this.listLengthR = listLengthR;
+	}
+
+
+	public List<Fichier> getNameListR() {
+		return nameListR;
+	}
+
+
+	public void setNameListR(List<Fichier> nameListR) {
+		this.nameListR = nameListR;
 	}
 
 

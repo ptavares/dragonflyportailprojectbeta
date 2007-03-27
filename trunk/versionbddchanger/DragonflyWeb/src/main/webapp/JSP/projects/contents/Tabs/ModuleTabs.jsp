@@ -11,7 +11,7 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 --%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+"http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
@@ -22,7 +22,7 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
         <div id="moduleTabs">        
             
             <div id="dojoTable" align="center">
-                   
+                
                 <h3 align="center">Modules</h3>
                 <table dojoType="filteringTable" multiple="true" alternateRows="true" id="moduleTable"
                        cellpadding="0" cellspacing="0" border="1" >	
@@ -40,10 +40,13 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
                         </s:iterator>
                     </tbody>
                 </table>
-                <br/>     
-                <s:submit align="center" onclick="openPopUp2('AddMaven!showModulePopup')" value="%{getText('add')}" />              
+                <br/>    
+                    <s:url id="showpopup"  action="AddMaven!showModulePopup"></s:url>
+                    <s:submit align="center" value="%{getText('add')}" href="%{showpopup}" targets="maven"/>    
+                
+               <!-- <s:submit align="center" onclick="openPopUp2('AddMaven!showModulePopup')" value="%{getText('add')}" />              -->
             </div>
         </div>
-    
+        
     </body>
 </html>

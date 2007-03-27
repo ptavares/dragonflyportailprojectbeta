@@ -25,10 +25,15 @@ pageEncoding="ISO-8859-1"%>
             <div dojoType="ContentPane" sizeMin="20" sizeShare="20" style="" align="center">
                 <table width=90%>
                     <s:iterator value="project">
+                        <s:url id="deleteProject" action="DeleteProject" >
+                            <s:param name="adddelObject">
+                                <s:property />
+                            </s:param>
+                        </s:url>
                         <tr id="<s:property />">
                             <td width="30">
                                 <s:form>
-                                    <s:submit type="image" theme="ajax" label="Suppress Project" targets="projectDiv"  src="img/project/delete.jpg" href="%{ajaxTest}" align="left" />
+                                    <s:submit type="image" theme="ajax" label="Suppress Project" targets="ProjectList"  src="img/project/delete.jpg" href="%{deleteProject}" align="left" />
                                 </s:form>
                             </td>
                             <td><s:property /></td>

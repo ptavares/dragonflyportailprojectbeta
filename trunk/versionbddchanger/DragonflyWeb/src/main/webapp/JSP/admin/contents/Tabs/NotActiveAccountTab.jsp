@@ -25,15 +25,25 @@ pageEncoding="ISO-8859-1"%>
             <div dojoType="ContentPane" sizeMin="20" sizeShare="20" style="" align="center">
                 <table width=90% >
                     <s:iterator value="notactiveAccount">
+                        <s:url id="acceptAccount" action="AcceptAccount" >
+                            <s:param name="adddelObject">
+                                <s:property />
+                            </s:param>
+                        </s:url>
+                        <s:url id="deleteAccount" action="DeleteAccount" >
+                            <s:param name="adddelObject">
+                                <s:property />
+                            </s:param>
+                        </s:url>
                         <tr id="<s:property />">
                             <td width="30">
                                 <s:form>
-                                    <s:submit type="image" theme="ajax" label="Active Account" targets="accountDiv"  src="img/project/check.gif" href="%{ajaxTest}" align="left" />
+                                    <s:submit type="image" theme="ajax" label="Active Account" targets="AccountList"  src="img/project/check.gif" href="%{acceptAccount}" align="left" />
                                 </s:form>
                             </td>
                             <td width="30">
                                 <s:form>
-                                    <s:submit type="image" theme="ajax" label="Suppress Account" targets="accountDiv"  src="img/project/delete.jpg" href="%{ajaxTest}" align="left" />
+                                    <s:submit type="image" theme="ajax" label="Suppress Account" targets="AccountList"  src="img/project/delete.jpg" href="%{deleteAccount}" align="left" />
                                 </s:form>
                             </td>
                             <td><s:property /></td>

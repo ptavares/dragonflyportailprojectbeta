@@ -4,7 +4,7 @@
 
 <struts>
     <package name="administration" namespace="/" extends="struts-default">
-      
+        
         <action name="Admin!*" method="{1}" class="administration.Admin" >
             <result name="projectList">/JSP/admin/contents/projectList.jsp</result>
             <result name="accountList">/JSP/admin/contents/accountList.jsp</result>
@@ -17,9 +17,19 @@
         </action>
         
         <action name="DeleteAccount" method="deleteAccount" class="administration.Admin" >
-            <result name="projectList">/JSP/admin/contents/projectList.jsp</result>
             <result name="accountList">/JSP/admin/contents/accountList.jsp</result>
-            <result name="success">/JSP/admin/adminMainPage.jsp</result>            
+        </action>
+        
+        <action name="DeleteProject" method="deleteProject" class="administration.Admin" >
+            <result name="projectList">/JSP/admin/contents/projectList.jsp</result>
+        </action>
+        
+        <action name="AcceptAccount" method="acceptAccount" class="administration.Admin" >
+            <result name="accountList">/JSP/admin/contents/accountList.jsp</result>
+        </action>
+        
+        <action name="AcceptProject" method="acceptProject" class="administration.Admin" >
+            <result name="projectList">/JSP/admin/contents/projectList.jsp</result>
         </action>
         
         

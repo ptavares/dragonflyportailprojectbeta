@@ -70,23 +70,38 @@ public class FileAction extends ActionSupport{
 		this.myDocFileName = myDocFileName;
 	}
 	
+	
+	private void clean(){
+		myDoc=null;
+		myDocContentType="";
+		myDocFileName="";
+	}
+	
+	
+	public String init(){
+		return SUCCESS;
+	}
+	
+	
+	
 	public String upload(){
 		Map<String, String> session = ActionContext.getContext().getSession();
 		projectName=session.get("project");
 		if(myDoc==null){
 			System.out.println("there");
-			addFieldError("upload failed", "ur upload haven't success, please retry");
+			addFieldError("upload failed", "Your upload haven't success, please retry");
 			return INPUT;
 		}
 		System.out.println("myDocFileName  "+myDocFileName+" myDocContentType "+myDocContentType );
 		
-		File f = new File(getText("fileAction.path")+"/Upload/"+projectName+"/tmp");
+		File f = new File(getText("fileAction.path")+projectName+"/tmp");
 		if (!f.exists()){
 			f.mkdirs();
 		}
 		System.out.println("testetsetsetestestst");
 		myDoc.renameTo(new File(f,myDocFileName));
-		addActionMessage("The file "+myDocFileName+" has been uploaded!");
+		addActionMessage(getText("upload.theFile")+" "+myDocFileName+getText("upload.success"));
+		clean();
 		return SUCCESS;
 	}
 	
@@ -95,10 +110,11 @@ public class FileAction extends ActionSupport{
 		Map<String, String> session = ActionContext.getContext().getSession();
 		projectName=session.get("project");
 		System.out.println(projectName);
-		File f=new File(getText("fileAction.path")+"/Upload/"+projectName+"/realise");
+		File f=new File(getText("fileAction.path")+projectName+"/realise");
 		if (!f.exists()){
 			f.mkdirs();
 		}
+		System.out.println(f.getPath());
 		File[] lists=f.listFiles();
 		for(int i=0; i<lists.length;i++){
 			System.out.println(lists[i].getName());

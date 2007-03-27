@@ -79,8 +79,8 @@
 <a href="javascript:ajaxpage('general/about.html', 'rightcolumn');">About</a><br/>
 <a href="javascript:ajaxpage('general/contact.html', 'rightcolumn');">Contact</a><br/>
 <a href="javascript:ajaxpage('general/faq.html', 'rightcolumn');">FAQ</a><br/>
-<a href="javascript:ajaxpage('JSP/help.jsp', 'rightcolumn');"><s:text name="newindex.help"/></a><br/>
-
+<s:url id="help" action="Help" />
+<s:a href="%{help}" targets="rightcolumn" ><s:text name="newindex.help"/></s:a><br/>
 <br>
 </div>
 </td>

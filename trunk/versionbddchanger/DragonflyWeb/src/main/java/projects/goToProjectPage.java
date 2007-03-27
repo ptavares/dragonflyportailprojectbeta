@@ -227,6 +227,22 @@ public class goToProjectPage extends ActionSupport {
 		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
 		return "addMeetingPage";
 	}
+        
+        public String goToAddModulePage(){
+		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
+                return "addModule";
+        }
+        
+        public String goToAddDependencyPage(){
+		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
+                return "addDependency";
+        }
+        
+        public String goToAddPluginPage(){
+		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
+                return "addPlugin";
+        }      
+                
 
 	/**
 	 * Redirect AddFAQ Page 
@@ -349,14 +365,7 @@ public class goToProjectPage extends ActionSupport {
         }
     }
     
-    public String goToPrivateSpace(){
-        return "privateSpace";
-    }
-    
-    public String goToMeetings(){
-        return "meeting";
-    }
-    
+     
     
     public String getProName() {
         return ProName;

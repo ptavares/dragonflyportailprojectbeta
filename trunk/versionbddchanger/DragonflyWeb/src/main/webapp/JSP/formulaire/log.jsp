@@ -25,7 +25,7 @@
 		<br>
 		
 	<s:div>
-			<s:url id="profile" action="ChangeNickname.action" />
+			<s:url id="profile" action="goProfile" />
 			<s:a href="%{profile}" targets="rightcolumn"><s:text name="newindex.editAccount"></s:text></s:a>
 			</s:div>	
 			<s:url id="Messages" action="ListMessages"/>

@@ -152,7 +152,8 @@ public @Stateless class ProjectManagerBean implements ProjectManager {
 		ProjectDescription description = MANAGER.getProjectDescription(project);
 		Collection<User> usersSet = MANAGER.getProjectUsers(project);
 		
-		ProjectInformationsBean projectInformationsProperties = new ProjectInformationsBean();		
+		ProjectInformationsBean projectInformationsProperties = new ProjectInformationsBean();	
+                projectInformationsProperties.setActived(p.isActived());
 		projectInformationsProperties.setProjectLeader(p.getProjectLeader());
 		projectInformationsProperties.setCreationDate(formatter.format(p.getCreationDate()));
 		projectInformationsProperties.setResume(description.getResume());

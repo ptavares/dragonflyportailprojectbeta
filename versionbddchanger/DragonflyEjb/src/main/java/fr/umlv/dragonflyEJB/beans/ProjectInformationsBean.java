@@ -9,6 +9,7 @@ package fr.umlv.dragonflyEJB.beans;
  */
 public class ProjectInformationsBean {
 
+        private boolean actived;
 	private String projectLeader;
 	private String creationDate;
 	private String resume;
@@ -18,7 +19,7 @@ public class ProjectInformationsBean {
 	
 	public ProjectInformationsBean() {
 	}
-	
+	       
 	/**
 	 *  
 	 * @return Creation Date for this Project
@@ -127,4 +128,12 @@ public class ProjectInformationsBean {
 	public String getName() {
 		return name;
 	}
+
+    public boolean isActived() {
+        return actived;
+    }
+
+    public void setActived(boolean Actived) {
+        this.actived = Actived;
+    }
 }

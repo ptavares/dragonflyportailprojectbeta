@@ -7,17 +7,17 @@
 Your email : <s:property value="#session.nom"/>
 
 <s:head theme="ajax"/>
-<s:form action="ModifPassword.action" theme="ajax" method="post" >
-<s:submit type="submit" theme="ajax" targets="newLog" value="Change Password" />
+<s:form action="ModifPassword.action"  method="post" >
+<s:submit  targets="newLog" value="Change Password" />
 </s:form>
 
 
-<s:form id="form1" action="ModifNickname.action" method="post" theme="ajax">
+<s:form id="form1" action="ModifNickname.action" method="post">
 <s:submit targets="newLog" value="Change Nickname"/>
 </s:form>
 
-<s:form id="form1" action="ModifEmail.action" method="post" theme="ajax">
-<s:submit targets="newLog" value="Change E-mail" theme="ajax"/>
+<s:form id="form1" action="ModifEmail.action" method="post">
+<s:submit targets="newLog" value="Change E-mail" />
 </s:form>
 
 

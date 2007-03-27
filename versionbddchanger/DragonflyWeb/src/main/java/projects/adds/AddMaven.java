@@ -71,19 +71,19 @@ public class AddMaven extends ActionSupport{
         depInfo.setScope(getScope());
         mavenManager.addDependency(depInfo,ProName);
         
-        String result = getGroupId()+","+getArtifactId()+","+getVersion()+","+getScope();
-        System.out.println("Result : "+result);
-        HttpServletResponse response = ServletActionContext.getResponse();
-        try {
-            System.out.println("begin response");
-            PrintWriter out = response.getWriter();
-            out.println(result);
-            out.flush();
-            System.out.println("end response");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+//        String result = getGroupId()+","+getArtifactId()+","+getVersion()+","+getScope();
+//        System.out.println("Result : "+result);
+//        HttpServletResponse response = ServletActionContext.getResponse();
+//        try {
+//            System.out.println("begin response");
+//            PrintWriter out = response.getWriter();
+//            out.println(result);
+//            out.flush();
+//            System.out.println("end response");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        return "dependency";
     }
     
     public String Plugin() throws Exception{
@@ -103,19 +103,19 @@ public class AddMaven extends ActionSupport{
         plugInfo.setVersion(getVersion());
         mavenManager.addPlugin(plugInfo,ProName);
         
-        String result = getGroupId()+","+getArtifactId()+","+getVersion();
-        System.out.println("Result : "+result);
-        HttpServletResponse response = ServletActionContext.getResponse();
-        try {
-            System.out.println("begin response");
-            PrintWriter out = response.getWriter();
-            out.println(result);
-            out.flush();
-            System.out.println("end response");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+//        String result = getGroupId()+","+getArtifactId()+","+getVersion();
+//        System.out.println("Result : "+result);
+//        HttpServletResponse response = ServletActionContext.getResponse();
+//        try {
+//            System.out.println("begin response");
+//            PrintWriter out = response.getWriter();
+//            out.println(result);
+//            out.flush();
+//            System.out.println("end response");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        return "plugin";
     }
     
     public String Module() throws Exception{
@@ -129,17 +129,17 @@ public class AddMaven extends ActionSupport{
         final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
         mavenManager.addModule(getModule(),ProName);
         
-        HttpServletResponse response = ServletActionContext.getResponse();
-        try {
-            System.out.println("begin response");
-            PrintWriter out = response.getWriter();
-            out.println(getModule());
-            out.flush();
-            System.out.println("end response");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+//        HttpServletResponse response = ServletActionContext.getResponse();
+//        try {
+//            System.out.println("begin response");
+//            PrintWriter out = response.getWriter();
+//            out.println(getModule());
+//            out.flush();
+//            System.out.println("end response");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        return "module";
     }
     
     @Override

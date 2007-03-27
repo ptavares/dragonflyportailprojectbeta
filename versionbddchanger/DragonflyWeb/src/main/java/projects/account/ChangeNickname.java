@@ -14,16 +14,20 @@ public class ChangeNickname extends ActionSupport {
 	public String execute() throws Exception{
 		System.out.println("Nickname :"+getNewLogin());
 		if((newLogin == null) || (newLogin.length()==0))
-			return INPUT;
+		{
+			return ERROR;
+			
+		}
 		String oldNickname = (String) ServletActionContext.getRequest().getSession().getAttribute("nom");
 		final InitialContext ctx = new InitialContext();
 		AccountModification modif = (AccountModification)ctx.lookup("AccountModification/remote");
 		boolean val = modif.changeNickmane(oldNickname, newLogin);
 		if(val==false){
-			System.out.println("Probleme changing nickname");
+			addFieldError("changeError","");
 			return ERROR;
-		}			
-		return SUCCESS;
+		}
+		addActionMessage(getText("nickname.success"));	
+		return "changeOk";
 	}
 
 	public String goNickname(){
@@ -37,6 +41,10 @@ public class ChangeNickname extends ActionSupport {
 
 	public void setNewLogin(String newLogin) {
 		this.newLogin = newLogin;
+	}
+	
+	public String init(){
+		return SUCCESS;
 	}
 	
 }

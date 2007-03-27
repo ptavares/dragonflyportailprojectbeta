@@ -43,7 +43,7 @@
 	</s:url>
 	<s:url id="FAQPage" action="goToProjectPage" method="goToFAQPage">
 	</s:url>
-	<s:url id="DownUpPage" action="goUpload">
+	<s:url id="DownUpPage" action="goDownload">
 	</s:url>
 	<s:url id="Administration" action="goToProjectPage" method="goToAdministrationPage">
 	</s:url>

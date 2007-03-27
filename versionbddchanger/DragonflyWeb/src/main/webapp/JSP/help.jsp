@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<a href="videoHelp/createAccount.html" target="_blank"><s:text name="help.createAccount"></s:text> </a>
-
+<a href="videoHelp/createAccount.html" target="_blank"><s:text name="help.createAccount"></s:text> </a><br/>
+<a href="videoHelp/createProject.html" target="_blank"><s:text name="help.createProject"></s:text> </a><br/>
 </body>
 </html>

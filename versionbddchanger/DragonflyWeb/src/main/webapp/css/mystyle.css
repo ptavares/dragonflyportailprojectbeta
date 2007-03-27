@@ -233,7 +233,7 @@ body {
 	font-weight: bold;
 }
 
-#infoProject,#news,#todo,#meetings,#faq,#administration,#projectDiv,#accountDiv{
+#infoProject,#news,#todo,#meetings,#maven,#faq,#administration,#projectDiv,#accountDiv{
 	padding-top: 10px;
 	padding-left: 10px;
 }
@@ -243,7 +243,7 @@ body {
 	font-weight: Bold;
 }
 
-#news .information,#todo .information, #meetings .information, 
+#news .information,#todo .information, #meetings, #maven .information, 
 	#faq .information,#administration .information {
 	font-size: 15px;
 	font-weight: Bold;

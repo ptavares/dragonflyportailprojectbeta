@@ -8,18 +8,21 @@
 			<result name="success">test/upload.jsp</result>
 		</action>
 	-->
-		<action name="goUpload" class="fileAction.FileAction"
+		<action name="goDownload" class="fileAction.FileAction"
 			method="goload">
 			<result name="success">
-				/JSP/projects/contents/upload.jsp
+				/JSP/projects/contents/download.jsp
 			</result>
 		</action>
 		
+		<action name="goUpload" class="fileAction.FileAction" method="init">
+		<result name="success">/JSP/projects/popups/uploadPopUp.jsp</result>
+		</action>
 		
 		<action name="doUpload" class="fileAction.FileAction"
 			method="upload">
-			<result name="input">/JSP/projects/contents/upload.jsp</result>
-			<result name="success">/JSP/projects/contents/upload.jsp</result>
+			<result name="input">/JSP/projects/popups/uploadPopUp.jsp</result>
+			<result name="success">/JSP/projects/popups/uploadPopUp.jsp</result>
 		</action>
 		
 		

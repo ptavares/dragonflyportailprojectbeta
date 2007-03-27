@@ -10,6 +10,7 @@
 	<include file="messageAction.xml"/>
 	<include file="fileAction.xml"/>
         <include file="administration.xml" />
+        <include file="information.xml" />
     <!-- Add packages here -->
 
 </struts>

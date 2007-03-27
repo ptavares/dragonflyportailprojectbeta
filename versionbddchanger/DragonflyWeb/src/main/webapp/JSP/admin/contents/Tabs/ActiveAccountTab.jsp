@@ -34,7 +34,7 @@ pageEncoding="ISO-8859-1"%>
                         <tr id="<s:property />">
                             <td width="30">
                                 <s:form >
-                                    <s:submit type="image" theme="ajax" label="Suppress Account" targets="accountDiv"  src="img/project/delete.jpg" href="%{deleteAccount}" align="left" />
+                                    <s:submit type="image" theme="ajax" label="Suppress Account" targets="AccountList"  src="img/project/delete.jpg" href="%{deleteAccount}" align="left" />
                                 </s:form>
                             </td>
                             <td><s:property /></td>

@@ -24,7 +24,7 @@ pageEncoding="ISO-8859-1"%>
             
             <s:actionerror/>
             <s:actionmessage/>
-            <s:form action="#">
+            <s:form action="AddMaven!Dependency">
                 <s:textfield name="groupId" label="GroupId" id="groupId"/>
                 <s:textfield name="artifactId" label="ArtifactId" id="artifactId"/>    
                 <s:textfield name="version" label="Version" id="version"/>
@@ -37,7 +37,7 @@ pageEncoding="ISO-8859-1"%>
                 <s:url id="backMavenPage" action="goToProjectPage"  method="goToMavenPage">
                     <s:param name="ProName"><%=session.getAttribute("project")%></s:param>
                 </s:url>
-                <s:text name="tasks.goBack"></s:text>
+                <s:text name="maven.goBack"></s:text>
                 <s:a href="%{backMavenPage}" targets="maven">
                 <img src="img/project/goBack.png" border="0"></s:a>
             </div>

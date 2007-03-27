@@ -38,7 +38,9 @@ pageEncoding="ISO-8859-1"%>
                     </tbody>
                 </table>
                 <br/>
-                <s:submit align="center" onclick="openPopUp2('AddMaven!showPluginPopup)" value="%{getText('add')}" />              
+                    <s:url id="showpopup"  action="AddMaven!showPluginPopup"></s:url>
+                    <s:submit align="center" value="%{getText('add')}" href="%{showpopup}" targets="maven"/>  
+                <!--<s:submit align="center" onclick="openPopUp2('AddMaven!showPluginPopup)" value="%{getText('add')}" />              -->
             </div>
         </div>
     </body>

@@ -49,7 +49,9 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
                     </tbody>
                 </table>
                 <br/>
-                <s:submit align="center" onclick="alert('clic');openPopUp2('AddMaven!showDependencyPopup')" value="%{getText('add')}" />   
+                    <s:url id="showpopup"  action="AddMaven!showDependencyPopup"></s:url>
+                    <s:submit align="center" value="%{getText('add')}" href="%{showpopup}" targets="maven"/>  
+                <!--<s:submit align="center" onclick="alert('clic');openPopUp2('AddMaven!showDependencyPopup')" value="%{getText('add')}" />   -->
             </div>  
         </div>
     </body>

@@ -29,7 +29,7 @@
         <action name="Inscription!*" method="{1}" class="authentification.Inscription">
         	<result name="input">/JSP/formulaire/reg.jsp</result>
         	<result name="error">/JSP/formulaire/reg.jsp</result>
-        	<result name="success">/JSP/formulaire/success.jsp</result>
+        	<result name="success">/JSP/success.jsp</result>
         </action>     
 
         <!-- Add actions here -->

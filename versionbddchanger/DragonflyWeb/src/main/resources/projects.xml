@@ -12,6 +12,8 @@
 		</interceptors>
 		<global-results>
 			<result name="login" type="redirect-action">Error</result>
+			<result name="changFaild">/JSP/error2.jsp</result>
+			<result name="changeOk">/JSP/success.jsp</result>
 		</global-results>
 
 		<action name="Error" class="projects.LoginError">
@@ -47,6 +49,9 @@
 		<result name="addTaskPage">/JSP/projects/adds/addTask.jsp</result>
 		<result name="addNewsPage">/JSP/projects/adds/addNews.jsp</result>
 		<result name="addMeetingPage">/JSP/projects/adds/addMeeting.jsp</result>
+		<result name="addModule">/JSP/projects/adds/addModule.jsp</result>
+		<result name="addDependency">/JSP/projects/adds/addDependency.jsp</result>
+		<result name="addPlugin">/JSP/projects/adds/addPlugin.jsp</result>
 		<result name="addFAQPage">/JSP/projects/adds/addFAQ.jsp</result>
 		
 		<!-- Edits Redirects -->
@@ -71,9 +76,9 @@
 		</action>
                 
                 <action name="AddMaven!*" method="{1}" class="projects.adds.AddMaven">
-                    <result name="module">/JSP/projects/popups/addModule.jsp</result>
-                    <result name="plugin">/JSP/projects/popups/addPlugin.jsp</result>
-                    <result name="dependency">/JSP/projects/popups/addDependency.jsp</result>
+                    <result name="module">/JSP/projects/adds/addModule.jsp</result>
+                    <result name="plugin">/JSP/projects/adds/addPlugin.jsp</result>
+                    <result name="dependency">/JSP/projects/adds/addDependency.jsp</result>
                 </action>
 
                 <action name="AddMeeting!*" method="{1}" class="projects.adds.AddMeeting">
@@ -125,6 +130,10 @@
 		
 
 		<!-- Modifications -->
+		
+		<action name="goProfile" class="projects.account.ChangeNickname" method="init">
+		<result name="success">JSP/profile.jsp</result>
+		</action>
 		<action name="ModifPassword" method="goPasswd"
 			class="projects.account.ChangePasswd">
 			<result name="success">JSP/passwd.jsp</result>
@@ -132,8 +141,6 @@
 
 		<action name="ChangePasswd!*" method="{1}"
 			class="projects.account.ChangePasswd">
-			<result name="error">passwd.jsp</result>
-			<result name="success">newIndex.jsp</result>
 		</action>
 
 		<action name="ModifNickname" method="goNickname"
@@ -145,8 +152,8 @@
 		<action name="ChangeNickname!*" method="{1}"
 			class="projects.account.ChangeNickname">
 			<result name="input">JSP/profile.jsp</result>
-			<result name="error">modifNickname.jsp</result>
-			<result name="success">newIndex.jsp</result>
+			<result name="error">JSP/modifNickname.jsp</result>
+			<result name="success">JSP/newIndex.jsp</result>
 		</action>
 
 		<action name="ModifEmail" method="goEmail"
@@ -156,9 +163,9 @@
 
 		<action name="ChangeEmail!*" method="{1}"
 			class="projects.account.ChangeEmail">
-			<result name="input">profile.jsp</result>
-			<result name="error">changeEmail.jsp</result>
-			<result name="success">newIndex.jsp</result>
+			<result name="input">JSP/profile.jsp</result>
+			<result name="error">JSP/changeEmail.jsp</result>
+			<result name="success">JSP/newIndex.jsp</result>
 		</action>
 	</package>
 </struts>

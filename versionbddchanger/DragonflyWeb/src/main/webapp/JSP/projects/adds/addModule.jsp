@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+   "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
@@ -11,12 +10,13 @@ pageEncoding="ISO-8859-1"%>
         <title>JSP Page</title>
         
         <s:head theme="ajax"/>
+                
         <script language="JavaScript" src="javascript/maven.js"></script>
     </head>
     <body>
         
-        <div class="back"id="createPlugin">
-            <div class="information"><s:text name="maven.createPlugin"></s:text><%=session.getAttribute("project")%>
+        <div class="back"id="createModule">
+            <div class="information"><s:text name="maven.createModule"></s:text><%=session.getAttribute("project")%>
             </div>
             <br>
             <br>
@@ -24,19 +24,16 @@ pageEncoding="ISO-8859-1"%>
             <s:actionerror/>
             <s:actionmessage/>
             
-            <s:form action="#">
-                <s:textfield name="groupId" label="GroupId" id="groupId"/>
-                <s:textfield name="artifactId" label="ArtifactId" id="artifactId"/>    
-                <s:textfield name="version" label="Version" id="version"/>
-                <s:submit onclick="alert('createPlugin'); " value="Add"></s:submit>
-                
+            <s:form action="AddMaven!Module">
+                <s:textfield name="module" label="Module" id="module"/>
+                <s:submit onclick="alert('createModule');" value="Add"></s:submit>                
             </s:form>
             
             <div id="goback">
                 <s:url id="backMavenPage" action="goToProjectPage"  method="goToMavenPage">
                     <s:param name="ProName"><%=session.getAttribute("project")%></s:param>
                 </s:url>
-                <s:text name="tasks.goBack"></s:text>
+                <s:text name="maven.goBack"></s:text>
                 <s:a href="%{backMavenPage}" targets="maven">
                 <img src="img/project/goBack.png" border="0"></s:a>
             </div>
@@ -44,3 +41,4 @@ pageEncoding="ISO-8859-1"%>
         
     </body>
 </html>
+

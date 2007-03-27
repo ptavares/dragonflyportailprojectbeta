@@ -11,6 +11,7 @@ package administration;
 
 import com.opensymphony.xwork2.ActionSupport;
 import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
+import fr.umlv.dragonflyEJB.services.account.modification.AccountModification;
 import fr.umlv.dragonflyEJB.services.project.information.ProjectInformation;
 import fr.umlv.dragonflyEJB.services.project.modification.ProjectModification;
 import java.util.ArrayList;
@@ -57,21 +58,37 @@ public class Admin extends ActionSupport{
     
     public String acceptAccount() throws Exception{
         System.out.println("acceptAccount "+adddelObject);
+        final InitialContext ctx = new InitialContext();
+        final AccountModification am=(AccountModification) ctx.lookup("AccountModification/remote");   
+        am.activateAccount(adddelObject);
+        initAccountList();
         return "accountList";
     }
     
     public String deleteAccount() throws Exception{
         System.out.println("deleteAccount "+adddelObject);
+        final InitialContext ctx = new InitialContext();
+        final AccountModification am=(AccountModification) ctx.lookup("AccountModification/remote");
+        //Ajout delete account
+        initAccountList();
         return "accountList";
     }
     
     public String acceptProject() throws Exception{
         System.out.println("acceptProject "+adddelObject);
+        final InitialContext ctx = new InitialContext();
+        final ProjectModification pm=(ProjectModification) ctx.lookup("ProjectModification/remote");
+        pm.activateProject(adddelObject);
+        initProjectList();
         return "projectList";
     }
     
     public String deleteProject() throws Exception{
         System.out.println("deleteProject "+adddelObject);
+        final InitialContext ctx = new InitialContext();
+        final ProjectModification pm=(ProjectModification) ctx.lookup("ProjectModification/remote");
+        //Ajout delete project
+        initProjectList();
         return "projectList";
     }
     public String ActiveAccountTab() throws Exception{

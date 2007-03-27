@@ -35,9 +35,12 @@ pageEncoding="ISO-8859-1"%>
             <div id="modules" style="display:inline;">  
                 <jsp:include flush="true" page="Tabs/ModuleTabs.jsp" /><br/>
             </div>      
-            <jsp:include flush="true" page="Tabs/DependencyTabs.jsp"/> <br/>          
-            
-            <jsp:include flush="true" page="Tabs/PluginTabs.jsp" /> <br/>
+            <div id="dependencies">
+                <jsp:include flush="true" page="Tabs/DependencyTabs.jsp"/> <br/>      
+            </div>
+            <div id="plugins">
+                <jsp:include flush="true" page="Tabs/PluginTabs.jsp" /> <br/>
+            </div>
             
         </div>
     </body>

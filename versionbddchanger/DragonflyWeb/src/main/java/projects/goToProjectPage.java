@@ -299,7 +299,7 @@ public class goToProjectPage extends ActionSupport {
 		}
 	}
         
-        private void initMaven() throws NamingException {
+        private void initMaven() {
             try {
                     final InitialContext ctx = new InitialContext();
                     System.out.println("Before");

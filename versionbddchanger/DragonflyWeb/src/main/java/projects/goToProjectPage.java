@@ -25,6 +25,7 @@ public class goToProjectPage extends ActionSupport {
 	public String ProName;
 
 	public ProjectInformationsBean informationBean = null;
+        public MavenInformation mavenInformation = null;
 	public List<TaskBean> tasks = null;
 	public List<MeetingBean> meetings = null;
 	public List<NewsBean> news = null;
@@ -88,6 +89,34 @@ public class goToProjectPage extends ActionSupport {
 		return SUCCESS;
 	}
 
+            public String submit() throws Exception{
+        System.out.println("SUBMIT");
+        Map<String, String> session = ActionContext.getContext().getSession();
+        ProName=session.get("project");
+        System.out.println("------------>project "+ProName);
+        System.out.println("groupId "+getMavenInformation().getGroupId());
+        System.out.println("artifactId "+getMavenInformation().getArtifactId());
+        System.out.println("packaging "+getMavenInformation().getPackaging());
+        System.out.println("name "+getMavenInformation().getName());
+        System.out.println("version "+getMavenInformation().getVersion());
+        System.out.println("description "+getMavenInformation().getDescription());
+        if(getMavenInformation().getDependencies()!=null)
+            System.out.println("Dependencies not null "+getMavenInformation().getDependencies().size());
+        final InitialContext ctx = new InitialContext();
+        System.out.println("Before");
+        final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
+        mavenManager.submitGeneralInformation(mavenInformation,ProName);
+//        MavenInformation info = mavenManager.loadMavenFile(ProName);
+//        info.setGroupId(getMavenInformation().getGroupId());
+//        info.setArtifactId(getMavenInformation().getArtifactId());
+//        info.setPackaging(getMavenInformation().getPackaging());
+//        info.setName(getMavenInformation().getName());
+//        info.setVersion(getMavenInformation().getVersion());
+//        info.setDescription(getMavenInformation().getDescription());
+        return null;
+    }
+        
+        
 	/**
 	 * Redirect to Information Page
 	 * @return
@@ -143,6 +172,7 @@ public class goToProjectPage extends ActionSupport {
 	 */
 	public String goToMavenPage(){
 		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
+                initMaven();
 		return "mavenPage";
 	}
 	/**
@@ -268,6 +298,19 @@ public class goToProjectPage extends ActionSupport {
 			e.printStackTrace();
 		}
 	}
+        
+        private void initMaven() throws NamingException {
+            try {
+                    final InitialContext ctx = new InitialContext();
+                    System.out.println("Before");
+                    final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
+                    mavenInformation = mavenManager.loadMavenFile(ProName);                
+		} catch (NamingException e) {
+			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
+			e.printStackTrace();
+		}
+        }
+
 
 	private void initNews()  {
 		try {
@@ -369,55 +412,6 @@ public class goToProjectPage extends ActionSupport {
     public void setMavenInformation(MavenInformation mavenInformation) {
         this.mavenInformation = mavenInformation;
     }
-
-
-	public String getProName() {
-		return ProName;
-	}
-	public void setProName(String proName) {
-		ProName = proName;
-	}
-
-	public ProjectInformationsBean getInformationBean() {
-		return informationBean;
-	}
-
-	public void setInformationBean(ProjectInformationsBean informationBean) {
-		this.informationBean = informationBean;
-	}
-
-	public List<MeetingBean> getMeetings() {
-		return meetings;
-	}
-
-	public void setMeetings(List<MeetingBean> meetings) {
-		this.meetings = meetings;
-	}
-
-	public List<NewsBean> getNews() {
-		return news;
-	}
-
-	public void setNews(List<NewsBean> news) {
-		this.news = news;
-	}
-
-	public List<QuestionResponseBean> getQuestionsResponse() {
-		return questionsResponse;
-	}
-
-	public void setQuestionsResponse(List<QuestionResponseBean> questionsResponse) {
-		this.questionsResponse = questionsResponse;
-	}
-
-	public List<TaskBean> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(List<TaskBean> tasks) {
-		this.tasks = tasks;
-	}
-
 	public int getUserStatus() {
 		return userStatus;
 	}

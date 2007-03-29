@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
-import fr.umlv.dragonflyEJB.managers.tables.MessageEJB;
+import fr.umlv.dragonflyEJB.beans.MessageBean;
 
 @Remote
 public interface AccountInformation {
@@ -16,7 +16,7 @@ public interface AccountInformation {
 	
 	public List<String> getUserRoles(String user)throws DragonflyBddException;
 	
-	public List<MessageEJB> getMessages(String UserID)throws DragonflyBddException;
+	public List<MessageBean> getMessages(String UserID)throws DragonflyBddException;
         
         public List<String> getActiveUsers()throws DragonflyBddException;
         

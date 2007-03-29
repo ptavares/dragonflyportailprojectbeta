@@ -12,7 +12,7 @@ import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyBdd.tables.Message;
 import fr.umlv.dragonflyBdd.tables.User;
 import fr.umlv.dragonflyBdd.tables.Roles;
-import fr.umlv.dragonflyEJB.managers.tables.MessageEJB;
+import fr.umlv.dragonflyEJB.beans.MessageBean;
 
 @LocalBinding(jndiBinding = "AccountManager/local")
 public @Stateless class AccountManagerBean implements AccountManager {
@@ -71,11 +71,11 @@ public @Stateless class AccountManagerBean implements AccountManager {
         return set;
     }
     
-    public List<MessageEJB> getMessages(String UserID) throws DragonflyBddException{
+    public List<MessageBean> getMessages(String UserID) throws DragonflyBddException{
         Collection<Message> mes=MANAGER.getMessages(UserID);
-        List<MessageEJB> mesEJB=new ArrayList<MessageEJB>();
+        List<MessageBean> mesEJB=new ArrayList<MessageBean>();
         for(Message m:mes){
-            MessageEJB	meEJB=new MessageEJB(m);
+            MessageBean	meEJB=new MessageBean(m);
             mesEJB.add(meEJB);
         }
         return mesEJB;

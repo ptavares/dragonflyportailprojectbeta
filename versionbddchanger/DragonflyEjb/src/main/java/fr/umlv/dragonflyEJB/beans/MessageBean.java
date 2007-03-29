@@ -1,10 +1,10 @@
-package fr.umlv.dragonflyEJB.managers.tables;
+package fr.umlv.dragonflyEJB.beans;
 
 import java.util.Date;
 
 import fr.umlv.dragonflyBdd.tables.Message;
 
-public class MessageEJB {
+public class MessageBean {
 	 // Fields    
 
     private long id;
@@ -15,17 +15,17 @@ public class MessageEJB {
     private boolean readed;
 
 /** default constructor */
-   public MessageEJB() {
+   public MessageBean() {
    }
 
 	/** minimal constructor */
-   public MessageEJB(String name, String content, Date sendTime) {
+   public MessageBean(String name, String content, Date sendTime) {
        this.name = name;
        this.content = content;
        this.sendTime = sendTime;
    }
    /** full constructor */
-   public MessageEJB(String name, String senter, String content, Date sendTime, boolean readed) {
+   public MessageBean(String name, String senter, String content, Date sendTime, boolean readed) {
       this.name = name;
       this.senter = senter;
       this.content = content;
@@ -33,7 +33,7 @@ public class MessageEJB {
       this.readed = readed;
    }
    
-   public MessageEJB(Message m){
+   public MessageBean(Message m){
 	   this.id=m.getId();
 	   this.name=m.getName();
 	   this.senter=m.getSenter();

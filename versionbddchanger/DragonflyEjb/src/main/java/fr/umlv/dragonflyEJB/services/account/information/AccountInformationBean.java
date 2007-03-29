@@ -9,8 +9,8 @@ import org.jboss.annotation.ejb.RemoteBinding;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyBdd.tables.User;
+import fr.umlv.dragonflyEJB.beans.MessageBean;
 import fr.umlv.dragonflyEJB.managers.account.AccountManager;
-import fr.umlv.dragonflyEJB.managers.tables.MessageEJB;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -33,7 +33,7 @@ public @Stateless class AccountInformationBean implements AccountInformation {
 		return managerLocal.getUserRoles(user);
 	}
 	
-	public List<MessageEJB> getMessages(String UserID)throws DragonflyBddException{
+	public List<MessageBean> getMessages(String UserID)throws DragonflyBddException{
 		return managerLocal.getMessages(UserID);
 	}
 

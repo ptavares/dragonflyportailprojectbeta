@@ -54,7 +54,7 @@
 			<key column="project_id" not-null="true"/>
 			<one-to-many class="Meeting" />
 		</bag>
-		
+                
 		<bag name="news" cascade="all-delete-orphan">
 			<key column="project_id" not-null="true"/>
 			<one-to-many class="News" />
@@ -63,10 +63,11 @@
 	
 	
 	<!-- In relation many-to-many : the users of the projects --> 
-		<set name="users" table="T_PROJECT_USERS" cascade="all-delete-orphan">
-        	<key column="project_id"/>
-        	<many-to-many column="user_id" class="User"/>
-    	</set>
+                <!--<set name="users" table="T_PROJECT_USERS" cascade="all-delete-orphan">-->
+                <set name="users" table="T_PROJECT_USERS" cascade="save-update">
+                    <key column="project_id"/>
+                    <many-to-many column="user_id" class="User"/>
+                </set>
 		
 <!--          _____________        _________________                          -->
 <!--  		 |             |      |                  |       _____________	  -->

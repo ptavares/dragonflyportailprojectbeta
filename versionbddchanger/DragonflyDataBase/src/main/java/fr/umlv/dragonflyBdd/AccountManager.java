@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.impl.LogFactoryImpl;
@@ -15,6 +16,7 @@ import org.hibernate.exception.ConstraintViolationException;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyBdd.tables.Message;
+import fr.umlv.dragonflyBdd.tables.Project;
 import fr.umlv.dragonflyBdd.tables.Roles;
 import fr.umlv.dragonflyBdd.tables.User;
 import fr.umlv.dragonflyBdd.utils.DragonFlyDBManager;
@@ -117,6 +119,73 @@ public class AccountManager {
 			User user = (User) session.get(User.class,email);
 			if(user == null)
 				return false;
+                        /*
+                        //Changement des roles si l utilisateur est admin
+                        //Recuperation des roles
+                        Collection<Roles> roles = user.getRoles();
+                        for(Roles role : roles ){
+                            String project;
+                            //compte admin
+                            if(role.getRole().endsWith("admin")){
+                                //Extraction du projet
+                                project = role.getRole().substring(0,role.getRole().length()-5);
+                                System.out.println("recuperation projet");
+                                Project p = ProjectManager.getProjectManagerInstance().getProject(project);
+                                System.out.println("recup Ok");
+                                System.out.println("Admin du projet "+project);
+                                //Si il est tout seul dans le projet suppression du projet
+                                Set<User> set = p.getUsers();
+                                System.out.println("Test If");
+                                if(set == null || set.isEmpty() ){
+                                    System.out.println("NULL OU EMPTY");
+                                    continue;
+                                }
+                                System.out.println("Size "+set.size());
+                                if(set.size() <= 1){
+                                    System.out.println("delete Unique dev");
+                                    session.delete(p);
+                                } 
+                                //Sinon on affecte un nouvel utilisateur comme chef de projet (premier de la list)
+                                else{
+                                    System.out.println("Multiuser");
+                                    //Recuperation des utilisateurs
+                                    Set<User> users = p.getUsers();
+                                    for(User current : users){
+                                        System.out.println("Current "+current.getEmail());
+                                        //C'est l'admin (on passe)
+                                        if(current.getEmail().equals(user.getEmail()))
+                                            continue;
+                                        System.out.println("affectation de nouvel utilisateur "+user.getEmail());
+                                        //premier utilisateur classique (on change l'utilisateur en admin)
+                                        for(Object newRoles : current.getRoles()){
+                                            if(((Roles)newRoles).getRole().equals(project+"user")){
+                                                System.out.println("previous change "+((Roles)newRoles).getRole());
+                                                ((Roles)newRoles).setRole(project+"admin");
+                                                System.out.println("after change "+((Roles)newRoles).getRole());
+                                                break;
+                                            }
+                                        }
+                                        System.out.println("change project leader");
+                                        //On change le project leader                            
+                                        p.setProjectLeader(current.getNickname());
+                                        //Update projet
+                                        session.update(p);
+                                        break;
+                                    }
+                                }
+                            } else if (role.getRole().endsWith("user")){
+                                project = role.getRole().substring(0,role.getRole().length()-4);
+                                System.out.println("user "+project);
+                            }else{
+                                System.out.println("admin Site ??? ");
+                                continue;
+                            }
+                        }
+                         **/
+                        
+                        
+                        
+                        
 			session.delete(user);
 			tr.commit();
 
@@ -153,7 +222,22 @@ public class AccountManager {
 
 			if(user == null)
 				return false;
+                        Collection<Roles> roles = user.getRoles();
 
+                        for(Roles role : roles ){
+                                String project;
+                                if(role.getRole().endsWith("admin")){
+                                        project = role.getRole().substring(0,role.getRole().length()-5);
+                                        Project p = ProjectManager.getProjectManagerInstance().getProject(project);
+                                        p.setProjectLeader(newNickName);
+                                        session.update(p);
+                                } else if (role.getRole().endsWith("user")){
+                                        project = role.getRole().substring(0,role.getRole().length()-4);
+                                }else{
+                                        continue;
+                                }
+                                System.out.println("project to change "+project);
+                        }
 			user.setNickname(newNickName);
 			session.update(user);
 			tr.commit();

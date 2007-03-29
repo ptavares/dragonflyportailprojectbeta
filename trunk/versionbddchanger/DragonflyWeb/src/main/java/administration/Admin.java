@@ -10,8 +10,10 @@
 package administration;
 
 import com.opensymphony.xwork2.ActionSupport;
+import fr.umlv.dragonflyEJB.services.account.dropper.AccountDropper;
 import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
 import fr.umlv.dragonflyEJB.services.account.modification.AccountModification;
+import fr.umlv.dragonflyEJB.services.project.dropper.ProjectDropper;
 import fr.umlv.dragonflyEJB.services.project.information.ProjectInformation;
 import fr.umlv.dragonflyEJB.services.project.modification.ProjectModification;
 import java.util.ArrayList;
@@ -68,7 +70,8 @@ public class Admin extends ActionSupport{
     public String deleteAccount() throws Exception{
         System.out.println("deleteAccount "+adddelObject);
         final InitialContext ctx = new InitialContext();
-        final AccountModification am=(AccountModification) ctx.lookup("AccountModification/remote");
+        final AccountDropper ad=(AccountDropper) ctx.lookup("AccountDropper/remote");
+        ad.removeAccount(adddelObject);
         //Ajout delete account
         initAccountList();
         return "accountList";
@@ -86,7 +89,8 @@ public class Admin extends ActionSupport{
     public String deleteProject() throws Exception{
         System.out.println("deleteProject "+adddelObject);
         final InitialContext ctx = new InitialContext();
-        final ProjectModification pm=(ProjectModification) ctx.lookup("ProjectModification/remote");
+        final ProjectDropper pd=(ProjectDropper) ctx.lookup("ProjectDropper/remote");
+        pd.removeProject(adddelObject);
         //Ajout delete project
         initProjectList();
         return "projectList";

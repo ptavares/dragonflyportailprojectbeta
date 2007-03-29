@@ -20,13 +20,13 @@ pageEncoding="ISO-8859-1"%>
             <s:form action="goToProjectPage!submit">                
                 <div id="general">
                     <s:text name="maven.InformationGeneral"/>
-                    <s:textfield name="mavenInformation.groupId" label="GroupId" id="groupId" />
-                    <s:textfield name="mavenInformation.artifactId" label="ArtifactId" id="artifactId"/>
-                    <s:select name="mavenInformation.packaging" id="packaging" label="Packaging" list="{'pom','jar','war','ear','ejb'}" onchange="alert('change');"/>                
-                    <s:textfield name="mavenInformation.name" id="name" label="Name"/>
-                    <s:textfield name="mavenInformation.version" id="version" label="Version"/>
-                    <s:textarea name="mavenInformation.description" id="description" label="Description"  cols="50" rows="8" theme="xhtml"/>                    
-                    <s:submit value="Modify" />
+                    <s:textfield name="mavenInformation.groupId" label="%{getText('maven.groupId')}" id="groupId" />
+                    <s:textfield name="mavenInformation.artifactId" label="%{getText('maven.artifactId')}" id="artifactId"/>
+                    <s:select name="mavenInformation.packaging" id="packaging" label="%{getText('maven.packaging')}" list="{'pom','jar','war','ear','ejb'}" onchange="alert('change');"/>                
+                    <s:textfield name="mavenInformation.name" id="name" label="%{getText('maven.name')}"/>
+                    <s:textfield name="mavenInformation.version" id="version" label="%{getText('maven.version')}"/>
+                    <s:textarea name="mavenInformation.description" id="description" label="%{getText('maven.description')}"  cols="50" rows="8" theme="xhtml"/>                    
+                    <s:submit value="%{getText('maven.modify')}" />
                 </div>            
             </s:form>
             

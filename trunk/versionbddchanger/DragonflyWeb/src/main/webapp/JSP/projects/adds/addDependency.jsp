@@ -25,11 +25,11 @@ pageEncoding="ISO-8859-1"%>
             <s:actionerror/>
             <s:actionmessage/>
             <s:form action="AddMaven!Dependency">
-                <s:textfield name="groupId" label="GroupId" id="groupId"/>
-                <s:textfield name="artifactId" label="ArtifactId" id="artifactId"/>    
-                <s:textfield name="version" label="Version" id="version"/>
-                <s:select name="scope" label="Scope" list="{'compile','provided','test'}"  id="scope"/>
-                <s:submit onclick="alert('createDependency');" value="Add"></s:submit>
+                <s:textfield name="groupId" label="%{getText('maven.groupId')}" id="groupId"/>
+                <s:textfield name="artifactId" label="ArtifactId" id="%{getText('maven.artifactId')}"/>    
+                <s:textfield name="version" label="Version" id="%{getText('maven.version')}"/>
+                <s:select name="scope" label="%{getText('maven.scope')}" list="{'compile','provided','test'}"  id="scope"/>
+                <s:submit onclick="alert('createDependency');" value="%{getText('maven.add')}"></s:submit>
                 
             </s:form>
             

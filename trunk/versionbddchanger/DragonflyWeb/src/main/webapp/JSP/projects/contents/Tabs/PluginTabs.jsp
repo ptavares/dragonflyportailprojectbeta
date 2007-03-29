@@ -16,15 +16,15 @@ pageEncoding="ISO-8859-1"%>
             
             <div id="dojoTable" align="center">
                 
-                <h3>Plugins</h3>
+                <h3><s:text name="maven.pluginsTabTitle"></s:text></h3>
                 <table dojoType="filteringTable" multiple="true" alternateRows="true" id="pluginTable"
                        cellpadding="0" cellspacing="0" border="1" >	
                     
                     <thead>
                         <tr>
-                            <th field="GroupId" dataType="String" align="center" valign="top"><s:text name="GroupId" /></th>
-                            <th field="ArtifactId" dataType="String" align="center" valign="top"><s:text name="ArtifactId"/></th>
-                            <th field="Version" dataType="String" align="center" valign="top"><s:text name="Version"/></th>
+                            <th field="GroupId" dataType="String" align="center" valign="top"><s:text name="maven.groupId" /></th>
+                            <th field="ArtifactId" dataType="String" align="center" valign="top"><s:text name="maven.artifactId"/></th>
+                            <th field="Version" dataType="String" align="center" valign="top"><s:text name="maven.version"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,8 +39,7 @@ pageEncoding="ISO-8859-1"%>
                 </table>
                 <br/>
                     <s:url id="showpopup"  action="AddMaven!showPluginPopup"></s:url>
-                    <s:submit align="center" value="%{getText('add')}" href="%{showpopup}" targets="maven"/>  
-                <!--<s:submit align="center" onclick="openPopUp2('AddMaven!showPluginPopup)" value="%{getText('add')}" />              -->
+                    <s:submit align="center" value="%{getText('maven.add')}" href="%{showpopup}" targets="maven"/>      
             </div>
         </div>
     </body>

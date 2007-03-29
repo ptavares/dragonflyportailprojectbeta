@@ -28,7 +28,7 @@ pageEncoding="ISO-8859-1"%>
                 <s:textfield name="groupId" label="GroupId" id="groupId"/>
                 <s:textfield name="artifactId" label="ArtifactId" id="artifactId"/>    
                 <s:textfield name="version" label="Version" id="version"/>
-                <s:submit onclick="alert('createPlugin'); " value="Add"></s:submit>
+                <s:submit onclick="alert('createPlugin'); " value="%{getText('maven.add')}"></s:submit>
                 
             </s:form>
             

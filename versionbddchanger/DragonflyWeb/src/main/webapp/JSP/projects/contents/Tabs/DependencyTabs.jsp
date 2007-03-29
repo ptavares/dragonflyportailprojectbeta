@@ -24,17 +24,17 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
             
             <div id="dojoTable" align="center">
                 
-                <h3 align="center">Dependencies</h3>
+                <h3 align="center"><s:text name="maven.dependenciesTabTitle"></s:text></h3>
                 
                 <table dojoType="filteringTable" multiple="true" alternateRows="true" id="dependencyTable"
                        cellpadding="0" cellspacing="0" border="1" >	
                     
                     <thead>
                         <tr>
-                            <th field="GroupId" dataType="String" align="center" valign="top"><s:text name="GroupId" /></th>
-                            <th field="ArtifactId" dataType="String" align="center" valign="top"><s:text name="ArtifactId"/></th>
-                            <th field="Version" dataType="String" align="center" valign="top"><s:text name="Version"/></th>
-                            <th field="Scope" dataType="String" align="center" valign="top"><s:text name="Scope"/></th>
+                            <th field="GroupId" dataType="String" align="center" valign="top"><s:text name="maven.groupId" /></th>
+                            <th field="ArtifactId" dataType="String" align="center" valign="top"><s:text name="maven.artifactId"/></th>
+                            <th field="Version" dataType="String" align="center" valign="top"><s:text name="maven.version"/></th>
+                            <th field="Scope" dataType="String" align="center" valign="top"><s:text name="maven.scope"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,9 +49,10 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
                     </tbody>
                 </table>
                 <br/>
-                    <s:url id="showpopup"  action="AddMaven!showDependencyPopup"></s:url>
-                    <s:submit align="center" value="%{getText('add')}" href="%{showpopup}" targets="maven"/>  
-                <!--<s:submit align="center" onclick="alert('clic');openPopUp2('AddMaven!showDependencyPopup')" value="%{getText('add')}" />   -->
+                <s:url id="showpopup"  action="AddMaven!showDependencyPopup"></s:url>
+                <s:submit align="center" value="%{getText('maven.add')}" href="%{showpopup}" targets="maven" />  
+                <s:submit align="center" value="%{getText('maven.remove')}" href="%{showpopup}" targets="maven" theme="simple"/>  
+                
             </div>  
         </div>
     </body>

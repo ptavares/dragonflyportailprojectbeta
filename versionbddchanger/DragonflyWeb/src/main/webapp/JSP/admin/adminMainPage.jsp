@@ -28,9 +28,9 @@ pageEncoding="ISO-8859-1"%>
                     <s:url id="AccountListPage" action="Admin" method="accountList"></s:url>
                     <!-- Le TabbedPanel contenant les différentes pages -->
                      <s:tabbedPanel id="adminTPanel" cssClass="tabbedPanel" >
-                        <s:div id="AccountList" label="%{getText('admin.accountTab')}" labelposition="top" href="%{AccountListPage}" cssClass="tabbedPanel_Div" >
+                        <s:div id="AccountList" label="%{getText('admin.accountTab')}" labelposition="top" href="%{AccountListPage}" refreshOnShow="true" cssClass="tabbedPanel_Div" >
                         </s:div>
-                        <s:div id="ProjectList" label="%{getText('admin.projectTab')}" labelposition="top" href="%{ProjectListPage}" cssClass="tabbedPanel_Div" />
+                        <s:div id="ProjectList" label="%{getText('admin.projectTab')}" labelposition="top" href="%{ProjectListPage}" refreshOnShow="true" cssClass="tabbedPanel_Div" />
                     </s:tabbedPanel>
                     
                 </div>

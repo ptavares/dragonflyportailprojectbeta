@@ -25,8 +25,8 @@ pageEncoding="ISO-8859-1"%>
             <s:actionmessage/>
             
             <s:form action="AddMaven!Module">
-                <s:textfield name="module" label="Module" id="module"/>
-                <s:submit onclick="alert('createModule');" value="Add"></s:submit>                
+                <s:textfield name="module" label="%{getText('maven.module')}" id="module"/>
+                <s:submit onclick="alert('createModule');" value="%{getText('maven.add')}"></s:submit>                
             </s:form>
             
             <div id="goback">

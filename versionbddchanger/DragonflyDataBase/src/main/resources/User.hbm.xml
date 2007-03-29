@@ -36,7 +36,7 @@
 			<key column="user_id" not-null="true"/>
 			<one-to-many class="Message" />
 		</bag>
-		
+				
 	</class>
 
 </hibernate-mapping>

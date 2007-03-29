@@ -17,10 +17,10 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 public class DragonFlyDBManager {
 
 	private static final SessionFactory sessionFactory;
-
 	private static final Configuration config;
+	public static final ThreadLocal session = new ThreadLocal(); 
 	
-	private static final ThreadLocal<Session> session = new ThreadLocal<Session>();
+	
 	
 	/**
 	 * Create only one SessionFactory
@@ -29,7 +29,6 @@ public class DragonFlyDBManager {
 		try {
 			config = new Configuration();
 			sessionFactory = config.configure().buildSessionFactory();
-		
 		} catch (HibernateException he) {
 			System.err.println("Configuration Error. Initial SessionFactory creation failed : "+he.getMessage());
 			throw new ExceptionInInitializerError(he);
@@ -50,12 +49,13 @@ public class DragonFlyDBManager {
 	 * @throws HibernateException
 	 */
 	public static Session openSession() throws HibernateException {
+		
 		Session s = sessionFactory.openSession();
 		s.setFlushMode(FlushMode.COMMIT);
 		s.setCacheMode(CacheMode.IGNORE);
 		return s;
 	}
-		
+	
 	/**
 	 * Create all databases tables from hibernate's configuration.
 	 *

@@ -15,10 +15,11 @@
 		
 <!--	<property name="hibernate.hbm2ddl.auto">update</property> -->
 <!-- 	<property name="hbm2ddl.auto">create</property> -->
+		<!-- Pour associer les sessions courantes au thread d'exécution  -->
+        <property name="hibernate.current_session_context_class">thread</property>
         <mapping resource="User.hbm.xml"/>
         <mapping resource="Project.hbm.xml"/>
         <mapping resource="ProjectDescription.hbm.xml"/>
-        <!-- <mapping resource="FAQ.hbm.xml"/>  -->
         <mapping resource="QuestionResponse.hbm.xml"/>
         <mapping resource="Task.hbm.xml"/>
         <mapping resource="Meeting.hbm.xml"/>

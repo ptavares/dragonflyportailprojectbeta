@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
-import fr.umlv.dragonflyEJB.services.account.adds.AccountAdds;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 
 public class SendMessageAction extends ActionSupport {
 	private String address;
@@ -25,7 +25,7 @@ public class SendMessageAction extends ActionSupport {
 	public String go(){
 		return INPUT;
 	}
-	public String execute() throws NamingException{
+	public String execute(){
 		String test="sended failed";
 		Map session = ActionContext.getContext().getSession();
 		UserID=(String) session.get("nom");
@@ -41,17 +41,19 @@ public class SendMessageAction extends ActionSupport {
 		if(content!=null){
 			System.out.println(content);
 		}
+		try {
 		final InitialContext ctx = new InitialContext();
-		final AccountAdds AA= (AccountAdds) ctx.lookup("AccountAdds/remote");
+		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+		//final AccountAdds AA= (AccountAdds) ctx.lookup("AccountAdds/remote");
 		boolean havesended;
 		try {
-			havesended = AA.createMessage(UserID, address, subject, content);
+			havesended = dEjb.createMessage(UserID, address, subject, content);
 		
 		if (havesended){
 			test="your Message has been sended";
 		}
 		HttpServletResponse response = ServletActionContext.getResponse();
-		try {
+		
 			System.out.println("begin response");
 			PrintWriter out = response.getWriter();
 			out.println(test);
@@ -61,8 +63,9 @@ public class SendMessageAction extends ActionSupport {
 			e.printStackTrace();
 		}
 		} catch (DragonflyBddException e1) {
-			// TODO REDIRECTION ERREUR BDD
 			e1.printStackTrace();
+		} catch (NamingException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

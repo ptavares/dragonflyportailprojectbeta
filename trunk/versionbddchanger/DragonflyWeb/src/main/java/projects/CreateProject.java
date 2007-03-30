@@ -8,8 +8,8 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import fr.umlv.dragonflyEJB.services.account.adds.AccountAdds;
-import fr.umlv.dragonflyEJB.services.project.creation.ProjectCreation;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
+
 
 public class CreateProject extends ActionSupport{
 	
@@ -30,7 +30,8 @@ public class CreateProject extends ActionSupport{
 			
 		
 		final InitialContext ctx = new InitialContext();
-		final ProjectCreation proj=(ProjectCreation) ctx.lookup("ProjectCreation/remote");
+		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+		//final ProjectCreation proj=(ProjectCreation) ctx.lookup("ProjectCreation/remote");
 		
 		int val;
 				
@@ -42,14 +43,14 @@ public class CreateProject extends ActionSupport{
 		}
 		
 		if(getDate()==null && getDescriptif().length()==0){
-			val = proj.createProject(getNomProjet(), creator, getResume());
+			val = dEjb.createProject(getNomProjet(), creator, getResume());
 		}
 		else
 			if(getDescriptif().length()==0){
-				val = proj.createProject(getNomProjet(), creator, getResume(), getDate());
+				val = dEjb.createProject(getNomProjet(), creator, getResume(), getDate());
 			}
 			else{
-				val = proj.createProject(getNomProjet(), creator, getDate(), getResume(), getDescriptif());
+				val = dEjb.createProject(getNomProjet(), creator, getDate(), getResume(), getDescriptif());
 			}
 		if(val == 1){
 			addActionError(getText("createproject.projectExist"));
@@ -63,8 +64,8 @@ public class CreateProject extends ActionSupport{
 		addActionMessage(getText("createproject.success1")+" ' "+getNomProjet()+" ' "+getText("createproject.success2"));
 				
 		String r = getNomProjet()+"admin";
-		final AccountAdds add = (AccountAdds)ctx.lookup("AccountAdds/remote");
-		add.addRole(creator, r);
+		//final AccountAdds add = (AccountAdds)ctx.lookup("AccountAdds/remote");
+		dEjb.addRole(creator, r);
 		return SUCCESS;		
 	}
 

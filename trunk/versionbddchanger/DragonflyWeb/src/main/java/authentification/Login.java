@@ -31,6 +31,8 @@ public class Login  {
 			session.put("login", "true");
 			session.put("nom", getUsername());
 			session.put("NickName", info.getUserNickname(getUsername()));
+                        if(getUsername().equals("admin@dragonfly.com"))
+                            session.put("admin",true);
 			System.out.println(session.get("nom"));
 			return SUCCESS;
 		}
@@ -41,6 +43,7 @@ public class Login  {
 		Map session = ActionContext.getContext().getSession();
 		session.remove("login");
 		session.remove("nom");
+                session.remove("admin");
 		return SUCCESS;
 	}
 

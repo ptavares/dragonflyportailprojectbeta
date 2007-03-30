@@ -22,6 +22,15 @@ body {
 	overflow-y: auto;
 }
 
+#administrationPage{
+        padding-top: 10px;
+	padding-left: 10px;
+        width: 700px;
+	height: 560px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
 /* Set the page width */
 #wrapper-header-top,#header,#wrapper-content,#wrapper-footer {
 	width: 85%;

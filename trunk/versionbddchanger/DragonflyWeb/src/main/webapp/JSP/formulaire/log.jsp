@@ -14,7 +14,9 @@
 				notifyTopics="loginLoading,loading,refresh" />
 		</s:form>
 	</s:div> <s:url id="inscription" action="Inscription!input" /> <s:a
-		href="%{inscription}" targets="rightcolumn"><s:text name="newindex.subscribe"></s:text> </s:a></div>
+		href="%{inscription}" targets="rightcolumn"><s:text name="newindex.subscribe"></s:text> </s:a>
+            
+            </div>
 </s:if>
 <s:else>
 
@@ -30,6 +32,12 @@
 			</s:div>	
 			<s:url id="Messages" action="ListMessages"/>
 			<s:a href="%{Messages}" targets="rightcolumn"><s:text name="newindex.myMessage"></s:text></s:a>
+                        <s:if test="#session.admin">
+                            <div>
+                                <s:url id="admin" action="Admin" /> <s:a
+                                    href="%{admin}" theme="xhtml"><s:text name="newindex.adminPage"></s:text> </s:a>
+                            </div>
+                        </s:if>
 			<br/>
 	 	<a href="<%=request.getContextPath()%>/Logout.action"><s:text name="newindex.logout"></s:text></a>
 	</s:else>

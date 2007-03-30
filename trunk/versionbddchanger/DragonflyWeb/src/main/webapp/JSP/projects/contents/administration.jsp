@@ -30,6 +30,20 @@
 
 <br>
 
+<div id="removeUser">
+<div id="subtitle">
+<div class="bout-gauche">
+<div class="bout-droit">
+<div class="fond">
+<h3><s:text name="administration.removeUser"></s:text></h3>
+</div>
+</div>
+</div>
+</div>
+<jsp:include flush="true" page="../adds/removeUser.jsp"></jsp:include></div>
+
+<br>
+
 <div id="newsTabs">
 <jsp:include flush="true" page="../results/deleteNewsResult.jsp"></jsp:include>
 </div>

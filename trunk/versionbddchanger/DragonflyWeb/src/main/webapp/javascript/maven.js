@@ -134,3 +134,6 @@ function processGeneralMavenStateChange() {
     }
 }
 
+funtion showDivManager(){
+    alert('showDivManager');
+}

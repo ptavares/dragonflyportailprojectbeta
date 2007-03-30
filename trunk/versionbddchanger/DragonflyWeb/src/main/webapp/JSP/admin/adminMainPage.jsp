@@ -27,15 +27,23 @@ pageEncoding="ISO-8859-1"%>
                     <s:url id="ProjectListPage" action="Admin" method="projectList"></s:url>
                     <s:url id="AccountListPage" action="Admin" method="accountList"></s:url>
                     <!-- Le TabbedPanel contenant les différentes pages -->
-                     <s:tabbedPanel id="adminTPanel" cssClass="tabbedPanel" >
+                    <s:tabbedPanel id="adminTPanel" cssClass="tabbedPanel" >
                         <s:div id="AccountList" label="%{getText('admin.accountTab')}" labelposition="top" href="%{AccountListPage}" refreshOnShow="true" cssClass="tabbedPanel_Div" >
                         </s:div>
                         <s:div id="ProjectList" label="%{getText('admin.projectTab')}" labelposition="top" href="%{ProjectListPage}" refreshOnShow="true" cssClass="tabbedPanel_Div" />
                     </s:tabbedPanel>
                     
                 </div>
-            </div>
-        </div>
+                <div id="goback">
+                    <s:text name="projectIndex.backToHomePage"/>
+                    <a href="index.html"><img src="img/project/backHomePage.png" border="0" 
+                                              alt="<s:text name="projectIndex.backToHomePage"/>"></a>
+                </div>
+                
+            </div><!-- close content -->
+        </div><!-- close wrapper-content -->
+        
+        <jsp:include flush="true" page="../../JSP/theme/Footer.jsp"></jsp:include>
         
     </body>
 </html>

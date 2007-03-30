@@ -9,35 +9,33 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
-import fr.umlv.dragonflyEJB.services.account.adds.AccountAdds;
-import fr.umlv.dragonflyEJB.services.account.creation.AccountCreation;
 
 
 public class Inscription extends ActionSupport {
 
-	
+
 	public String execute()  {
-		
+
 		InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-	
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		//final AccountCreation creator=(AccountCreation) ctx.lookup("AccountCreation/remote");
-		int result=dEjb.createAccount(email, username, password);
-		if (result==1){
-			addActionError(getText("register.emailExist"));
-			return ("error");
-		}
-		else if(result==2){
-			addActionError(getText("register.erreurInterne"));
-			return ("error");
-		}
-		
-		final AccountAdds AA= (AccountAdds) ctx.lookup("AccountAdds/remote");
-		AA.createMessage("Dragonfly", getEmail(), "Welcome", "Welcome To Dragonfly Web Portail. Have Fun !");
-		addActionMessage(getText("register.success"));
-		
+
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//final AccountCreation creator=(AccountCreation) ctx.lookup("AccountCreation/remote");
+			int result=dEjb.createAccount(email, username, password);
+			if (result==1){
+				addActionError(getText("register.emailExist"));
+				return ("error");
+			}
+			else if(result==2){
+				addActionError(getText("register.erreurInterne"));
+				return ("error");
+			}
+
+			//final AccountAdds AA= (AccountAdds) ctx.lookup("AccountAdds/remote");
+			dEjb.createMessage("Dragonfly", getEmail(), "Welcome", "Welcome To Dragonfly Web Portail. Have Fun !");
+			addActionMessage(getText("register.success"));
+
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (DragonflyBddException e) {
@@ -45,8 +43,8 @@ public class Inscription extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
-	
+
+
 	private String username;
 	private String password;
 	private String email;
@@ -54,10 +52,10 @@ public class Inscription extends ActionSupport {
 	private String lastname;
 	private String confirmPassword;
 	private String sexe;
-	
+
 	private ArrayList<String> sexe_choice ;
-	
-	
+
+
 	public ArrayList<String> getSexe_choice() {
 		if(sexe_choice == null){
 			sexe_choice = new ArrayList<String>();

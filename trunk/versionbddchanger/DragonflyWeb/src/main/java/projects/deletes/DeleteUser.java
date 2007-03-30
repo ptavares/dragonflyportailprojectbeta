@@ -9,12 +9,15 @@
 
 package projects.deletes;
 
-import com.opensymphony.xwork2.ActionSupport;
-import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
-import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
 import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 
 /**
  *
@@ -26,11 +29,11 @@ public class DeleteUser extends ActionSupport{
     public String execute() {
         String name = (String) ServletActionContext.getRequest().getSession().getAttribute("project");
         
-        InitialContext ctx;
-        try {
-            ctx = new InitialContext();
-            final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-            
+        final InitialContext ctx;
+		try {
+			ctx = new InitialContext();
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+  
             if(!dEJB.removeUserFromProject(name,userMail)){
                 addActionError(getText("administration.removeUser.accountError"));
                 return ERROR;

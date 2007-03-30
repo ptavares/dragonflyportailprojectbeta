@@ -25,21 +25,21 @@ public class Login  {
 		InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		//final AccountAuthentification Authen=(AccountAuthentification) ctx.lookup("AccountAuthentification/remote");
-		
-		System.out.println("--login---->"+password);
-		if(dEjb.isAuthentificationCorrect(getUsername(), getPassword())){
-			Map session = ActionContext.getContext().getSession();
-			//final AccountInformation info=(AccountInformation) ctx.lookup("AccountInformation/remote");
-			session.put("login", "true");
-			session.put("nom", getUsername());
-			session.put("NickName", dEjb.getUserNickname(getUsername()));
-                        if(getUsername().equals("admin@dragonfly.com"))
-                            session.put("admin",true);
-			System.out.println(session.get("nom"));
-			return SUCCESS;
-		}
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//final AccountAuthentification Authen=(AccountAuthentification) ctx.lookup("AccountAuthentification/remote");
+
+			//System.out.println("--login---->"+password);
+			if(dEjb.isAuthentificationCorrect(getUsername(), getPassword())){
+				Map session = ActionContext.getContext().getSession();
+				//final AccountInformation info=(AccountInformation) ctx.lookup("AccountInformation/remote");
+				session.put("login", "true");
+				session.put("nom", getUsername());
+				session.put("NickName", dEjb.getUserNickname(getUsername()));
+				if(getUsername().equals("admin@dragonfly.com"))
+					session.put("admin",true);
+				//System.out.println(session.get("nom"));
+				return SUCCESS;
+			}
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (DragonflyBddException e) {
@@ -47,12 +47,12 @@ public class Login  {
 		}
 		return INPUT;
 	}
-	
+
 	public String logout(){
 		Map session = ActionContext.getContext().getSession();
 		session.remove("login");
 		session.remove("nom");
-                session.remove("admin");
+		session.remove("admin");
 		return SUCCESS;
 	}
 

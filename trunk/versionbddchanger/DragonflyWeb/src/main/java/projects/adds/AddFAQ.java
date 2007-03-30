@@ -1,9 +1,5 @@
 package projects.adds;
 
-import java.sql.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -12,7 +8,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
-import fr.umlv.dragonflyEJB.services.project.adds.ProjectAdds;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 
 public class AddFAQ extends ActionSupport{
 
@@ -23,20 +19,19 @@ public class AddFAQ extends ActionSupport{
 	public String execute() {
 
 		String project = (String)ServletActionContext.getRequest().getSession().getAttribute("project");
-		System.out.println("Project Name : "+project);
 
 		if(project==null)
 			return "rien";
 
-
-		InitialContext ctx;
-		final ProjectAdds proj;
+		final InitialContext ctx;
+		
 		try {
+
 			ctx = new InitialContext();
 
-			proj=(ProjectAdds) ctx.lookup("ProjectAdds/remote");
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 
-			if(!proj.addQuestionResponse(project, question, response)){
+			if(!dEJB.addQuestionResponse(project, question, response)){
 				addActionError(getText("faq.creates.creationError"));
 				return ERROR;
 			}

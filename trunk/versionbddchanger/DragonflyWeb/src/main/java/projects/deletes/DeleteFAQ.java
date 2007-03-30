@@ -3,33 +3,31 @@ package projects.deletes;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
-import fr.umlv.dragonflyEJB.services.project.modification.ProjectModification;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 
 public class DeleteFAQ extends ActionSupport {
-	
+
 	private String delete;
 	private String ProName;
-	
+
 	public String execute() {
-		String project = (String)ServletActionContext.getRequest().getSession().getAttribute("project");
-		System.out.println("Project Name : "+project);
-		
-		InitialContext ctx;
+		//String project = (String)ServletActionContext.getRequest().getSession().getAttribute("project");
+		//System.out.println("Project Name : "+project);
+
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-		
-		final ProjectModification proj=(ProjectModification) ctx.lookup("ProjectModification/remote");
-		
-		if(!proj.removeQuestionResponse(getProName(), getDelete())){
-			addActionError(getText("faq.remove.deleteError"));
-			return ERROR;
-		}
-		
+
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+
+			if(!dEJB.removeQuestionResponse(getProName(), getDelete())){
+				addActionError(getText("faq.remove.deleteError"));
+				return ERROR;
+			}
+
 		} catch (NamingException e) {
 			// TODO REDIRECTION ERREUR EJB
 			e.printStackTrace();
@@ -37,7 +35,7 @@ public class DeleteFAQ extends ActionSupport {
 			// TODO REDIRECTION ERREUR BDD
 			e.printStackTrace();
 		}
-		
+
 		return INPUT;
 	}
 

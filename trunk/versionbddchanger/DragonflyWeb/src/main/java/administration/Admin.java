@@ -43,32 +43,50 @@ public class Admin extends ActionSupport{
 
 	@Override
 	public String execute() throws Exception{
-		System.out.println("Execute Action");
+		//System.out.println("Execute Action");
 		//initAccountList();
 		return SUCCESS;
 	}
 
 	public String projectList() throws Exception{
-		System.out.println("ProjectList Action");
+		//System.out.println("ProjectList Action");
 		initProjectList();
 		return "projectList";
 	}
 
 	public String accountList() throws Exception{
-		System.out.println("AccountList Action");
+		//System.out.println("AccountList Action");
 		initAccountList();
 		return "accountList";
 	}
 
 	public String acceptAccount() {
-		System.out.println("acceptAccount "+adddelObject);
-		InitialContext ctx;
+		//System.out.println("acceptAccount "+adddelObject);
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
 
-			// final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-			final AccountModification am=(AccountModification) ctx.lookup("AccountModification/remote");   
-			am.activateAccount(adddelObject);
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//final AccountModification am=(AccountModification) ctx.lookup("AccountModification/remote");   
+			dEjb.activateUser(adddelObject);
+			initAccountList();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (DragonflyBddException e) {
+			e.printStackTrace();
+		}
+		return "accountList";
+	}
+
+	public String deleteAccount(){
+		//System.out.println("deleteAccount "+adddelObject);
+		final InitialContext ctx;
+		try {
+			ctx = new InitialContext();
+
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//final AccountDropper ad=(AccountDropper) ctx.lookup("AccountDropper/remote");
+			dEjb.removeAccount(adddelObject);
 			initAccountList();
 		} catch (NamingException e) {
 			e.printStackTrace();
@@ -80,36 +98,16 @@ public class Admin extends ActionSupport{
 		return "accountList";
 	}
 
-	public String deleteAccount(){
-		System.out.println("deleteAccount "+adddelObject);
-		InitialContext ctx;
-		try {
-			ctx = new InitialContext();
-		
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		//final AccountDropper ad=(AccountDropper) ctx.lookup("AccountDropper/remote");
-		dEjb.removeAccount(adddelObject);
-		initAccountList();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (DragonflyBddException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "accountList";
-	}
-
 	public String acceptProject(){
-		System.out.println("acceptProject "+adddelObject);
-		InitialContext ctx;
+		//System.out.println("acceptProject "+adddelObject);
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-		
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		//final ProjectModification pm=(ProjectModification) ctx.lookup("ProjectModification/remote");
-		dEjb.activateProject(adddelObject);
-		initProjectList();
+
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//final ProjectModification pm=(ProjectModification) ctx.lookup("ProjectModification/remote");
+			dEjb.activateProject(adddelObject);
+			initProjectList();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (DragonflyBddException e) {
@@ -121,16 +119,16 @@ public class Admin extends ActionSupport{
 	}
 
 	public String deleteProject(){
-		System.out.println("deleteProject "+adddelObject);
-		InitialContext ctx;
+		//System.out.println("deleteProject "+adddelObject);
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-	
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		// final ProjectDropper pd=(ProjectDropper) ctx.lookup("ProjectDropper/remote");
-		dEjb.removeProject(adddelObject);
-		//Ajout delete project
-		initProjectList();
+
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			// final ProjectDropper pd=(ProjectDropper) ctx.lookup("ProjectDropper/remote");
+			dEjb.removeProject(adddelObject);
+			//Ajout delete project
+			initProjectList();
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (DragonflyBddException e) {
@@ -153,29 +151,29 @@ public class Admin extends ActionSupport{
 	}
 
 	private void initProjectList(){
-		System.out.println("InitProjectList");
-		InitialContext ctx;
+		//System.out.println("InitProjectList");
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-		
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		final ProjectInformation pi=(ProjectInformation) ctx.lookup("ProjectInformation/remote");
-		//final ProjectModification pm=(ProjectModification) ctx.lookup("ProjectModification/remote");
 
-		setProject(pi.getActiveProject());
-		System.out.println("Active Project **********");
-		if(getAccount() !=null){
-			for(String s : project){
-				System.out.println(s);
-			}
-		}
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//final ProjectInformation pi=(ProjectInformation) ctx.lookup("ProjectInformation/remote");
+			//final ProjectModification pm=(ProjectModification) ctx.lookup("ProjectModification/remote");
 
-		setNotactiveProject(pi.getNotActiveProject());
-		System.out.println("Not Active Project ***********");
-		if(getNotactiveAccount() !=null){
-			for(String s : notactiveProject)
-				System.out.println(s);
-		}
+			setProject(dEjb.getActiveProject());
+//			System.out.println("Active Project **********");
+//			if(getAccount() !=null){
+//				for(String s : project){
+//					System.out.println(s);
+//				}
+//			}
+
+			setNotactiveProject(dEjb.getNotActiveProject());
+//			System.out.println("Not Active Project ***********");
+//			if(getNotactiveAccount() !=null){
+//				for(String s : notactiveProject)
+//					System.out.println(s);
+//			}
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (DragonflyBddException e) {
@@ -191,20 +189,20 @@ public class Admin extends ActionSupport{
 	}
 
 	private void initActiveAccountList() {
-		InitialContext ctx;
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-		
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		//  final AccountInformation ai=(AccountInformation) ctx.lookup("AccountInformation/remote");
 
-		setAccount(dEjb.getActiveUsers());
-		System.out.println("Active Account **********");
-		if(getAccount() !=null){
-			for(String s : account){
-				System.out.println(s);
-			}
-		}
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//  final AccountInformation ai=(AccountInformation) ctx.lookup("AccountInformation/remote");
+
+			setAccount(dEjb.getActiveUsers());
+//			System.out.println("Active Account **********");
+//			if(getAccount() !=null){
+//				for(String s : account){
+//					System.out.println(s);
+//				}
+//			}
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (DragonflyBddException e) {
@@ -213,19 +211,19 @@ public class Admin extends ActionSupport{
 	}
 
 	private void initNotActiveAccountList() {
-		InitialContext ctx;
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-	
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		//   final AccountInformation ai=(AccountInformation) ctx.lookup("AccountInformation/remote");
 
-		setNotactiveAccount(dEjb.getNotActiveUsers());
-		System.out.println("Not Active Account ***********");
-		if(getNotactiveAccount() !=null){
-			for(String s : notactiveAccount)
-				System.out.println(s);
-		}
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//   final AccountInformation ai=(AccountInformation) ctx.lookup("AccountInformation/remote");
+
+			setNotactiveAccount(dEjb.getNotActiveUsers());
+//			System.out.println("Not Active Account ***********");
+//			if(getNotactiveAccount() !=null){
+//				for(String s : notactiveAccount)
+//					System.out.println(s);
+//			}
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (DragonflyBddException e) {
@@ -234,28 +232,28 @@ public class Admin extends ActionSupport{
 	}
 
 	private void initAccountList() {
-		InitialContext ctx;
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-	
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		// final AccountInformation ai=(AccountInformation) ctx.lookup("AccountInformation/remote");
-//		final AccountModification am=(AccountModification) ctx.lookup("AccountModification/remote");
 
-		setAccount(dEjb.getActiveUsers());
-		System.out.println("Active Account **********");
-		if(getAccount() !=null){
-			for(String s : account){
-				System.out.println(s);
-			}
-		}
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			// final AccountInformation ai=(AccountInformation) ctx.lookup("AccountInformation/remote");
+//			final AccountModification am=(AccountModification) ctx.lookup("AccountModification/remote");
 
-		setNotactiveAccount(dEjb.getNotActiveUsers());
-		System.out.println("Not Active Account ***********");
-		if(getNotactiveAccount() !=null){
-			for(String s : notactiveAccount)
-				System.out.println(s);
-		}
+			setAccount(dEjb.getActiveUsers());
+//			System.out.println("Active Account **********");
+//			if(getAccount() !=null){
+//				for(String s : account){
+//					System.out.println(s);
+//				}
+//			}
+
+			setNotactiveAccount(dEjb.getNotActiveUsers());
+//			System.out.println("Not Active Account ***********");
+//			if(getNotactiveAccount() !=null){
+//				for(String s : notactiveAccount)
+//					System.out.println(s);
+//			}
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (DragonflyBddException e) {

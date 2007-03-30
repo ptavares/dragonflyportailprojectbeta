@@ -13,47 +13,47 @@ import projects.adds.tools.Tools;
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
-import fr.umlv.dragonflyEJB.services.project.adds.ProjectAdds;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 
 public class AddNews extends ActionSupport {
-	
+
 	private String subj;
 	private String descr;
 	private Date post;
 	private String newsId;
-	
+
 	public String execute() {
 		String project = (String)ServletActionContext.getRequest().getSession().getAttribute("project");
-		
+
 		if(!Tools.checkSpecialChar(subj)){
 			addActionError(getText("creates.SpecialCharactersError"));
 			return ERROR;
 		}
-				
+
 		String author = (String) ServletActionContext.getRequest().getSession().getAttribute("NickName");
 		if(author == null){
 			addActionError(getText("news.creates.rightCreationError"));
 			return ERROR;
 		}
-		
-		InitialContext ctx;
+
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-		
-		final ProjectAdds proj=(ProjectAdds) ctx.lookup("ProjectAdds/remote");
-		
-		post = new java.sql.Date(System.currentTimeMillis());
-		Long  id = proj.addNews(project, author, post, subj, descr);
-		newsId = id.toString();
-		
-		if(id == -1){
-			addActionMessage(getText("news.creates.creationError"));
-			return ERROR;
-		}
-		
-		addActionMessage(getText("news.creates.creationSuccess1")+" ' "+getSubj()+" ' "+getText("news.creates.creationSuccess2"));
 
-		
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+
+			post = new java.sql.Date(System.currentTimeMillis());
+			Long  id = dEJB.addNews(project, author, post, subj, descr);
+			newsId = id.toString();
+
+			if(id == -1){
+				addActionMessage(getText("news.creates.creationError"));
+				return ERROR;
+			}
+
+			addActionMessage(getText("news.creates.creationSuccess1")+" ' "+getSubj()+" ' "+getText("news.creates.creationSuccess2"));
+
+
 		} catch (NamingException e) {
 			// TODO REDIRECTION ERREUR EJB
 			e.printStackTrace();
@@ -67,11 +67,11 @@ public class AddNews extends ActionSupport {
 	public String getNewsId() {
 		return newsId;
 	}
-	
+
 	public String getPost(){
 		return new SimpleDateFormat("yyyy/MM/dd").format(post);
 	}
-	
+
 	public String getDescr() {
 		return descr;
 	}
@@ -91,6 +91,6 @@ public class AddNews extends ActionSupport {
 		this.subj = subj;
 	}
 
-	
-	
+
+
 }

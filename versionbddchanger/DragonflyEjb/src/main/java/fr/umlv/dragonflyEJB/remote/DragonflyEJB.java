@@ -7,7 +7,6 @@ import javax.ejb.Remote;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyBdd.tables.Project;
-import fr.umlv.dragonflyBdd.tables.User;
 import fr.umlv.dragonflyEJB.beans.MeetingBean;
 import fr.umlv.dragonflyEJB.beans.MessageBean;
 import fr.umlv.dragonflyEJB.beans.NewsBean;
@@ -103,7 +102,13 @@ public interface DragonflyEJB {
 	public List<QuestionResponseBean> getProjectFAQ(String project) throws DragonflyBddException;
 
 	public boolean activateProject(String project) throws DragonflyBddException;
-        
-         public List<ProjectInformationsBean> getMyProject(String UserName) throws DragonflyBddException;
+
+	public List<ProjectInformationsBean> getMyProject(String UserName) throws DragonflyBddException;
+
+	public List<ProjectInformationsBean> getProjectNamesWithDescriptions() throws DragonflyBddException;
+
+	public List<String> getActiveProject() throws DragonflyBddException;
+
+	public List<String> getNotActiveProject() throws DragonflyBddException;
 
 }

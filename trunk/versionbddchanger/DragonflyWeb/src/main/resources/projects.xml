@@ -67,6 +67,11 @@
 			<result name="input">/JSP/ListProject.jsp</result>
 			<result name="success">/JSP/ListProject.jsp</result>
 		</action>
+                
+                <action name="MyProject" class="projects.MyProject">
+			<result name="input">/JSP/projects/MyProject.jsp</result>
+                    <result name="success">/JSP/projects/MyProject.jsp</result>
+                </action>
 		
 		<!-- Adds Actions -->
 		<action name="AddTask!*" method="{1}" class="projects.adds.AddTask">

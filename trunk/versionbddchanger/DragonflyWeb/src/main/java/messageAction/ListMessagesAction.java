@@ -11,13 +11,13 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
-import fr.umlv.dragonflyEJB.managers.tables.MessageEJB;
+import fr.umlv.dragonflyEJB.beans.MessageBean;
 import fr.umlv.dragonflyEJB.services.account.adds.AccountAdds;
 import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
 
 public class ListMessagesAction extends ActionSupport {
 	private String UserID;
-	private List<MessageEJB> mes;
+	private List<MessageBean> mes;
 	private List<Integer> ids;
 	
 	
@@ -31,8 +31,8 @@ public class ListMessagesAction extends ActionSupport {
 			mes=Authen.getMessages(UserID);
 		
 		if(mes.isEmpty()){
-			mes.add(new MessageEJB("test","youself","this is  your first message",new Date(),false));
-			mes.add(new MessageEJB("test22","youself22","this is  your seconde message",new Date(),false));
+			mes.add(new MessageBean("test","youself","this is  your first message",new Date(),false));
+			mes.add(new MessageBean("test22","youself22","this is  your seconde message",new Date(),false));
 		}
 		} catch (DragonflyBddException e) {
 			// TODO REDIRECTION ERREUR BDD
@@ -42,11 +42,11 @@ public class ListMessagesAction extends ActionSupport {
 	}
 	
 
-	public List<MessageEJB> getMes() {
+	public List<MessageBean> getMes() {
 		return mes;
 	}
 
-	public void setMes(List<MessageEJB> mes) {
+	public void setMes(List<MessageBean> mes) {
 		this.mes = mes;
 	}
 

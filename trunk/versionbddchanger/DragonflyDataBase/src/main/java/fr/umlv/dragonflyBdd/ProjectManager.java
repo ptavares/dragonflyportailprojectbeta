@@ -945,6 +945,51 @@ public class ProjectManager {
 		}
 		return true;
 	}
+	/**
+	 *  Remove an user to the named project
+	 *
+	 * @param project The name of the project where the user must be added
+	 * @param mail The id of the user to add to the project
+	 * @return true if the user have been added - false if the user is already in project
+	 * @throws DragonflyBddException
+	 */
+	public boolean removeUserFromProject(String project, String mail) throws DragonflyBddException {
+		Transaction tr =null;
+		Session session = null;
+		try{
+			session = DragonFlyDBManager.openSession();
+			tr = session.beginTransaction();
+			Project proj = (Project)session.get(Project.class,project);
+
+			//Chek if the user exist
+			if(AccountManager.getAccountManagerInstance().getUser(mail)==null)
+				return false;
+
+			List result = session.createFilter(proj.getUsers(), "where this.email='"+mail+"'").list();
+			
+			if(result.size()==0){
+				//User doesn't exist in project
+				return false;
+			}
+			//the user exist in this project
+			User user = (User) result.get(0);
+			//Test if he is the projectLeader
+			if(user.getNickname().equals(proj.getProjectLeader()) ){
+				return false;
+                        }
+			proj.getUsers().remove(user);
+			session.update(proj);
+			tr.commit();
+			return true;
+		}catch (Exception e) {
+			if(tr != null)
+				tr.rollback();
+			throw new DragonflyBddException(e.getMessage());
+		}finally {
+			session.close();
+
+		}
+	}
 
 	/**
 	 * Get a user's project's list.
@@ -982,5 +1027,7 @@ public class ProjectManager {
 			session.close();
 		}
 	}
+
+
 
 }

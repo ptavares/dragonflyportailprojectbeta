@@ -10,6 +10,11 @@ pageEncoding="ISO-8859-1"%>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     </head>
     <script language="JavaScript" src="javascript/maven.js"></script>
+    <script type="text/javascript"> 
+        function showDivManager(){
+            alert('Show Div script');
+        }
+    </script>
     <body>
         
         <div id="maven">            
@@ -22,7 +27,7 @@ pageEncoding="ISO-8859-1"%>
                     <s:text name="maven.InformationGeneral"/>
                     <s:textfield name="mavenInformation.groupId" label="%{getText('maven.groupId')}" id="groupId" />
                     <s:textfield name="mavenInformation.artifactId" label="%{getText('maven.artifactId')}" id="artifactId"/>
-                    <s:select name="mavenInformation.packaging" id="packaging" label="%{getText('maven.packaging')}" list="{'pom','jar','war','ear','ejb'}" onchange="alert('change');"/>                
+                    <s:select name="mavenInformation.packaging" id="packaging" label="%{getText('maven.packaging')}" list="{'pom','jar','war','ear','ejb'}" onchange=""/>                
                     <s:textfield name="mavenInformation.name" id="name" label="%{getText('maven.name')}"/>
                     <s:textfield name="mavenInformation.version" id="version" label="%{getText('maven.version')}"/>
                     <s:textarea name="mavenInformation.description" id="description" label="%{getText('maven.description')}"  cols="50" rows="8" theme="xhtml"/>                    
@@ -32,9 +37,16 @@ pageEncoding="ISO-8859-1"%>
             
             <br/>
             
-            <div id="modules" style="display:inline;">  
-                <jsp:include flush="true" page="Tabs/ModuleTabs.jsp" /><br/>
-            </div>      
+            <s:if test="mavenInformation.packaging == 'pom'">
+                <div id="modules" style="display:inline;">  
+                    <jsp:include flush="true" page="Tabs/ModuleTabs.jsp" /><br/>
+                </div>    
+            </s:if>
+            <s:else>                
+                <div id="modules" style="display:none;">  
+                    <jsp:include flush="true" page="Tabs/ModuleTabs.jsp" /><br/>
+                </div>    
+            </s:else>
             <div id="dependencies">
                 <jsp:include flush="true" page="Tabs/DependencyTabs.jsp"/> <br/>      
             </div>

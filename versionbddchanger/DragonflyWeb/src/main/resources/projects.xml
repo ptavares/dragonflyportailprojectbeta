@@ -106,6 +106,12 @@
             <result name="Error">/JSP/projects/adds/addUser.jsp</result>
         </action>
 
+        	<action name="DeleteUser!*" method="{1}" class="projects.deletes.DeleteUser">
+            <result name="input">/JSP/projects/adds/removeUser.jsp</result>
+            <result name="success">/JSP/projects/adds/removeUser.jsp</result>
+            <result name="error">/JSP/projects/adds/removeUser.jsp</result>
+            <result name="Error">/JSP/projects/adds/removeUser.jsp</result>
+        </action>
 		
 		<!-- Deletes Actions -->
 		<action name="DeleteTask!*" method="{1}" class="projects.deletes.DeleteTask">

@@ -14,46 +14,47 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+</head>
+<body>
+
+<div id="dependencyTabs">        
+    
+    <div id="dojoTable" align="center">
         
-        <div id="dependencyTabs">        
+        <h3 align="center"><s:text name="maven.dependenciesTabTitle"></s:text></h3>
+        
+        <table dojoType="filteringTable" multiple="true" alternateRows="true" id="dependencyTable"
+               cellpadding="0" cellspacing="0" border="1" >	
             
-            <div id="dojoTable" align="center">
-                
-                <h3 align="center"><s:text name="maven.dependenciesTabTitle"></s:text></h3>
-                
-                <table dojoType="filteringTable" multiple="true" alternateRows="true" id="dependencyTable"
-                       cellpadding="0" cellspacing="0" border="1" >	
-                    
-                    <thead>
-                        <tr>
-                            <th field="GroupId" dataType="String" align="center" valign="top"><s:text name="maven.groupId" /></th>
-                            <th field="ArtifactId" dataType="String" align="center" valign="top"><s:text name="maven.artifactId"/></th>
-                            <th field="Version" dataType="String" align="center" valign="top"><s:text name="maven.version"/></th>
-                            <th field="Scope" dataType="String" align="center" valign="top"><s:text name="maven.scope"/></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <s:iterator value="mavenInformation.dependencies">
-                            <tr value="<s:property value="groupId"/>.<s:property value="artifactId"/>">
-                                <td><s:property value="groupId" /></td>
-                                <td><s:property value="artifactId" /></td>
-                                <td><s:property value="version" /></td>
-                                <td><s:property value="scope" /></td>
-                            </tr>
-                        </s:iterator>
-                    </tbody>
-                </table>
-                <br/>
-                <s:url id="showpopup"  action="AddMaven!showDependencyPopup"></s:url>
-                <s:submit align="center" value="%{getText('maven.add')}" href="%{showpopup}" targets="maven" />  
-                <s:submit align="center" value="%{getText('maven.remove')}" href="%{showpopup}" targets="maven" theme="simple"/>  
-                
-            </div>  
-        </div>
-    </body>
+            <thead>
+                <tr>
+                    <th field="GroupId" dataType="String" align="center" valign="top"><s:text name="maven.groupId" /></th>
+                    <th field="ArtifactId" dataType="String" align="center" valign="top"><s:text name="maven.artifactId"/></th>
+                    <th field="Version" dataType="String" align="center" valign="top"><s:text name="maven.version"/></th>
+                    <th field="Scope" dataType="String" align="center" valign="top"><s:text name="maven.scope"/></th>
+                </tr>
+            </thead>
+            <tbody>
+                <s:iterator value="mavenInformation.dependencies">
+                    <tr value="<s:property value="groupId"/>.<s:property value="artifactId"/>">
+                        <td><s:property value="groupId" /></td>
+                        <td><s:property value="artifactId" /></td>
+                        <td><s:property value="version" /></td>
+                        <td><s:property value="scope" /></td>
+                    </tr>
+                </s:iterator>
+            </tbody>
+        </table>
+        <br/>
+        
+        <s:url id="showpopup"  action="AddMaven!showDependencyPopup"></s:url>
+        <s:submit align="right" value="%{getText('maven.add')}" href="%{showpopup}" targets="maven" /> 
+        </table>
+        
+    </div> 
+</div>
+</body>
 </html>

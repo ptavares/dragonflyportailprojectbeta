@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 import org.jboss.annotation.ejb.RemoteBinding;
 
@@ -23,7 +24,7 @@ import fr.umlv.dragonflyEJB.locals.information.InformationManager;
 import fr.umlv.dragonflyEJB.locals.modification.ModificationManager;
 
 @RemoteBinding(jndiBinding = "DragonflyEJB/remote")
-public class DragonflyEJBBean implements DragonflyEJB {
+public @Stateless class DragonflyEJBBean implements DragonflyEJB {
 
 	@EJB
 	private AddsManager addsManager;

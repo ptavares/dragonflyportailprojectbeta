@@ -1,13 +1,14 @@
 package fr.umlv.dragonflyEJB.locals.modification;
 
 import java.util.Date;
+import javax.ejb.Stateless;
 
 import org.jboss.annotation.ejb.LocalBinding;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 
 @LocalBinding(jndiBinding = "ModificationManager/local")
-public class ModificationManagerBean implements ModificationManager {
+public @Stateless class ModificationManagerBean implements ModificationManager {
 	private final static fr.umlv.dragonflyBdd.AccountManager AM_MANAGER;
 
 	static {

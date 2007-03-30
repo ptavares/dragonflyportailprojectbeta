@@ -1,13 +1,14 @@
 package fr.umlv.dragonflyEJB.locals.creation;
 
 import java.util.Date;
+import javax.ejb.Stateless;
 
 import org.jboss.annotation.ejb.LocalBinding;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 
 @LocalBinding(jndiBinding = "CreationManager/local")
-public class CreationManagerBean implements CreationManager {
+public @Stateless class CreationManagerBean implements CreationManager {
 	private final static fr.umlv.dragonflyBdd.AccountManager AM_MANAGER;
 
 	static {

@@ -1,13 +1,14 @@
 package fr.umlv.dragonflyEJB.locals.adds;
 
 import java.util.Date;
+import javax.ejb.Stateless;
 
 import org.jboss.annotation.ejb.LocalBinding;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 
 @LocalBinding(jndiBinding = "AddsManager/local")
-public class AddsManagerBean implements AddsManager {
+public @Stateless class AddsManagerBean implements AddsManager {
 
 	private final static fr.umlv.dragonflyBdd.AccountManager AM_MANAGER;
 

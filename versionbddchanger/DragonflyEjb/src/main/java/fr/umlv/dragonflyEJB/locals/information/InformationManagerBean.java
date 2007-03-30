@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import javax.ejb.Stateless;
 
 import org.jboss.annotation.ejb.LocalBinding;
 
@@ -27,7 +28,7 @@ import fr.umlv.dragonflyEJB.beans.QuestionResponseBean;
 import fr.umlv.dragonflyEJB.beans.TaskBean;
 
 @LocalBinding(jndiBinding = "InformationManager/local")
-public class InformationManagerBean implements InformationManager {
+public @Stateless class InformationManagerBean implements InformationManager {
 	private final static fr.umlv.dragonflyBdd.AccountManager AM_MANAGER;
 
 	static {

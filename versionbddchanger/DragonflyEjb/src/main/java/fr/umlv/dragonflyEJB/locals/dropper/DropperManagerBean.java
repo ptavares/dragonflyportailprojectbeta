@@ -3,9 +3,10 @@ package fr.umlv.dragonflyEJB.locals.dropper;
 import org.jboss.annotation.ejb.LocalBinding;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
+import javax.ejb.Stateless;
 
 @LocalBinding(jndiBinding = "DropperManager/local")
-public class DropperManagerBean implements DropperManager {
+public @Stateless class DropperManagerBean implements DropperManager {
 	private final static fr.umlv.dragonflyBdd.AccountManager AM_MANAGER;
 
 	static {

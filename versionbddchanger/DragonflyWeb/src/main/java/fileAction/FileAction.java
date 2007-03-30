@@ -98,7 +98,6 @@ public class FileAction extends ActionSupport{
 		if (!f.exists()){
 			f.mkdirs();
 		}
-		System.out.println("testetsetsetestestst");
 		myDoc.renameTo(new File(f,myDocFileName));
 		addActionMessage(getText("upload.theFile")+" "+myDocFileName+getText("upload.success"));
 		clean();

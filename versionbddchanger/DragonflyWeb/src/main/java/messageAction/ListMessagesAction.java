@@ -12,35 +12,38 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyEJB.beans.MessageBean;
-import fr.umlv.dragonflyEJB.services.account.adds.AccountAdds;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
 
 public class ListMessagesAction extends ActionSupport {
 	private String UserID;
 	private List<MessageBean> mes;
 	private List<Integer> ids;
-	
-	
-	public String execute() throws NamingException{
+
+
+	public String execute(){
+
 		Map session = ActionContext.getContext().getSession();
 		UserID=(String) session.get("nom");
-		
-		final InitialContext ctx = new InitialContext();
-		final AccountInformation Authen=(AccountInformation) ctx.lookup("AccountInformation/remote");
 		try {
-			mes=Authen.getMessages(UserID);
-		
-		if(mes.isEmpty()){
-			mes.add(new MessageBean("test","youself","this is  your first message",new Date(),false));
-			mes.add(new MessageBean("test22","youself22","this is  your seconde message",new Date(),false));
-		}
+			InitialContext ctx;
+			ctx = new InitialContext();
+
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//final AccountInformation Authen=(AccountInformation) ctx.lookup("AccountInformation/remote");
+			mes=dEjb.getMessages(UserID);
+			if(mes.isEmpty()){
+				mes.add(new MessageBean("test","youself","this is  your first message",new Date(),false));
+				mes.add(new MessageBean("test22","youself22","this is  your seconde message",new Date(),false));
+			}
 		} catch (DragonflyBddException e) {
-			// TODO REDIRECTION ERREUR BDD
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 		return SUCCESS;
 	}
-	
+
 
 	public List<MessageBean> getMes() {
 		return mes;
@@ -68,29 +71,31 @@ public class ListMessagesAction extends ActionSupport {
 		System.out.println("here");
 		this.ids = ids;
 	}
-	
-	public String Supprimer() throws NamingException{
+
+	public String Supprimer(){
 		Map session = ActionContext.getContext().getSession();
 		UserID=(String) session.get("nom");
-		final InitialContext ctx = new InitialContext();
-		AccountAdds AA=(AccountAdds) ctx.lookup("AccountAdds/remote");
-		System.out.println("here-----------"+UserID);
-		
 		try {
-		if(ids!=null){
-			for(int i=0;i<ids.size();i++){
-				System.out.println(ids.size());
-				if(ids.get(i)!=null)
-					
-						AA.removeMessage(UserID, ids.get(i));
-					
+		final InitialContext ctx = new InitialContext();
+		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+		//AccountAdds AA=(AccountAdds) ctx.lookup("AccountAdds/remote");
+		System.out.println("here-----------"+UserID);
+
+			if(ids!=null){
+				for(int i=0;i<ids.size();i++){
+					System.out.println(ids.size());
+					if(ids.get(i)!=null)
+
+						dEjb.removeMessage(UserID, ids.get(i));
+
+				}
 			}
-		}
-		final AccountInformation Authen=(AccountInformation) ctx.lookup("AccountInformation/remote");
-		mes=Authen.getMessages(UserID);
-		
+			final AccountInformation Authen=(AccountInformation) ctx.lookup("AccountInformation/remote");
+			mes=Authen.getMessages(UserID);
+
 		} catch (DragonflyBddException e) {
-			// TODO REDIRECTION ERREUR BDD
+			e.printStackTrace();
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 		return SUCCESS;

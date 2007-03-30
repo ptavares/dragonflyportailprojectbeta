@@ -3,9 +3,12 @@ package authentification;
 import java.util.ArrayList;
 
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 import fr.umlv.dragonflyEJB.services.account.adds.AccountAdds;
 import fr.umlv.dragonflyEJB.services.account.creation.AccountCreation;
 
@@ -13,11 +16,15 @@ import fr.umlv.dragonflyEJB.services.account.creation.AccountCreation;
 public class Inscription extends ActionSupport {
 
 	
-	public String execute() throws Exception {
+	public String execute()  {
 		
-		final InitialContext ctx = new InitialContext();
-		final AccountCreation creator=(AccountCreation) ctx.lookup("AccountCreation/remote");
-		int result=creator.createAccount(email, username, password);
+		InitialContext ctx;
+		try {
+			ctx = new InitialContext();
+	
+		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+		//final AccountCreation creator=(AccountCreation) ctx.lookup("AccountCreation/remote");
+		int result=dEjb.createAccount(email, username, password);
 		if (result==1){
 			addActionError(getText("register.emailExist"));
 			return ("error");
@@ -30,6 +37,12 @@ public class Inscription extends ActionSupport {
 		final AccountAdds AA= (AccountAdds) ctx.lookup("AccountAdds/remote");
 		AA.createMessage("Dragonfly", getEmail(), "Welcome", "Welcome To Dragonfly Web Portail. Have Fun !");
 		addActionMessage(getText("register.success"));
+		
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (DragonflyBddException e) {
+			e.printStackTrace();
+		}
 		return SUCCESS;
 	}
 	

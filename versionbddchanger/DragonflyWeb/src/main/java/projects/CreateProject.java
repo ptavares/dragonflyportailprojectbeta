@@ -3,74 +3,87 @@ package projects;
 import java.sql.Date;
 
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 
 
 public class CreateProject extends ActionSupport{
-	
+
 	private String nomProjet=getText("createproject.projectName");
 	private String descriptif;
 	private Date date = new Date(System.currentTimeMillis());
 	private String resume=getText("createproject.resume1");
-	
-	public String execute() throws Exception {
-				
+
+	public String execute() {
+
 		String creator = (String) ServletActionContext.getRequest().getSession().getAttribute("nom");
-		
+
 		if(!checknomProjet(getNomProjet())){
 			addActionError(getText("createproject.nameError"));
 			nomProjet = getText("createproject.projectName");
 			return ERROR;
 		}
-			
-		
-		final InitialContext ctx = new InitialContext();
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		//final ProjectCreation proj=(ProjectCreation) ctx.lookup("ProjectCreation/remote");
-		
-		int val;
-				
-		Date dateTest = new Date(System.currentTimeMillis());
-		
-		if(getDate()!=null && getDate().before(dateTest)){
-			addActionError(getText("createproject.dateError"));
-			return ERROR;
-		}
-		
-		if(getDate()==null && getDescriptif().length()==0){
-			val = dEjb.createProject(getNomProjet(), creator, getResume());
-		}
-		else
-			if(getDescriptif().length()==0){
-				val = dEjb.createProject(getNomProjet(), creator, getResume(), getDate());
+
+
+		InitialContext ctx;
+		try {
+			ctx = new InitialContext();
+
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//final ProjectCreation proj=(ProjectCreation) ctx.lookup("ProjectCreation/remote");
+
+			int val;
+
+			Date dateTest = new Date(System.currentTimeMillis());
+
+			if(getDate()!=null && getDate().before(dateTest)){
+				addActionError(getText("createproject.dateError"));
+				return ERROR;
 			}
-			else{
-				val = dEjb.createProject(getNomProjet(), creator, getDate(), getResume(), getDescriptif());
+
+			if(getDate()==null && getDescriptif().length()==0){
+				val = dEjb.createProject(getNomProjet(), creator, getResume());
 			}
-		if(val == 1){
-			addActionError(getText("createproject.projectExist"));
-			return ERROR;
+			else
+				if(getDescriptif().length()==0){
+					val = dEjb.createProject(getNomProjet(), creator, getResume(), getDate());
+				}
+				else{
+					val = dEjb.createProject(getNomProjet(), creator, getDate(), getResume(), getDescriptif());
+				}
+			if(val == 1){
+				addActionError(getText("createproject.projectExist"));
+				return ERROR;
+			}
+			else if(val==2){
+				addActionError(getText("createproject.projectCreationError"));
+				return ERROR;
+			}
+
+			addActionMessage(getText("createproject.success1")+" ' "+getNomProjet()+" ' "+getText("createproject.success2"));
+
+			String r = getNomProjet()+"admin";
+			//final AccountAdds add = (AccountAdds)ctx.lookup("AccountAdds/remote");
+			dEjb.addRole(creator, r);
+
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DragonflyBddException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else if(val==2){
-			addActionError(getText("createproject.projectCreationError"));
-			return ERROR;
-		}
-		
-		addActionMessage(getText("createproject.success1")+" ' "+getNomProjet()+" ' "+getText("createproject.success2"));
-				
-		String r = getNomProjet()+"admin";
-		//final AccountAdds add = (AccountAdds)ctx.lookup("AccountAdds/remote");
-		dEjb.addRole(creator, r);
 		return SUCCESS;		
 	}
 
 	private boolean checknomProjet(String nomProjet) {
-		
+
 		for(int i=0; i<nomProjet.length() ; i++){
 			if(!Character.isLetterOrDigit(nomProjet.charAt(i)))
 				if(!(nomProjet.charAt(i)=='_'))		
@@ -89,7 +102,7 @@ public class CreateProject extends ActionSupport{
 	public void setResume(String resume) {
 		this.resume = resume;
 	}
-	
+
 	public String getDescriptif() {
 		return descriptif;
 	}

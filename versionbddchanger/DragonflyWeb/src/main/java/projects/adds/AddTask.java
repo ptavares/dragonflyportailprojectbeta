@@ -14,7 +14,7 @@ import projects.adds.tools.Tools;
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
-import fr.umlv.dragonflyEJB.services.project.adds.ProjectAdds;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 
 public class AddTask extends ActionSupport {
 
@@ -47,15 +47,15 @@ public class AddTask extends ActionSupport {
 		}
 		
 				
-		InitialContext ctx;
+		final InitialContext ctx;
 
 		try {
 			ctx = new InitialContext();
 
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			
 			post = new java.sql.Date(System.currentTimeMillis());
 			
-			final ProjectAdds proj=(ProjectAdds) ctx.lookup("ProjectAdds/remote");
-
 			String[] tab = getStart().split("/");
 			String[] tab2 = getEnd().split("/");
 
@@ -77,7 +77,7 @@ public class AddTask extends ActionSupport {
 				return ERROR;
 			}
 			
-			Long  id = proj.addTask(p,author,getDescr(),getSubj(),post, debut, fin);	
+			Long  id = dEJB.addTask(p,author,getDescr(),getSubj(),post, debut, fin);	
 			taskId = id.toString();
 			
 			if(id == -1){

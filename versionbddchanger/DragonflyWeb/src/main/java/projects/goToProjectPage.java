@@ -16,6 +16,7 @@ import fr.umlv.dragonflyEJB.beans.NewsBean;
 import fr.umlv.dragonflyEJB.beans.ProjectInformationsBean;
 import fr.umlv.dragonflyEJB.beans.QuestionResponseBean;
 import fr.umlv.dragonflyEJB.beans.TaskBean;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
 import fr.umlv.dragonflyEJB.services.project.information.ProjectInformation;
 import fr.umlv.dragonflyEJB.services.project.maven.MavenInformation;
@@ -25,7 +26,7 @@ public class goToProjectPage extends ActionSupport {
 	public String ProName;
 
 	public ProjectInformationsBean informationBean = null;
-        public MavenInformation mavenInformation = null;
+	public MavenInformation mavenInformation = null;
 	public List<TaskBean> tasks = null;
 	public List<MeetingBean> meetings = null;
 	public List<NewsBean> news = null;
@@ -52,13 +53,13 @@ public class goToProjectPage extends ActionSupport {
 		}
 
 		if(name!=null){
-			InitialContext ctx;
 			List<String> list=null;
+
+			final InitialContext ctx;
 			try {
 				ctx = new InitialContext();
-
-				final AccountInformation info = (AccountInformation)ctx.lookup("AccountInformation/remote");
-				list = info.getUserRoles(name);
+				final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+				list = dEJB.getUserRoles(name);
 			} catch (NamingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -89,48 +90,66 @@ public class goToProjectPage extends ActionSupport {
 		return SUCCESS;
 	}
 
-            public String submit() throws Exception{
-        System.out.println("SUBMIT");
-        Map<String, String> session = ActionContext.getContext().getSession();
-        ProName=session.get("project");
-        System.out.println("------------>project "+ProName);
-        System.out.println("groupId "+getMavenInformation().getGroupId());
-        System.out.println("artifactId "+getMavenInformation().getArtifactId());
-        System.out.println("packaging "+getMavenInformation().getPackaging());
-        System.out.println("name "+getMavenInformation().getName());
-        System.out.println("version "+getMavenInformation().getVersion());
-        System.out.println("description "+getMavenInformation().getDescription());
-        if(getMavenInformation().getDependencies()!=null)
-            System.out.println("Dependencies not null "+getMavenInformation().getDependencies().size());
-        final InitialContext ctx = new InitialContext();
-        System.out.println("Before");
-        final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
-        mavenManager.submitGeneralInformation(mavenInformation,ProName);
-//        MavenInformation info = mavenManager.loadMavenFile(ProName);
-//        info.setGroupId(getMavenInformation().getGroupId());
-//        info.setArtifactId(getMavenInformation().getArtifactId());
-//        info.setPackaging(getMavenInformation().getPackaging());
-//        info.setName(getMavenInformation().getName());
-//        info.setVersion(getMavenInformation().getVersion());
-//        info.setDescription(getMavenInformation().getDescription());
-        return null;
-    }
-        
-        
+	public String submit() {
+
+		//System.out.println("SUBMIT");
+		Map<String, String> session = ActionContext.getContext().getSession();
+		ProName=session.get("project");
+//		System.out.println("------------>project "+ProName);
+//		System.out.println("groupId "+getMavenInformation().getGroupId());
+//		System.out.println("artifactId "+getMavenInformation().getArtifactId());
+//		System.out.println("packaging "+getMavenInformation().getPackaging());
+//		System.out.println("name "+getMavenInformation().getName());
+//		System.out.println("version "+getMavenInformation().getVersion());
+//		System.out.println("description "+getMavenInformation().getDescription());
+		if(getMavenInformation().getDependencies()!=null)
+			System.out.println("Dependencies not null "+getMavenInformation().getDependencies().size());
+
+		final InitialContext ctx;
+		try {
+			ctx = new InitialContext();
+			//System.out.println("Before");
+			final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
+			mavenManager.submitGeneralInformation(mavenInformation,ProName);
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+//		MavenInformation info = mavenManager.loadMavenFile(ProName);
+//		info.setGroupId(getMavenInformation().getGroupId());
+//		info.setArtifactId(getMavenInformation().getArtifactId());
+//		info.setPackaging(getMavenInformation().getPackaging());
+//		info.setName(getMavenInformation().getName());
+//		info.setVersion(getMavenInformation().getVersion());
+//		info.setDescription(getMavenInformation().getDescription());
+		return null;
+	}
+
+
 	/**
 	 * Redirect to Information Page
 	 * @return
 	 * @throws NamingException 
 	 */
-	public String goToInformationPage() throws NamingException{
+	public String goToInformationPage() {
 		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
-		final InitialContext ctx = new InitialContext();
-		final ProjectInformation pi=(ProjectInformation) ctx.lookup("ProjectInformation/remote");
+
+		final InitialContext ctx;
+
 		try {
-			informationBean = pi.getProjectInformations(ProName);
+			ctx = new InitialContext();
+
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			informationBean = dEJB.getProjectInformations(ProName);
+
 		} catch (DragonflyBddException e) {
 			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
 			e.printStackTrace();
+
+		} catch (NamingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		return "informationPage";
 	}
@@ -172,7 +191,7 @@ public class goToProjectPage extends ActionSupport {
 	 */
 	public String goToMavenPage(){
 		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
-                initMaven();
+		initMaven();
 		return "mavenPage";
 	}
 	/**
@@ -227,22 +246,22 @@ public class goToProjectPage extends ActionSupport {
 		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
 		return "addMeetingPage";
 	}
-        
-        public String goToAddModulePage(){
+
+	public String goToAddModulePage(){
 		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
-                return "addModule";
-        }
-        
-        public String goToAddDependencyPage(){
+		return "addModule";
+	}
+
+	public String goToAddDependencyPage(){
 		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
-                return "addDependency";
-        }
-        
-        public String goToAddPluginPage(){
+		return "addDependency";
+	}
+
+	public String goToAddPluginPage(){
 		userStatus = Integer.parseInt((String) ActionContext.getContext().getSession().get("userStatus"));
-                return "addPlugin";
-        }      
-                
+		return "addPlugin";
+	}      
+
 
 	/**
 	 * Redirect AddFAQ Page 
@@ -280,10 +299,10 @@ public class goToProjectPage extends ActionSupport {
 	private void initTasks() {
 		try {
 			final InitialContext ctx = new InitialContext();
-			final ProjectInformation proj = (ProjectInformation) ctx.lookup("ProjectInformation/remote");
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 
 
-			tasks = proj.getProjectTasks(ProName);
+			tasks = dEJB.getProjectTasks(ProName);
 			if(tasks == null)
 				tasks = new ArrayList<TaskBean>();
 
@@ -299,10 +318,10 @@ public class goToProjectPage extends ActionSupport {
 	private void initMeetings()  {
 		try {
 			final InitialContext ctx = new InitialContext();
-			final ProjectInformation proj = (ProjectInformation) ctx.lookup("ProjectInformation/remote");
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 
 
-			meetings = proj.getProjectMeetings(ProName);
+			meetings = dEJB.getProjectMeetings(ProName);
 			if(meetings == null)
 				meetings = new ArrayList<MeetingBean>();
 
@@ -314,34 +333,34 @@ public class goToProjectPage extends ActionSupport {
 			e.printStackTrace();
 		}
 	}
-        
-        private void initMaven() {
-            try {
-                    final InitialContext ctx = new InitialContext();
-                    System.out.println("Before");
-                    final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
-                    mavenInformation = mavenManager.loadMavenFile(ProName);                
+
+	private void initMaven() {
+		try {
+			final InitialContext ctx = new InitialContext();
+			//System.out.println("Before");
+			final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
+			mavenInformation = mavenManager.loadMavenFile(ProName);                
 		} catch (NamingException e) {
 			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
 			e.printStackTrace();
 		}
-        }
+	}
 
 
 	private void initNews()  {
 		try {
 			final InitialContext ctx = new InitialContext();
-			final ProjectInformation proj = (ProjectInformation) ctx.lookup("ProjectInformation/remote");
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 
 
-			news = proj.getProjectNews(ProName);
+			news = dEJB.getProjectNews(ProName);
 			if(news == null)
 				news = new ArrayList<NewsBean>();
 
 		} catch (DragonflyBddException e) {
 //			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
-            e.printStackTrace();
-        } catch (NamingException e) {
+			e.printStackTrace();
+		} catch (NamingException e) {
 //			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
 			e.printStackTrace();
 		}
@@ -350,77 +369,77 @@ public class goToProjectPage extends ActionSupport {
 	private void initFAQ() {
 		try {
 			final InitialContext ctx = new InitialContext();
-			final ProjectInformation proj = (ProjectInformation) ctx.lookup("ProjectInformation/remote");
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 
-			questionsResponse = proj.getProjectFAQ(ProName);
+			questionsResponse = dEJB.getProjectFAQ(ProName);
 			if(questionsResponse == null)
 				questionsResponse = new ArrayList<QuestionResponseBean>();
 
 		} catch (DragonflyBddException e) {
 //			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
-            e.printStackTrace();
-        } catch (NamingException e) {
-            // TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
-            e.printStackTrace();
-        }
-    }
-    
-     
-    
-    public String getProName() {
-        return ProName;
-    }
-    public void setProName(String proName) {
-        ProName = proName;
-    }
-    
-    public ProjectInformationsBean getInformationBean() {
-        return informationBean;
-    }
-    
-    public void setInformationBean(ProjectInformationsBean informationBean) {
-        this.informationBean = informationBean;
-    }
-    
-    public List<MeetingBean> getMeetings() {
-        return meetings;
-    }
-    
-    public void setMeetings(List<MeetingBean> meetings) {
-        this.meetings = meetings;
-    }
-    
-    public List<NewsBean> getNews() {
-        return news;
-    }
-    
-    public void setNews(List<NewsBean> news) {
-        this.news = news;
-    }
-    
-    public List<QuestionResponseBean> getQuestionsResponse() {
-        return questionsResponse;
-    }
-    
-    public void setQuestionsResponse(List<QuestionResponseBean> questionsResponse) {
-        this.questionsResponse = questionsResponse;
-    }
-    
-    public List<TaskBean> getTasks() {
-        return tasks;
-    }
-    
-    public void setTasks(List<TaskBean> tasks) {
-        this.tasks = tasks;
-    }
+			e.printStackTrace();
+		} catch (NamingException e) {
+			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
+			e.printStackTrace();
+		}
+	}
 
-    public MavenInformation getMavenInformation() {
-        return mavenInformation;
-    }
 
-    public void setMavenInformation(MavenInformation mavenInformation) {
-        this.mavenInformation = mavenInformation;
-    }
+
+	public String getProName() {
+		return ProName;
+	}
+	public void setProName(String proName) {
+		ProName = proName;
+	}
+
+	public ProjectInformationsBean getInformationBean() {
+		return informationBean;
+	}
+
+	public void setInformationBean(ProjectInformationsBean informationBean) {
+		this.informationBean = informationBean;
+	}
+
+	public List<MeetingBean> getMeetings() {
+		return meetings;
+	}
+
+	public void setMeetings(List<MeetingBean> meetings) {
+		this.meetings = meetings;
+	}
+
+	public List<NewsBean> getNews() {
+		return news;
+	}
+
+	public void setNews(List<NewsBean> news) {
+		this.news = news;
+	}
+
+	public List<QuestionResponseBean> getQuestionsResponse() {
+		return questionsResponse;
+	}
+
+	public void setQuestionsResponse(List<QuestionResponseBean> questionsResponse) {
+		this.questionsResponse = questionsResponse;
+	}
+
+	public List<TaskBean> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<TaskBean> tasks) {
+		this.tasks = tasks;
+	}
+
+	public MavenInformation getMavenInformation() {
+		return mavenInformation;
+	}
+
+	public void setMavenInformation(MavenInformation mavenInformation) {
+		this.mavenInformation = mavenInformation;
+	}
 	public int getUserStatus() {
 		return userStatus;
 	}

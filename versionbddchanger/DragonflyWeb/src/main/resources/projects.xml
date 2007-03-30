@@ -167,16 +167,5 @@
 			<result name="success">JSP/newIndex.jsp</result>
 		</action>
 
-		<action name="ModifEmail" method="goEmail"
-			class="projects.account.ChangeEmail">
-			<result name="success">JSP/changeEmail.jsp</result>
-		</action>
-
-		<action name="ChangeEmail!*" method="{1}"
-			class="projects.account.ChangeEmail">
-			<result name="input">JSP/profile.jsp</result>
-			<result name="error">JSP/changeEmail.jsp</result>
-			<result name="success">JSP/newIndex.jsp</result>
-		</action>
 	</package>
 </struts>

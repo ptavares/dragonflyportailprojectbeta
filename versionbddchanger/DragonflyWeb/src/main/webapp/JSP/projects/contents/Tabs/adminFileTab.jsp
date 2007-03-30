@@ -12,7 +12,7 @@
 	<div class="bout-gauche">
 	<div class="bout-droit">
 	<div class="fond">
-	<h3><s:text name="administration.subtitleMeeting"></s:text></h3>
+	<h3><s:text name="administration.subtitleFile"></s:text></h3>
 	</div>
 	</div>
 	</div>

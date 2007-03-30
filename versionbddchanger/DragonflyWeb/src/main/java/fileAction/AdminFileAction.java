@@ -84,9 +84,9 @@ public class AdminFileAction extends  ActionSupport {
 		if (!f2.exists()){
 			f2.mkdirs();
 		}
-		System.out.println(f==null);
-		System.out.println(f2==null);
-		System.out.println(file);
+//		System.out.println(f==null);
+//		System.out.println(f2==null);
+//		System.out.println(file);
 		File des=new File(f2,file);
 		if (des.exists())
 			des.delete();

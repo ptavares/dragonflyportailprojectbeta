@@ -21,7 +21,7 @@
 	</div>
 
 
-<div id="listPane" dojoType="ContentPane" sizeMin="20" sizeShare="20" style="" align="center">
+<div dojoType="ContentPane" sizeMin="20" sizeShare="20" style="" align="center">
 <table width=90%>
 <s:iterator value="meetings">
 	<s:url id="deleteMeeting" action="DeleteMeeting">

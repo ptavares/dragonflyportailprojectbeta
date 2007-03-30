@@ -1,39 +1,53 @@
 package projects.account;
 
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import fr.umlv.dragonflyEJB.services.account.modification.AccountModification;
+import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 
 public class ChangeNickname extends ActionSupport {
 	private String newLogin=null;
-	
-	public String execute() throws Exception{
-		System.out.println("Nickname :"+getNewLogin());
-		if((newLogin == null) || (newLogin.length()==0))
-		{
+
+	public String execute() {
+		//System.out.println("Nickname :"+getNewLogin());
+		if((newLogin == null) || (newLogin.length()==0)){
 			return ERROR;
-			
 		}
+
 		String oldNickname = (String) ServletActionContext.getRequest().getSession().getAttribute("nom");
-		final InitialContext ctx = new InitialContext();
-		AccountModification modif = (AccountModification)ctx.lookup("AccountModification/remote");
-		boolean val = modif.changeNickmane(oldNickname, newLogin);
-		if(val==false){
-			addFieldError("changeError","");
-			return ERROR;
+
+		final InitialContext ctx;
+		try {
+			ctx = new InitialContext();
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			
+			boolean val = dEJB.changeNickmane(oldNickname, newLogin);
+			
+			if(val==false){
+				addActionError(getText("change.changeNicknameError"));
+				return ERROR;
+			}
+			addActionMessage(getText("change.changeNicknameErrorSuccess"));
+			
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DragonflyBddException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		addActionMessage(getText("nickname.success"));	
 		return "changeOk";
 	}
 
 	public String goNickname(){
 		return SUCCESS;
 	}
-	
+
 	public String getNewLogin() {
 		return newLogin;
 	}
@@ -42,9 +56,9 @@ public class ChangeNickname extends ActionSupport {
 	public void setNewLogin(String newLogin) {
 		this.newLogin = newLogin;
 	}
-	
+
 	public String init(){
 		return SUCCESS;
 	}
-	
+
 }

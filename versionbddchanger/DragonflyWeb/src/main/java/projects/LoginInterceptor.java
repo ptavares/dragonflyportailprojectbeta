@@ -3,7 +3,6 @@ package projects;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionInvocation;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
 public class LoginInterceptor implements Interceptor {

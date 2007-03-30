@@ -26,7 +26,7 @@ public class DownloadAction2 implements Action {
 
 	public String execute() throws Exception {
 		HttpServletResponse response=ServletActionContext.getResponse();
-		System.out.println(getF());
+		//System.out.println(getF());
 		response.setHeader("Content-Disposition","attachment;"+getF()+";");
 		return SUCCESS;
 	}

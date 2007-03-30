@@ -9,7 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyEJB.beans.ProjectInformationsBean;
-import fr.umlv.dragonflyEJB.services.project.information.ProjectInformation;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 public class PopProject  extends ActionSupport{
 
 
@@ -22,11 +22,11 @@ public class PopProject  extends ActionSupport{
 		try {
 			ctx = new InitialContext();
 
-			final ProjectInformation pi=(ProjectInformation) ctx.lookup("ProjectInformation/remote");
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 
 			projects = new ArrayList<ProjectInformationsBean>();
 
-			projects = pi.getProjectNamesWithDescriptions();
+			projects = dEJB.getProjectNamesWithDescriptions();
 		} catch (DragonflyBddException e) {
 //			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
 			e.printStackTrace();
@@ -34,7 +34,7 @@ public class PopProject  extends ActionSupport{
 //			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
 			e1.printStackTrace();
 		}
-		
+
 		return SUCCESS;
 	}
 

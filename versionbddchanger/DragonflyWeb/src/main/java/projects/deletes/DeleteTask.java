@@ -6,20 +6,20 @@ import javax.naming.NamingException;
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
-import fr.umlv.dragonflyEJB.services.project.modification.ProjectModification;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 
 public class DeleteTask extends ActionSupport {
 	private String delete;
 	private String ProName;
 
 	public String execute() {			
-		InitialContext ctx;
+		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
 
-			final ProjectModification proj=(ProjectModification) ctx.lookup("ProjectModification/remote");
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 
-			if(!proj.removeTask(getProName(), getDelete())){
+			if(!dEJB.removeTask(getProName(), getDelete())){
 				addActionError(getText("tasks.remove.deleteError"));
 				return ERROR;
 			}

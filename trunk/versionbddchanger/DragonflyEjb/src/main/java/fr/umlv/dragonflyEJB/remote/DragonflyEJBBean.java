@@ -96,7 +96,7 @@ public @Stateless class DragonflyEJBBean implements DragonflyEJB {
 	public List<Project> getAllProject() throws DragonflyBddException {
 		return informationManager.getAllProject();
 	}
-	
+
 	public List<MessageBean> getMessages(String UserID) throws DragonflyBddException {
 		return informationManager.getMessages(UserID);
 	}
@@ -158,7 +158,16 @@ public @Stateless class DragonflyEJBBean implements DragonflyEJB {
 		return informationManager.getNotActiveUsers();
 	}
 
-        public List<ProjectInformationsBean> getMyProject(String UserName) throws DragonflyBddException{
-            return informationManager.getMyProject(UserName);
-        }
+	public List<ProjectInformationsBean> getMyProject(String UserName) throws DragonflyBddException{
+		return informationManager.getMyProject(UserName);
+	}
+	public List<ProjectInformationsBean> getProjectNamesWithDescriptions() throws DragonflyBddException {
+		return informationManager.getProjectNamesWithDescriptions();
+	}
+	public List<String> getActiveProject() throws DragonflyBddException {
+		return informationManager.getActiveProject();
+	}
+	public List<String> getNotActiveProject() throws DragonflyBddException {
+		return informationManager.getNotActiveProject();
+	}
 }

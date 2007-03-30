@@ -227,4 +227,22 @@ public @Stateless class InformationManagerBean implements InformationManager {
 	public boolean isPasswordCorrect(String mail, String passwd) throws DragonflyBddException {
 		return AM_MANAGER.isPasswordCorrect(mail,passwd);
 	}
+        
+        public List<ProjectInformationsBean> getMyProject(String UserNname)throws DragonflyBddException{
+            List<Project> list = PM_MANAGER.getUserProjects(UserNname);
+            List<ProjectInformationsBean> projects = new ArrayList<ProjectInformationsBean>();
+            
+            for(Project project : list){
+                ProjectInformationsBean bean = new ProjectInformationsBean();
+                bean.setResume(project.getDescription().getResume());
+                bean.setName(project.getName());
+                bean.setProjectLeader(project.getProjectLeader());
+                bean.setCreationDate(formatter.format(project.getCreationDate()));
+                projects.add(bean);
+            }
+            System.out.println("Username "+UserNname);
+            System.out.println("EJB List "+list.size());
+            System.out.println("EJB Project "+projects.size());
+            return projects;
+        }
 }

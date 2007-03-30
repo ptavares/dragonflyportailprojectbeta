@@ -1,5 +1,6 @@
 package fr.umlv.dragonflyEJB.locals.information;
 
+import fr.umlv.dragonflyBdd.utils.DragonFlyDBManager;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -53,5 +54,7 @@ public interface InformationManager {
 	public List<String> getActiveProject() throws DragonflyBddException;
 
 	public List<String> getNotActiveProject() throws DragonflyBddException;
+        
+        public List<ProjectInformationsBean> getMyProject(String UserNname) throws DragonflyBddException;
 
 }

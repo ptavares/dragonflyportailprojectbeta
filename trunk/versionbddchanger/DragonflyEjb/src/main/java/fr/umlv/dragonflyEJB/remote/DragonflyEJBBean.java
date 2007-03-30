@@ -158,5 +158,7 @@ public @Stateless class DragonflyEJBBean implements DragonflyEJB {
 		return informationManager.getNotActiveUsers();
 	}
 
-
+        public List<ProjectInformationsBean> getMyProject(String UserName) throws DragonflyBddException{
+            return informationManager.getMyProject(UserName);
+        }
 }

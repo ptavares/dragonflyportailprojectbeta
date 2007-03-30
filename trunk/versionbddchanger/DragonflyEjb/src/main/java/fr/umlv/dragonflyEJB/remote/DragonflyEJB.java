@@ -103,5 +103,7 @@ public interface DragonflyEJB {
 	public List<QuestionResponseBean> getProjectFAQ(String project) throws DragonflyBddException;
 
 	public boolean activateProject(String project) throws DragonflyBddException;
+        
+         public List<ProjectInformationsBean> getMyProject(String UserName) throws DragonflyBddException;
 
 }

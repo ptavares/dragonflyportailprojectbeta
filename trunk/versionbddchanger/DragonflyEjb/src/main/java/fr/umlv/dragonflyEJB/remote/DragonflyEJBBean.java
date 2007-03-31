@@ -42,8 +42,8 @@ public @Stateless class DragonflyEJBBean implements DragonflyEJB {
 	private InformationManager informationManager;
 	@EJB
 	private ModificationManager modificationManager;
-        @EJB
-        private MavenManager mavenManager;
+	@EJB
+    private MavenManager mavenManager;
 
 	public boolean activateProject(String project) throws DragonflyBddException {
 		return modificationManager.activateProject(project);

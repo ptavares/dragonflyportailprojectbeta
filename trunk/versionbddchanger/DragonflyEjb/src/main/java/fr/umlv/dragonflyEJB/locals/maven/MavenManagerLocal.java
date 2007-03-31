@@ -9,7 +9,8 @@
 
 package fr.umlv.dragonflyEJB.locals.maven;
 
-import org.jboss.annotation.ejb.Local;
+import javax.ejb.Local;
+
 
 /**
  *

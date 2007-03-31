@@ -21,47 +21,38 @@ public class SendMessageAction extends ActionSupport {
 	private String subject;
 	private String content;
 	private String UserID;
-	
+
 	public String go(){
+		return INPUT;
+	}
+	public String goContact(){
 		return INPUT;
 	}
 	public String execute(){
 		String test="sended failed";
 		Map session = ActionContext.getContext().getSession();
 		UserID=(String) session.get("nom");
-//		if (UserID!=null){
-//			System.out.println(UserID);
-//		}
-//		if(subject!=null){
-//			System.out.println(subject);
-//		} 
-//		if(address!=null){
-//			System.out.println(address);
-//		}
-//		if(content!=null){
-//			System.out.println(content);
-//		}
 		try {
-		final InitialContext ctx = new InitialContext();
-		final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
-		//final AccountAdds AA= (AccountAdds) ctx.lookup("AccountAdds/remote");
-		boolean havesended;
-		try {
-			havesended = dEjb.createMessage(UserID, address, subject, content);
-		
-		if (havesended){
-			test="your Message has been sended";
-		}
-		HttpServletResponse response = ServletActionContext.getResponse();
-		
-			//System.out.println("begin response");
-			PrintWriter out = response.getWriter();
-			out.println(test);
-			out.flush();
-			//System.out.println("end response");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			final InitialContext ctx = new InitialContext();
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			//final AccountAdds AA= (AccountAdds) ctx.lookup("AccountAdds/remote");
+			boolean havesended;
+			try {
+				havesended = dEjb.createMessage(UserID, address, subject, content);
+
+				if (havesended){
+					test="your Message has been sended";
+				}
+				HttpServletResponse response = ServletActionContext.getResponse();
+
+				//System.out.println("begin response");
+				PrintWriter out = response.getWriter();
+				out.println(test);
+				out.flush();
+				//System.out.println("end response");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} catch (DragonflyBddException e1) {
 			e1.printStackTrace();
 		} catch (NamingException e) {
@@ -69,6 +60,32 @@ public class SendMessageAction extends ActionSupport {
 		}
 		return null;
 	}
+	public String sendContact(){
+		String adres="admin@dragonfly.com";
+		InitialContext ctx;
+		if (UserID==null||UserID.equals(""))
+		{
+			addActionError("Please Enter Your E-Mail.");
+			return INPUT;
+		}
+		try {
+			ctx = new InitialContext();
+			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			boolean havesended = dEjb.createMessage(UserID, adres, subject, content);
+			if (havesended){
+				addActionMessage("Your Message has been sended");
+				return SUCCESS;
+			}
+				
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (DragonflyBddException e) {
+			e.printStackTrace();
+		}
+		return INPUT;
+	}
+
+
 	public String getAddress() {
 		return address;
 	}

@@ -78,7 +78,8 @@
 <div id="link">
 <a href="javascript:ajaxpage('general/general.html', 'rightcolumn');">General</a><br/>
 <a href="javascript:ajaxpage('general/about.html', 'rightcolumn');">About</a><br/>
-<a href="javascript:ajaxpage('general/contact.html', 'rightcolumn');">Contact</a><br/>
+<s:url id="contact" action="contact" />
+<s:a href="%{contact}" targets="rightcolumn">Contact</s:a><br/>
 <a href="javascript:ajaxpage('general/faq.html', 'rightcolumn');">FAQ</a><br/>
 <s:url id="help" action="Help" />
 <s:a href="%{help}" targets="rightcolumn" ><s:text name="newindex.help"/></s:a><br/>

@@ -95,6 +95,9 @@ public class AccountManagerTest extends TestCase {
 		//Change nickname
 		assertTrue(am.changeNickmane(mail, "NewNickname"));
 
+		//Nickname Allready exist now
+		assertFalse(am.changeNickmane(mail, "NewNickname"));
+		
 		//Test
 		assertEquals(am.getUserNickname(mail),"NewNickname");
 

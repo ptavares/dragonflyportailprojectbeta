@@ -45,13 +45,13 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
+                <configuration>     
                     <componentProperties>
                         <drop>true</drop>
                     </componentProperties>
                 </configuration>
             </plugin>
-            <plugin>
+           <!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jboss-maven-plugin</artifactId>
                 <executions>
@@ -68,7 +68,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

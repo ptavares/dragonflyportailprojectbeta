@@ -12,7 +12,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyEJB.beans.MessageBean;
 import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
-import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
 
 public class ListMessagesAction extends ActionSupport {
 	private String UserID;
@@ -88,8 +87,7 @@ public class ListMessagesAction extends ActionSupport {
 
 				}
 			}
-			final AccountInformation Authen=(AccountInformation) ctx.lookup("AccountInformation/remote");
-			mes=Authen.getMessages(UserID);
+			mes=dEjb.getMessages(UserID);
 
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();

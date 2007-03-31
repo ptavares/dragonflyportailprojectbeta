@@ -9,8 +9,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
-import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
-import fr.umlv.dragonflyEJB.services.account.modification.AccountModification;
 
 public class ChangePasswd extends ActionSupport {
 	private String oldPasswd;

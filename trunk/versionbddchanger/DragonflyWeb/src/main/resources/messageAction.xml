@@ -2,24 +2,30 @@
 <!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
-
-<struts>
-
-    <package name="messageAction" namespace="/" extends="struts-default">
-
-	<action name="ListMessages" class="messageAction.ListMessagesAction">
-		<result name="success">/JSP/Messages.jsp</result>
-	</action>  
-	<action name="sendMessage"  class="messageAction.SendMessageAction">
-	<result name="input">/JSP/SendMessage.jsp</result>
-	<result name="success">/JSP/MessageSended.jsp</result>
-	</action> 
-	<action name="goSendMessage" method="go" class="messageAction.SendMessageAction">
-	<result name="input">/JSP/SendMessage.jsp</result>
-	</action> 
-	<action name="supprimerMessage" class="messageAction.ListMessagesAction" method="Supprimer">
-	<result name="success">/JSP/Messages.jsp</result>
-	</action>
-
-    </package>
-</struts>
+        
+        <struts>
+        	
+        	<package name="messageAction" namespace="/" extends="struts-default">
+        		
+        		<action name="ListMessages" class="messageAction.ListMessagesAction">
+        			<result name="success">/JSP/Messages.jsp</result>
+        		</action>  
+        		<action name="sendMessage"  class="messageAction.SendMessageAction">
+        			<result name="input">/JSP/SendMessage.jsp</result>
+        			<result name="success">/JSP/MessageSended.jsp</result>
+        		</action> 
+        		<action name="goSendMessage" method="go" class="messageAction.SendMessageAction">
+        			<result name="input">/JSP/SendMessage.jsp</result>
+        		</action> 
+        		<action name="supprimerMessage" class="messageAction.ListMessagesAction" method="Supprimer">
+        			<result name="success">/JSP/Messages.jsp</result>
+        		</action>
+        		<action name="contact" class="messageAction.SendMessageAction" method="goContact">
+        			<result name="input">/JSP/general/contact.jsp</result>
+        		</action>
+        		<action name="sendContact" class="messageAction.SendMessageAction" method="sendContact">
+        			<result name="input">/JSP/general/contact.jsp</result>
+        			<result name="success">/JSP/success.jsp</result>
+        		</action>
+        	</package>
+        </struts>

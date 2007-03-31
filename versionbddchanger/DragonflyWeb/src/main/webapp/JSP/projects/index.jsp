@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="css/mystyle.css" type="text/css">
 
-<title>Project Home Page</title>
+<title><%= session.getAttribute("project") %> <s:text name="tabbed.homepage"></s:text> </title>
 
 <s:head theme="ajax"/>
 </head>

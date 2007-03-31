@@ -22,7 +22,7 @@
 		<tr>
 			<th field="subject" dataType="String" valign="top" width="200px"><s:text name="table.subject"></s:text> </th>
 		<th field="description" dataType="String" valign="top" width="320px"><s:text name="table.description"></s:text></th>
-		<th field="postDate" dataType="Date" sort="desc" format="%d %b %Y" valign="top">Post Date</th>
+		<th field="postDate" dataType="Date" sort="desc" format="%d %b %Y" valign="top"><s:text name="table.postDate"></th>
 		</tr>
 	</thead>
 	<tbody>

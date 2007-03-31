@@ -11,7 +11,8 @@
 
 <div id="meetings">
 
-<div class="information"><s:text name="meetings.title"></s:text><%=session.getAttribute("project")%>
+<div class="information">
+<s:text name="meetings.title"></s:text><%=session.getAttribute("project")%>
 </div>
 <br>
 <br>

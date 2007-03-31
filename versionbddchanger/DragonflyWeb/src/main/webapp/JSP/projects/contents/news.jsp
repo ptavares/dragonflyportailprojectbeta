@@ -20,7 +20,7 @@
 	
 	<li><s:text name="news.create"></s:text>
 	<s:a href="%{addNews}" targets="news">
-	<input type="image" src="img/project/create.gif" alt="<s:text name="news.create"/>"/>
+	<input type="image" src="img/project/createnews.gif" alt="<s:text name="news.create"/>"/>
 	</s:a>
 	</li>
 </ul>

@@ -57,15 +57,15 @@
 <tr>
 <td>
 <div dojoType="TitlePane" label="<s:text name="newindex.projects"/>" labelNodeClass="DMTitle" containerNodeClass="content">
-
+<div id="link">
 <s:url id="createproject" action="CreateProject!input" />
 <s:a href="%{createproject}" targets="rightcolumn" ><s:text name="newindex.createProject"></s:text></s:a><br/>
 <s:url id="myproject" action="MyProject" />
-<s:a href="%{myproject}" targets="rightcolumn" >My Project</s:a><br/>
+<s:a href="%{myproject}" targets="rightcolumn" ><s:text name="newindex.myProject"></s:text></s:a><br/>
 <s:url id="listproject" action="ListProjects" />
 <s:a href="%{listproject}" targets="rightcolumn" ><s:text name="newindex.listProject"></s:text></s:a><br/>
 </div>
-
+</div>
 </td>
 </tr>
 </table>
@@ -75,6 +75,7 @@
 <tr>
 <td>
 <div dojoType="TitlePane" label="<s:text name="newindex.information"/>" labelNodeClass="DMTitle" containerNodeClass="content">
+<div id="link">
 <a href="javascript:ajaxpage('general/general.html', 'rightcolumn');">General</a><br/>
 <a href="javascript:ajaxpage('general/about.html', 'rightcolumn');">About</a><br/>
 <a href="javascript:ajaxpage('general/contact.html', 'rightcolumn');">Contact</a><br/>
@@ -82,6 +83,7 @@
 <s:url id="help" action="Help" />
 <s:a href="%{help}" targets="rightcolumn" ><s:text name="newindex.help"/></s:a><br/>
 <br>
+</div>
 </div>
 </td>
 </tr>

@@ -9,7 +9,16 @@
 </head>
 <body>
 
-<a href="videoHelp/createAccount.html" target="_blank"><s:text name="help.createAccount"></s:text> </a><br/>
-<a href="videoHelp/createProject.html" target="_blank"><s:text name="help.createProject"></s:text> </a><br/>
+
+<div id="title">
+<div id="title-left">
+<div id="title-right">
+<h1><s:text name="help.title"></s:text></h1>
+</div>
+</div>
+</div>
+
+<s:text name="help.createAccount"></s:text><a href="videoHelp/createAccount.html" target="_blank"><img src="img/video.gif" border="0"/> </a><br/>
+<s:text name="help.createProject"></s:text><a href="videoHelp/createProject.html" target="_blank"><img src="img/video.gif" border="0"/> </a><br/>
 </body>
 </html>

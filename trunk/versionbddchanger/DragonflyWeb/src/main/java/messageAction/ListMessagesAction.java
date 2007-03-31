@@ -34,8 +34,10 @@ public class ListMessagesAction extends ActionSupport {
 			
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return SUCCESS;
 	}
@@ -91,8 +93,10 @@ public class ListMessagesAction extends ActionSupport {
 
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return SUCCESS;
 	}

@@ -7,6 +7,10 @@
         	
         	<package name="messageAction" namespace="/" extends="struts-default">
         		
+        		
+        		<global-results>
+        			<result name="actionError">/JSP/ActionError.jsp</result>
+        		</global-results>
         		<action name="ListMessages" class="messageAction.ListMessagesAction">
         			<result name="success">/JSP/Messages.jsp</result>
         		</action>  

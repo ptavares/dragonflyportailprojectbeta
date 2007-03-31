@@ -72,11 +72,11 @@ public class AddMeeting extends ActionSupport {
 
 
 		} catch (NamingException e1) {
-			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
 			e1.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
-			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
 			e.printStackTrace();
+			return "actionError";
 		}
 		return INPUT;
 	}

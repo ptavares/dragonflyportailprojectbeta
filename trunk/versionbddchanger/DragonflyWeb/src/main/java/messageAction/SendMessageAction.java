@@ -52,11 +52,14 @@ public class SendMessageAction extends ActionSupport {
 				//System.out.println("end response");
 			} catch (IOException e) {
 				e.printStackTrace();
+				return "actionError";
 			}
 		} catch (DragonflyBddException e1) {
 			e1.printStackTrace();
+			return "actionError";
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return null;
 	}
@@ -79,8 +82,10 @@ public class SendMessageAction extends ActionSupport {
 				
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return INPUT;
 	}

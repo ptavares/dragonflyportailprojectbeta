@@ -31,11 +31,11 @@ public class MyProject extends ActionSupport {
 			// System.out.println("List "+projects.size());
 
 		} catch (DragonflyBddException e) {
-//			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
 			e.printStackTrace();
+			return "actionError";
 		} catch (NamingException e1) {
-//			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
 			e1.printStackTrace();
+			return "actionError";
 		}
 		return SUCCESS;
 	}

@@ -4,6 +4,9 @@
 
 <struts>
     <package name="administration" namespace="/" extends="struts-default">
+        <global-results>
+            <result name="actionError">/JSP/ActionError.jsp</result>
+        </global-results>
         
         <action name="Admin!*" method="{1}" class="administration.Admin" >
             <result name="projectList">/JSP/admin/contents/projectList.jsp</result>

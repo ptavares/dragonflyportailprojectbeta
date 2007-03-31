@@ -28,11 +28,11 @@ public class DeleteMeeting extends ActionSupport {
 			}
 
 		} catch (NamingException e) {
-			// TODO REDIRECTION ERREUR EJB
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
-			// TODO REDIRECTION ERREUR BDD
 			e.printStackTrace();
+			return "actionError";
 		}
 
 		return INPUT;

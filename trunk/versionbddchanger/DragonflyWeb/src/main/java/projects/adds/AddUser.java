@@ -42,11 +42,11 @@ public class AddUser extends ActionSupport {
 			addActionMessage(getText("administration.addUser.succes"));
 
 		} catch (NamingException e) {
-			// TODO REDIRECTION ERREUR EJB
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
-			// TODO REDIRECTION ERREUR BDD
 			e.printStackTrace();
+			return "actionError";
 		}
 		return SUCCESS;
 	}

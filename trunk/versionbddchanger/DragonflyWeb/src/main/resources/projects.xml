@@ -14,7 +14,9 @@
 			<result name="login" type="redirect-action">Error</result>
 			<result name="changFaild">/JSP/error2.jsp</result>
 			<result name="changeOk">/JSP/success.jsp</result>
+			<result name="actionError">/JSP/ActionError.jsp</result>
 		</global-results>
+			
 
 		<action name="Error" class="projects.LoginError">
 			<result name="error">/JSP/error.jsp</result>

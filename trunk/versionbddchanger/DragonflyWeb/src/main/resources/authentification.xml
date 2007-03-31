@@ -12,6 +12,9 @@
                 <interceptor-ref name="defaultStack"/>
             </interceptor-stack>
   		</interceptors>
+        <global-results>
+            <result name="actionError">/JSP/ActionError.jsp</result>
+        </global-results>
  		<action name="Login" class="authentification.Login">
             <result name="input">/JSP/newIndex.jsp</result>
             <result name= "success">/JSP/formulaire/log.jsp</result>

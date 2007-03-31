@@ -38,8 +38,10 @@ public class Inscription extends ActionSupport {
 
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return SUCCESS;
 	}

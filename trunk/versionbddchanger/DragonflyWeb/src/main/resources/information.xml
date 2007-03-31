@@ -4,7 +4,9 @@
 
 <struts>
     <package name="information" namespace="/" extends="struts-default">
-      
+        <global-results>
+            <result name="actionError">/JSP/ActionError.jsp</result>
+        </global-results>
         <action name="Help" class="information.Help" >
             <result name="success">/JSP/help.jsp</result>            
         </action>

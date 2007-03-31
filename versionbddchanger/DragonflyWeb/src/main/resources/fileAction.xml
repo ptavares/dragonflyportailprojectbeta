@@ -8,6 +8,10 @@
 			<result name="success">test/upload.jsp</result>
 		</action>
 	-->
+		
+		<global-results>
+			<result name="actionError">/JSP/ActionError.jsp</result>
+		</global-results>
 		<action name="goDownload" class="fileAction.FileAction"
 			method="goload">
 			<result name="success">

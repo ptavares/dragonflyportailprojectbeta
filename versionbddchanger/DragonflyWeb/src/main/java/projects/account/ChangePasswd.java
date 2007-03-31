@@ -63,11 +63,11 @@ public class ChangePasswd extends ActionSupport {
 			addActionMessage(getText("passwdChange.success"));
 
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "actionError";
 		}
 		return "changeOk";
 	}

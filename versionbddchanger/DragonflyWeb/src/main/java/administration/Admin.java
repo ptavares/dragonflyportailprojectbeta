@@ -70,8 +70,10 @@ public class Admin extends ActionSupport{
 			initAccountList();
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return "accountList";
 	}
@@ -88,10 +90,13 @@ public class Admin extends ActionSupport{
 			initAccountList();
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return "accountList";
 	}
@@ -108,10 +113,13 @@ public class Admin extends ActionSupport{
 			initProjectList();
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return "projectList";
 	}
@@ -129,20 +137,23 @@ public class Admin extends ActionSupport{
 			initProjectList();
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return "projectList";
 	}
-	public String ActiveAccountTab() throws Exception{
+	public String ActiveAccountTab(){
 		//initActiveAccountList();
 		init();
 		return "activeAccountTab";
 	}
 
-	public String NotActiveAccountTab() throws Exception{
+	public String NotActiveAccountTab(){
 		//initNotActiveAccountList();
 		init();
 		return "notActiveAccountTab";

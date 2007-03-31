@@ -58,11 +58,11 @@ public class goToProjectPage extends ActionSupport {
 				final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 				list = dEJB.getUserRoles(name);
 			} catch (NamingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return "actionError";
 			} catch (DragonflyBddException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return "actionError";
 			}
 
 			if(list == null) {
@@ -109,8 +109,8 @@ public class goToProjectPage extends ActionSupport {
 			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 			dEJB.submitGeneralInformation(mavenInformation,ProName);
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "actionError";
 		}
 
 //		MavenInformation info = mavenManager.loadMavenFile(ProName);
@@ -141,12 +141,12 @@ public class goToProjectPage extends ActionSupport {
 			informationBean = dEJB.getProjectInformations(ProName);
 
 		} catch (DragonflyBddException e) {
-			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
 			e.printStackTrace();
+			return "actionError";
 
 		} catch (NamingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			return "actionError";
 		}
 		return "informationPage";
 	}
@@ -304,10 +304,8 @@ public class goToProjectPage extends ActionSupport {
 				tasks = new ArrayList<TaskBean>();
 
 		} catch (DragonflyBddException e) {
-//			TODO A REDIRIGER VERS PAGE D'ERREUR NIVO BDD
 			e.printStackTrace();
 		} catch (NamingException e) {
-			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
 			e.printStackTrace();
 		}
 	}

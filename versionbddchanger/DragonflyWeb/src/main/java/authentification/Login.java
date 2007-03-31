@@ -42,8 +42,10 @@ public class Login  {
 			}
 		} catch (NamingException e) {
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
+			return "actionError";
 		}
 		return INPUT;
 	}

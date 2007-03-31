@@ -40,11 +40,11 @@ public class DeleteUser extends ActionSupport{
             }
             addActionMessage(getText("administration.removeUser.succes"));
         } catch (NamingException e) {
-            // TODO REDIRECTION ERREUR EJB
             e.printStackTrace();
+            return "actionError";
         } catch (DragonflyBddException e) {
-            // TODO REDIRECTION ERREUR BDD
             e.printStackTrace();
+            return "actionError";
         }
         return SUCCESS;
     }

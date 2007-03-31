@@ -73,11 +73,11 @@ public class CreateProject extends ActionSupport{
 			dEjb.addRole(creator, r);
 
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "actionError";
 		}
 		return SUCCESS;		
 	}

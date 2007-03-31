@@ -35,11 +35,11 @@ public class ChangeNickname extends ActionSupport {
 			addActionMessage(getText("change.changeNicknameErrorSuccess"));
 			
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "actionError";
 		}
 		return "changeOk";
 	}

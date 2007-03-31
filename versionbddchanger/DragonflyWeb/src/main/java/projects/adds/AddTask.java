@@ -88,11 +88,11 @@ public class AddTask extends ActionSupport {
 			addActionMessage(getText("tasks.creates.creationSuccess1")+" ' "+getSubj()+" ' "+getText("tasks.creates.creationSuccess2"));
 
 		} catch (NamingException e) {
-			// TODO REDIRECTION ERREUR EJB
 			e.printStackTrace();
+			return "actionError";
 		} catch (DragonflyBddException e) {
-			// TODO REDIRECTION ERREUR BDD
 			e.printStackTrace();
+			return "actionError";
 		}
 
 		return INPUT;

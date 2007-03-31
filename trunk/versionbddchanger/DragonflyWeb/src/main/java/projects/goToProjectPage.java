@@ -11,22 +11,19 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
+import fr.umlv.dragonflyEJB.beans.MavenInformationBean;
 import fr.umlv.dragonflyEJB.beans.MeetingBean;
 import fr.umlv.dragonflyEJB.beans.NewsBean;
 import fr.umlv.dragonflyEJB.beans.ProjectInformationsBean;
 import fr.umlv.dragonflyEJB.beans.QuestionResponseBean;
 import fr.umlv.dragonflyEJB.beans.TaskBean;
 import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
-import fr.umlv.dragonflyEJB.services.account.information.AccountInformation;
-import fr.umlv.dragonflyEJB.services.project.information.ProjectInformation;
-import fr.umlv.dragonflyEJB.services.project.maven.MavenInformation;
-import fr.umlv.dragonflyEJB.services.project.maven.MavenManager;
 
 public class goToProjectPage extends ActionSupport {
 	public String ProName;
 
 	public ProjectInformationsBean informationBean = null;
-	public MavenInformation mavenInformation = null;
+	public MavenInformationBean mavenInformation = null;
 	public List<TaskBean> tasks = null;
 	public List<MeetingBean> meetings = null;
 	public List<NewsBean> news = null;
@@ -109,8 +106,8 @@ public class goToProjectPage extends ActionSupport {
 		try {
 			ctx = new InitialContext();
 			//System.out.println("Before");
-			final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
-			mavenManager.submitGeneralInformation(mavenInformation,ProName);
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			dEJB.submitGeneralInformation(mavenInformation,ProName);
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -338,8 +335,8 @@ public class goToProjectPage extends ActionSupport {
 		try {
 			final InitialContext ctx = new InitialContext();
 			//System.out.println("Before");
-			final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
-			mavenInformation = mavenManager.loadMavenFile(ProName);                
+			final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+			mavenInformation = dEJB.loadMavenFile(ProName);                
 		} catch (NamingException e) {
 			// TODO A REDIRIGER VERS PAGE D'ERREUR NIVO EJB
 			e.printStackTrace();
@@ -433,11 +430,11 @@ public class goToProjectPage extends ActionSupport {
 		this.tasks = tasks;
 	}
 
-	public MavenInformation getMavenInformation() {
+	public MavenInformationBean getMavenInformation() {
 		return mavenInformation;
 	}
 
-	public void setMavenInformation(MavenInformation mavenInformation) {
+	public void setMavenInformation(MavenInformationBean mavenInformation) {
 		this.mavenInformation = mavenInformation;
 	}
 	public int getUserStatus() {

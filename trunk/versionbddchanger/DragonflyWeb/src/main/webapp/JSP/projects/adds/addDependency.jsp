@@ -29,7 +29,7 @@ pageEncoding="ISO-8859-1"%>
                 <s:textfield name="artifactId" label="ArtifactId" id="%{getText('maven.artifactId')}"/>    
                 <s:textfield name="version" label="Version" id="%{getText('maven.version')}"/>
                 <s:select name="scope" label="%{getText('maven.scope')}" list="{'compile','provided','test'}"  id="scope"/>
-                <s:submit onclick="alert('createDependency');" value="%{getText('maven.add')}"></s:submit>
+                <s:submit align='center' onclick="alert('createDependency');" value="%{getText('maven.add')}"></s:submit>
                 
             </s:form>
             

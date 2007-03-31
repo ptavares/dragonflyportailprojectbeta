@@ -11,17 +11,13 @@ package projects.adds;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import fr.umlv.dragonflyEJB.services.project.maven.DependencyInformation;
-import fr.umlv.dragonflyEJB.services.project.maven.MavenInformation;
-import fr.umlv.dragonflyEJB.services.project.maven.MavenManager;
-import fr.umlv.dragonflyEJB.services.project.maven.PluginInformation;
-import java.io.IOException;
-import java.io.PrintWriter;
+import fr.umlv.dragonflyEJB.beans.DependencyInformationBean;
+import fr.umlv.dragonflyEJB.beans.MavenInformationBean;
+import fr.umlv.dragonflyEJB.beans.PluginInformationBean;
+import fr.umlv.dragonflyEJB.locals.maven.MavenManager;
+import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
 import java.util.Map;
 import javax.naming.InitialContext;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.maven.Plugin;
-import org.apache.struts2.ServletActionContext;
 
 /**
  *
@@ -63,13 +59,13 @@ public class AddMaven extends ActionSupport{
 //		System.out.println("scope "+getScope());
 		final InitialContext ctx = new InitialContext();
 		// System.out.println("Before");
-		final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
-		DependencyInformation depInfo = new DependencyInformation();
+		final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+		DependencyInformationBean depInfo = new DependencyInformationBean();
 		depInfo.setGroupId(getGroupId());
 		depInfo.setArtifactId(getArtifactId());
 		depInfo.setVersion(getVersion());
 		depInfo.setScope(getScope());
-		mavenManager.addDependency(depInfo,ProName);
+		dEJB.addDependency(depInfo,ProName);
 
 //		String result = getGroupId()+","+getArtifactId()+","+getVersion()+","+getScope();
 //		System.out.println("Result : "+result);
@@ -96,12 +92,12 @@ public class AddMaven extends ActionSupport{
 //		System.out.println("version "+getVersion());
 		final InitialContext ctx = new InitialContext();
 //		System.out.println("Before");
-		final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
-		PluginInformation plugInfo = new PluginInformation();
+		final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+		PluginInformationBean plugInfo = new PluginInformationBean();
 		plugInfo.setGroupId(getGroupId());
 		plugInfo.setArtifactId(getArtifactId());
 		plugInfo.setVersion(getVersion());
-		mavenManager.addPlugin(plugInfo,ProName);
+		dEJB.addPlugin(plugInfo,ProName);
 
 //		String result = getGroupId()+","+getArtifactId()+","+getVersion();
 //		System.out.println("Result : "+result);
@@ -126,8 +122,8 @@ public class AddMaven extends ActionSupport{
 //		System.out.println("module "+getModule());
 		final InitialContext ctx = new InitialContext();
 		//System.out.println("Before");
-		final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
-		mavenManager.addModule(getModule(),ProName);
+		final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+		dEJB.addModule(getModule(),ProName);
 
 //		HttpServletResponse response = ServletActionContext.getResponse();
 //		try {
@@ -155,8 +151,8 @@ public class AddMaven extends ActionSupport{
 //		System.out.println("description "+getDescription());
 		final InitialContext ctx = new InitialContext();
 		//System.out.println("Before");
-		final MavenManager mavenManager =(MavenManager) ctx.lookup("MavenManager/remote");
-		MavenInformation info = mavenManager.loadMavenFile(ProName);
+		final DragonflyEJB dEJB=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
+		MavenInformationBean info = dEJB.loadMavenFile(ProName);
 
 //		HttpServletResponse response = ServletActionContext.getResponse();
 //		try {

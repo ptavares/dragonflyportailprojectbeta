@@ -37,16 +37,16 @@ pageEncoding="ISO-8859-1"%>
             
             <br/>
             
-            <s:if test="mavenInformation.packaging == 'pom'">
+           <!-- <s:if test="mavenInformation.packaging == 'pom'">-->
                 <div id="modules" style="display:inline;">  
                     <jsp:include flush="true" page="Tabs/ModuleTabs.jsp" /><br/>
                 </div>    
-            </s:if>
-            <s:else>                
+            <!--</s:if>
+            <s:else>       -->         
                 <div id="modules" style="display:none;">  
                     <jsp:include flush="true" page="Tabs/ModuleTabs.jsp" /><br/>
                 </div>    
-            </s:else>
+           <!-- </s:else>-->
             <div id="dependencies">
                 <jsp:include flush="true" page="Tabs/DependencyTabs.jsp"/> <br/>      
             </div>

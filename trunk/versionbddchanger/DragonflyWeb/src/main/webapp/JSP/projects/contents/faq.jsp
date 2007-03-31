@@ -21,7 +21,7 @@
 	
 	<li><s:text name="faq.create"></s:text>
 	<s:a href="%{addFAQ}" targets="faq">
-	<input type="image" src="img/project/create.gif" alt="<s:text name="faq.create"/>"/>
+	<input type="image" src="img/project/createfaq.gif" alt="<s:text name="faq.create"/>"/>
 	</s:a>
 	</li>		
 </ul>

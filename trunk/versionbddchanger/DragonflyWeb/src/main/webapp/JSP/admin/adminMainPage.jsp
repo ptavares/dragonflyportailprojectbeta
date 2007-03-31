@@ -10,7 +10,7 @@ pageEncoding="ISO-8859-1"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/mystyle.css" type="text/css">
         
-        <title><s:text name="%{getText('admin.Title')}" /></title>
+        <title><s:text name="%{getText('admin.title')}" /></title>
         
         <s:head theme="ajax"/>
     </head>

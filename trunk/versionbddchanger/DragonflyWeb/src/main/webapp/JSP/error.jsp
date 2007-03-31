@@ -19,10 +19,8 @@
 </div>
 
 
-<s:fielderror />
-
-<s:url id="HomePage" action="Login.action"/>
-<s:a href="%{HomePage}">Return to HOME PAGE</s:a>
+<s:actionerror />
+<s:fielderror/>
 
 </body>
 </html>

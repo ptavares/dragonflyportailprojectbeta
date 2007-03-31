@@ -33,7 +33,7 @@
 			<tr id="<s:property value="QRId"/>">
 				
 				<td>
-				<div class="meetingImage" />
+				<div class="faqImage" />
 				</td>
 				<td>
 

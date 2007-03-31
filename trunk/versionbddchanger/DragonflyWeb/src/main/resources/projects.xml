@@ -69,7 +69,8 @@
 		</action>
                 
                 <action name="MyProject" class="projects.MyProject">
-			<result name="input">/JSP/projects/MyProject.jsp</result>
+                <interceptor-ref name="LoginError"></interceptor-ref>
+					<result name="input">/JSP/projects/MyProject.jsp</result>
                     <result name="success">/JSP/projects/MyProject.jsp</result>
                 </action>
 		

@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <s:div id="tt">
+<div id="link">
 <s:if test="#session.login != 'true'">
 	<div dojoType="TitlePane" label="<s:text name="newindex.login"/>" labelNodeClass="DMTitle"
 		containerNodeClass="content"><s:div id="tt">
@@ -42,5 +43,5 @@
 	 	<a href="<%=request.getContextPath()%>/Logout.action"><s:text name="newindex.logout"></s:text></a>
 	</s:else>
 
-
+</div>
 </s:div>

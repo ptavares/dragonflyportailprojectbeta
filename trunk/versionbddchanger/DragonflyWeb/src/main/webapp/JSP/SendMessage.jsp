@@ -10,6 +10,8 @@
 <s:head theme="ajax"/>
 </head>
 <body>
+
+
 <div id="form">
 <s:form action="#">
 	<s:textfield id="address" name="address" label="To" size="45"/>

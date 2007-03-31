@@ -1,6 +1,5 @@
 package messageAction;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,10 +31,7 @@ public class ListMessagesAction extends ActionSupport {
 			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 			//final AccountInformation Authen=(AccountInformation) ctx.lookup("AccountInformation/remote");
 			mes=dEjb.getMessages(UserID);
-			if(mes.isEmpty()){
-				mes.add(new MessageBean("test","youself","this is  your first message",new Date(),false));
-				mes.add(new MessageBean("test22","youself22","this is  your seconde message",new Date(),false));
-			}
+			
 		} catch (DragonflyBddException e) {
 			e.printStackTrace();
 		} catch (NamingException e) {

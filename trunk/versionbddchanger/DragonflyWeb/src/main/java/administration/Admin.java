@@ -20,8 +20,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyEJB.remote.DragonflyEJB;
-import fr.umlv.dragonflyEJB.services.account.modification.AccountModification;
-import fr.umlv.dragonflyEJB.services.project.information.ProjectInformation;
 
 /**
  *
@@ -123,10 +121,10 @@ public class Admin extends ActionSupport{
 		final InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-
 			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 			// final ProjectDropper pd=(ProjectDropper) ctx.lookup("ProjectDropper/remote");
 			dEjb.removeProject(adddelObject);
+			
 			//Ajout delete project
 			initProjectList();
 		} catch (NamingException e) {

@@ -65,7 +65,7 @@ public class SendMessageAction extends ActionSupport {
 		InitialContext ctx;
 		if (UserID==null||UserID.equals(""))
 		{
-			addActionError("Please Enter Your E-Mail.");
+			addActionError(getText("sendmessage.error"));
 			return INPUT;
 		}
 		try {
@@ -73,7 +73,7 @@ public class SendMessageAction extends ActionSupport {
 			final DragonflyEJB dEjb=(DragonflyEJB) ctx.lookup("DragonflyEJB/remote");
 			boolean havesended = dEjb.createMessage(UserID, adres, subject, content);
 			if (havesended){
-				addActionMessage("Your Message has been sended");
+				addActionMessage(getText("sendmessage.succes"));
 				return SUCCESS;
 			}
 				

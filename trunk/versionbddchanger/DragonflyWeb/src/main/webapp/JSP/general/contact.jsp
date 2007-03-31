@@ -8,11 +8,21 @@
 <title>Contact</title>
 </head>
 <body>
+
+<body>
+<div id="title">
+<div id="title-left">
+<div id="title-right">
+<h1><s:text name="newindex.contact.title"></s:text></h1>
+</div>
+</div>
+</div> 
+
 <s:actionerror/>
 <s:form action="sendContact">
-<s:textfield name="UserID" label="Your E-mail" size="45"/>
-<s:textfield  name="subject" label="Subject" size="45"/>
-<s:textarea  name="content" rows="8" cols="45" label="Content" theme="xhtml"/>
+<s:textfield name="UserID" label="%{getText('newindex.contact.email')}" size="45"/>
+<s:textfield  name="subject" label="%{getText('newindex.contact.subjet')}" size="45"/>
+<s:textarea  name="content" rows="8" cols="45" label="%{getText('newindex.contact.content')}" theme="xhtml"/>
 <s:submit value="send" targets="rightcolumn"/>
 </s:form>
 </body>

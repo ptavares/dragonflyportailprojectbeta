@@ -9,7 +9,7 @@ package fr.umlv.dragonflyEJB.beans;
  */
 public class ProjectInformationsBean {
 
-        private boolean actived;
+    private boolean actived;
 	private String projectLeader;
 	private String creationDate;
 	private String resume;

@@ -90,7 +90,6 @@ public @Stateless class InformationManagerBean implements InformationManager {
 		List<Project> projects = getAllProject();
 		for(Project p:projects){
 			if(!p.isActived()){
-				System.out.println("EJB "+p.getName());
 				reponse.add(p.getName());
 			}
 		}
@@ -104,7 +103,6 @@ public @Stateless class InformationManagerBean implements InformationManager {
 		for(User user : users)
 			if(!user.isActived())
 				reponse.add(user.getEmail());
-		System.out.println("fin getNotActiveUsers");
 		return reponse;
 	}
 	public List<QuestionResponseBean> getProjectFAQ(String project) throws DragonflyBddException {
@@ -238,11 +236,9 @@ public @Stateless class InformationManagerBean implements InformationManager {
                 bean.setName(project.getName());
                 bean.setProjectLeader(project.getProjectLeader());
                 bean.setCreationDate(formatter.format(project.getCreationDate()));
+                bean.setActived(project.isActived());
                 projects.add(bean);
             }
-            System.out.println("Username "+UserNname);
-            System.out.println("EJB List "+list.size());
-            System.out.println("EJB Project "+projects.size());
             return projects;
         }
 }

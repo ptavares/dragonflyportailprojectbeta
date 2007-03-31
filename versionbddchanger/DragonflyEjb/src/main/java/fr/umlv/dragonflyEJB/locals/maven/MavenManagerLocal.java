@@ -7,15 +7,15 @@
  * and open the template in the editor.
  */
 
-package fr.umlv.dragonflyEJB.services.project.maven;
+package fr.umlv.dragonflyEJB.locals.maven;
 
-import javax.ejb.Remote;
+import org.jboss.annotation.ejb.Local;
 
 /**
  *
  * @author J-Paul
  */
-@Remote
-public interface MavenManagerRemote extends MavenManager{
+@Local
+public interface MavenManagerLocal extends MavenManager{
     
 }

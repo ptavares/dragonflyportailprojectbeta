@@ -7,9 +7,12 @@ import javax.ejb.Remote;
 
 import fr.umlv.dragonflyBdd.exception.DragonflyBddException;
 import fr.umlv.dragonflyBdd.tables.Project;
+import fr.umlv.dragonflyEJB.beans.DependencyInformationBean;
+import fr.umlv.dragonflyEJB.beans.MavenInformationBean;
 import fr.umlv.dragonflyEJB.beans.MeetingBean;
 import fr.umlv.dragonflyEJB.beans.MessageBean;
 import fr.umlv.dragonflyEJB.beans.NewsBean;
+import fr.umlv.dragonflyEJB.beans.PluginInformationBean;
 import fr.umlv.dragonflyEJB.beans.ProjectInformationsBean;
 import fr.umlv.dragonflyEJB.beans.QuestionResponseBean;
 import fr.umlv.dragonflyEJB.beans.TaskBean;
@@ -110,5 +113,19 @@ public interface DragonflyEJB {
 	public List<String> getActiveProject() throws DragonflyBddException;
 
 	public List<String> getNotActiveProject() throws DragonflyBddException;
+
+	/*******************************************************************/
+	/**           		        Maven                             **/
+	/********************************************************************/
+                
+        public void submitGeneralInformation(MavenInformationBean mavenInformation,String projectName);
+        
+        public void addDependency(DependencyInformationBean dependency,String projectName);    
+        
+        public void addModule(String module,String projectName);
+        
+        public void addPlugin(PluginInformationBean plugin,String projectName);
+        
+        public MavenInformationBean loadMavenFile(String projectName);
 
 }

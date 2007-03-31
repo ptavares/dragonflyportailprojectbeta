@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package fr.umlv.dragonflyEJB.services.project.maven;
+package fr.umlv.dragonflyEJB.beans;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ import java.io.Serializable;
  *
  * @author J-Paul
  */
-public class PluginInformation  implements Serializable{
+public class PluginInformationBean  implements Serializable{
     private String artifactId;
     private String groupId;
     private String version;

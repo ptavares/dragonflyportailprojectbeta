@@ -1,5 +1,8 @@
 package fr.umlv.dragonflyEJB.remote;
 
+import fr.umlv.dragonflyEJB.beans.DependencyInformationBean;
+import fr.umlv.dragonflyEJB.beans.MavenInformationBean;
+import fr.umlv.dragonflyEJB.beans.PluginInformationBean;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +25,7 @@ import fr.umlv.dragonflyEJB.locals.creation.CreationManager;
 import fr.umlv.dragonflyEJB.locals.dropper.DropperManager;
 import fr.umlv.dragonflyEJB.locals.information.InformationManager;
 import fr.umlv.dragonflyEJB.locals.modification.ModificationManager;
+import fr.umlv.dragonflyEJB.locals.maven.MavenManager;
 
 @RemoteBinding(jndiBinding = "DragonflyEJB/remote")
 public @Stateless class DragonflyEJBBean implements DragonflyEJB {
@@ -38,6 +42,8 @@ public @Stateless class DragonflyEJBBean implements DragonflyEJB {
 	private InformationManager informationManager;
 	@EJB
 	private ModificationManager modificationManager;
+        @EJB
+        private MavenManager mavenManager;
 
 	public boolean activateProject(String project) throws DragonflyBddException {
 		return modificationManager.activateProject(project);
@@ -170,4 +176,24 @@ public @Stateless class DragonflyEJBBean implements DragonflyEJB {
 	public List<String> getNotActiveProject() throws DragonflyBddException {
 		return informationManager.getNotActiveProject();
 	}
+
+        public void submitGeneralInformation(MavenInformationBean mavenInformation, String projectName) {
+                mavenManager.submitGeneralInformation(mavenInformation,projectName);
+        }
+
+        public void addDependency(DependencyInformationBean dependency, String projectName) {
+                mavenManager.addDependency(dependency,projectName);
+        }
+
+        public void addModule(String module, String projectName) {
+                mavenManager.addModule(module,projectName);
+        }
+
+        public void addPlugin(PluginInformationBean plugin, String projectName) {
+                mavenManager.addPlugin(plugin,projectName);
+        }
+
+        public MavenInformationBean loadMavenFile(String projectName) {
+                return mavenManager.loadMavenFile(projectName);
+        }
 }

@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package fr.umlv.dragonflyEJB.services.project.maven;
+package fr.umlv.dragonflyEJB.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author J-Paul
  */
-public class MavenInformation implements Serializable{
+public class MavenInformationBean implements Serializable{
     private String groupId;
     private String artifactId;
     private String packaging;
@@ -25,10 +25,10 @@ public class MavenInformation implements Serializable{
     private String version;
     private String description;
     
-    private ParentInformation parent;
+    private ParentInformationBean parent;
     private List<String> modules = new ArrayList<String>();
-    private List<DependencyInformation> dependencies = new ArrayList<DependencyInformation>();
-    private List<PluginInformation> plugins = new ArrayList<PluginInformation>();
+    private List<DependencyInformationBean> dependencies = new ArrayList<DependencyInformationBean>();
+    private List<PluginInformationBean> plugins = new ArrayList<PluginInformationBean>();
 
     public String getGroupId() {
         return groupId;
@@ -78,19 +78,19 @@ public class MavenInformation implements Serializable{
         this.description = description;
     }
 
-    public List<DependencyInformation> getDependencies() {
+    public List<DependencyInformationBean> getDependencies() {
         return dependencies;
     }
 
-    public void setDependencies(List<DependencyInformation> dependencies) {
+    public void setDependencies(List<DependencyInformationBean> dependencies) {
         this.setDependencies(dependencies);
     }
 
-    public ParentInformation getParent() {
+    public ParentInformationBean getParent() {
         return parent;
     }
 
-    public void setParent(ParentInformation parent) {
+    public void setParent(ParentInformationBean parent) {
         this.parent = parent;
     }
 
@@ -102,11 +102,11 @@ public class MavenInformation implements Serializable{
         this.modules = modules;
     }
 
-    public List<PluginInformation> getPlugins() {
+    public List<PluginInformationBean> getPlugins() {
         return plugins;
     }
 
-    public void setPlugins(List<PluginInformation> plugins) {
+    public void setPlugins(List<PluginInformationBean> plugins) {
         this.plugins = plugins;
     }
     

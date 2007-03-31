@@ -27,13 +27,6 @@
 
 <s:form action="Inscription" method="post" validate="true">
  
-		<!-- Information général (optionnelle) -->
-		<s:textfield label="%{getText('register.firstname')}" name="firstname"
-			size="20" />
-		<s:textfield label="%{getText('register.lastname')}" name="lastname"
-			size="20" />
-
-		<s:radio label="%{getText('register.sexe')}" list="sexe_choice" name="sexe"></s:radio>
 		<!-- Champs obligatoire -->
 
 		<s:textfield label="%{getText('register.username')}" name="username" 

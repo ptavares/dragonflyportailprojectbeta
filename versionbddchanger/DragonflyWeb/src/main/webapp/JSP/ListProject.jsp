@@ -33,10 +33,13 @@
 <s:iterator value="projects">
 <tr>
 <td>
-<div id="link">
-        <s:url id="toto" action="goToProjectPage"><s:param name="ProName" value="%{name}"/></s:url>
-        <s:a href="%{toto}" showLoadingText="false" targets="rightcolumn"><s:property value="name"/></s:a>
-</div>
+       <s:if test="%{actived}">
+       	 	<s:url id="toto" action="goToProjectPage"><s:param name="ProName" value="%{name}"/></s:url>
+        	<s:a href="%{toto}" showLoadingText="false" targets="rightcolumn"><s:property value="name"/></s:a>
+		</s:if>
+		<s:else>
+			<s:property value="name"/>
+		</s:else>
 </td>
 <td>
 <s:property value="resume"/>

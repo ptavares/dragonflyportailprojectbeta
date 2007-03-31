@@ -7,11 +7,13 @@
  * and open the template in the editor.
  */
 
-package fr.umlv.dragonflyEJB.services.project.maven;
+package fr.umlv.dragonflyEJB.locals.maven;
 
+import fr.umlv.dragonflyEJB.beans.DependencyInformationBean;
+import fr.umlv.dragonflyEJB.beans.MavenInformationBean;
+import fr.umlv.dragonflyEJB.beans.ParentInformationBean;
+import fr.umlv.dragonflyEJB.beans.PluginInformationBean;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import javax.ejb.Stateless;
 import javax.xml.bind.JAXBContext;
@@ -23,20 +25,20 @@ import org.apache.maven.Build;
 import org.apache.maven.Build.Plugins;
 import org.apache.maven.Dependency;
 import org.apache.maven.Model;
+import org.apache.maven.Plugin;
 import org.apache.maven.Model.Modules;
 import org.apache.maven.Model.Dependencies;
 import org.apache.maven.ObjectFactory;
-import org.apache.maven.Plugin;
-import org.jboss.annotation.ejb.RemoteBinding;
+import org.jboss.annotation.ejb.LocalBinding;
 
 /**
  *
  * @author J-Paul
  */
-@RemoteBinding(jndiBinding = "MavenManager/remote")
+@LocalBinding(jndiBinding = "MavenManager/local")
 public @Stateless class MavenManagerBean implements MavenManager{
     
-    public void createNewFile(MavenInformation mavenInformation, String projectName) {
+    public void createNewFile(MavenInformationBean mavenInformation, String projectName) {
         System.out.println(mavenInformation+"  --  "+projectName);
         
         if(mavenInformation==null)
@@ -62,7 +64,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
         }
         System.out.println("foreach");
         int i=0;
-        for(DependencyInformation depInfo :mavenInformation.getDependencies()){
+        for(DependencyInformationBean depInfo :mavenInformation.getDependencies()){
             System.out.println("foreach "+i);
             i++;
             Dependency dep = new Dependency();
@@ -105,8 +107,8 @@ public @Stateless class MavenManagerBean implements MavenManager{
         return file;
     }
     
-    private MavenInformation generateBasicPom(String projectName){
-        MavenInformation info = new MavenInformation();
+    private MavenInformationBean generateBasicPom(String projectName){
+        MavenInformationBean info = new MavenInformationBean();
         info.setGroupId("groupId");
         info.setArtifactId(projectName);
         info.setPackaging("jar");
@@ -140,7 +142,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
     }
     
     
-    public MavenInformation loadMavenFile(String projectName) {
+    public MavenInformationBean loadMavenFile(String projectName) {
         
         File source = new File("Dragonfly/"+projectName);
         
@@ -152,7 +154,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
         
         File pomFile = new File("Dragonfly/"+projectName+"/realise/pom.xml");
         
-        MavenInformation info = new MavenInformation();
+        MavenInformationBean info = new MavenInformationBean();
         if(pomFile.exists() && pomFile.isFile()){
             System.out.println("File Find");
             try {
@@ -176,7 +178,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
                 if(dependencies != null){
                     System.out.println("Dependencies --------------"+dependencies.getDependency().size());
                     for(Dependency dep : dependencies.getDependency()){
-                        DependencyInformation depInfo = new DependencyInformation();
+                        DependencyInformationBean depInfo = new DependencyInformationBean();
                         depInfo.setArtifactId(dep.getArtifactId());
                         depInfo.setGroupId(dep.getGroupId());
                         depInfo.setVersion(dep.getVersion());
@@ -202,7 +204,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
                     if( plugins != null){
                         System.out.println("Plugin count "+plugins.getPlugin());
                         for(Plugin plug : plugins.getPlugin()){
-                            PluginInformation pInfo = new PluginInformation();
+                            PluginInformationBean pInfo = new PluginInformationBean();
                             pInfo.setGroupId(plug.getGroupId());
                             pInfo.setArtifactId(plug.getArtifactId());
                             pInfo.setVersion(plug.getVersion());
@@ -230,7 +232,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
         System.out.println("Hello");
     }
     
-    public void submitGeneralInformation(MavenInformation mavenInformation, String projectName) {
+    public void submitGeneralInformation(MavenInformationBean mavenInformation, String projectName) {
         System.out.println("submitGeneralInformation");
         File pomFile = getPomFile(projectName);
         try {
@@ -255,7 +257,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
         }
     }
     
-    public void addDependency(DependencyInformation dependency, String projectName) {
+    public void addDependency(DependencyInformationBean dependency, String projectName) {
         System.out.println("addDependency");
         File pomFile = getPomFile(projectName);
         try {
@@ -292,7 +294,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
         }
     }
     
-    public void submitParent(ParentInformation parent, String projectName) {
+    public void submitParent(ParentInformationBean parent, String projectName) {
         System.out.println("submitParent");
     }
     
@@ -318,7 +320,7 @@ public @Stateless class MavenManagerBean implements MavenManager{
         }
     }
     
-    public void addPlugin(PluginInformation plugin, String projectName) {
+    public void addPlugin(PluginInformationBean plugin, String projectName) {
         System.out.println("addPlugin");
         File pomFile = getPomFile(projectName);
         try {
